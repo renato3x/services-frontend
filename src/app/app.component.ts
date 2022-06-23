@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'services-frontend';
+
+  message(msg: string) {
+    console.log(msg)
+  }
+
+  ngOnInit() {
+    this.message('Hello World')
+  }
 }
