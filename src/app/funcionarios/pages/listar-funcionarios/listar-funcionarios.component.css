@@ -1,0 +1,21 @@
+.container {
+  min-height: calc(100vh - 64px);
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 100px 1fr;
+}
+
+#lateral {
+  background: #3f51b5;
+}
+
+#lateral h2 {
+  writing-mode: vertical-rl;
+  color: white;
+  text-align: center;
+  height: 100%;
+}
+
+main {
+  background: #e4e4e4;
+}
