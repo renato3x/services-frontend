@@ -10,7 +10,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class ListarFuncionariosComponent implements OnInit {
 
   funcionarios: Funcionario[] = []
-  colunas: Array<string> = ['id', 'email', 'nome']
+  colunas: Array<string> = ['id', 'email', 'nome', 'actions']
 
   constructor(
     private funcService: FuncionarioService
@@ -22,13 +22,13 @@ export class ListarFuncionariosComponent implements OnInit {
     // 3° complete -> a fonte de dados te retorna tudo
 
     this.funcService.getFuncionarios().subscribe(
-      function(funcs) { // sucesso
-        console.log(funcs)
+      (funcs) => { // sucesso
+        this.funcionarios = funcs
       },
-      function(erro) { // erro
+      (erro) => { // erro
         console.log(erro)
       },
-      function() { // complete
+      () => { // complete
         console.log('Dados enviados com sucesso')
       }
     )
