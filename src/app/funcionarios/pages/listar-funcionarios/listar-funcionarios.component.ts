@@ -10,7 +10,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class ListarFuncionariosComponent implements OnInit {
 
   funcionarios: Funcionario[] = []
-  colunas: Array<string> = ['id', 'email', 'nome', 'actions']
+  colunas: Array<string> = ['id', 'nome', 'email', 'actions']
 
   constructor(
     private funcService: FuncionarioService

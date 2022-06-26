@@ -7,19 +7,26 @@
 
 #lateral {
   background: #3f51b5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #lateral h2 {
-  writing-mode: vertical-rl;
   color: white;
   text-align: center;
-  height: 100%;
+  font-weight: 500;
+  transform: rotate(-90deg);
 }
 
 main {
-  background: #e4e4e4;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 450px 1fr;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 table {
-  width: 100%;
+  height: fit-content;
 }
