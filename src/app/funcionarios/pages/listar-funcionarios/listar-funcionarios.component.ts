@@ -21,6 +21,28 @@ export class ListarFuncionariosComponent implements OnInit {
     // 2° erro -> ocorre um erro na fonte de dados
     // 3° complete -> a fonte de dados te retorna tudo
 
+    this.recuperarFuncionarios()
+  }
+
+  deletarFuncionario(id: number): void {
+    const deletar = confirm('Você realmente quer excluir esse funcionário?')
+
+    if (deletar) {
+      this.funcService.deleteFuncionario(id)
+      .subscribe(
+        () => {
+          alert('Funcionário deletado!')
+          this.recuperarFuncionarios()
+        },
+        (error) => {
+          alert('Não foi possível deletar esse funcionário')
+          console.log(error)
+        }
+      )
+    }
+  }
+
+  recuperarFuncionarios(): void {
     this.funcService.getFuncionarios().subscribe(
       (funcs) => { // sucesso
         this.funcionarios = funcs
