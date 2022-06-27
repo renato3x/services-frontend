@@ -30,3 +30,7 @@ main {
 table {
   height: fit-content;
 }
+
+.ativo {
+  color: red;
+}
