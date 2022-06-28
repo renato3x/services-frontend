@@ -1,12 +1,15 @@
 <h2 mat-dialog-title>Novo Funcionário</h2>
 <section mat-dialog-content>
-  <form action="">
+  <form action="" [formGroup]="formFuncionario" (ngSubmit)="salvar()">
+    <img [src]="fotoPreview" alt="" *ngIf="fotoPreview.length > 0">
+
     <mat-form-field appearance="fill">
       <mat-label>Nome</mat-label>
       <input
         type="text"
         placeholder="Ex: João Pedro"
         matInput
+        formControlName="nome"
       >
     </mat-form-field>
     <mat-form-field appearance="fill">
@@ -15,6 +18,7 @@
         type="email"
         placeholder="Ex: seuemail@mail.com"
         matInput
+        formControlName="email"
       >
     </mat-form-field>
     <input
@@ -22,6 +26,7 @@
       accept="image/*"
       id="file-input"
       #fileInput
+      (change)="recuperarFoto($event)"
     >
     <button
       type="button"
@@ -30,6 +35,6 @@
       (click)="fileInput.click()"
     >Selecione uma imagem</button>
 
-    <button type="submit" disabled mat-raised-button color="accent" id="salvar">Salvar</button>
+    <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
   </form>
 </section>

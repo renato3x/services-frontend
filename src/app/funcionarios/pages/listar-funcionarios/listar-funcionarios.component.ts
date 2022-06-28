@@ -25,7 +25,6 @@ export class ListarFuncionariosComponent implements OnInit {
     // 3° complete -> a fonte de dados te retorna tudo
 
     this.recuperarFuncionarios()
-    this.abrirFormFuncionario()
   }
 
   deletarFuncionario(id: number): void {
