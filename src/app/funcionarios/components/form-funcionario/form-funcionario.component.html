@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Novo Funcionário</h2>
+<section mat-dialog-content>
+  <form action="">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input
+        type="text"
+        placeholder="Ex: João Pedro"
+        matInput
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input
+        type="email"
+        placeholder="Ex: seuemail@mail.com"
+        matInput
+      >
+    </mat-form-field>
+    <input
+      type="file"
+      accept="image/*"
+      id="file-input"
+      #fileInput
+    >
+    <button
+      type="button"
+      mat-stroked-button
+      color="primary"
+      (click)="fileInput.click()"
+    >Selecione uma imagem</button>
+
+    <button type="submit" disabled mat-raised-button color="accent" id="salvar">Salvar</button>
+  </form>
+</section>

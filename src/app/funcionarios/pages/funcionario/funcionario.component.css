@@ -1,0 +1,6 @@
+mat-card {
+  height: calc(100vh - (150px));
+  position: sticky;
+  top: 16px;
+  left: 0;
+}
