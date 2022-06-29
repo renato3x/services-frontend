@@ -1,6 +1,13 @@
-mat-card {
+mat-card, .loader {
   height: calc(100vh - (150px));
   position: sticky;
   top: 16px;
   left: 0;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
