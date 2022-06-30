@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
 
@@ -29,8 +29,38 @@ export class FuncionarioService {
     return this.http.get<Funcionario>(`${this.baseUrl}/${id}`)
   }
 
-  salvarFuncionario(func: Funcionario): Observable<Funcionario> {
+  /**
+   * RXJS Operators: funções que manipulam os dados que
+   * os observables te retornam
+   */
+  salvarFuncionario(func: Funcionario, foto: File): Observable<Promise<Observable<Funcionario>>> {
+    /**
+     * fazendo requisição POST para salvar os dados do funcionário
+     * return funcionário que acabou de ser salvo
+     */
+
+    /**
+     * a função pipe é utilizada para colocar os operadores do RXJS
+     * que manipularão os dados que são retornados dos observables
+     */
+
+    /**
+     * o pipe map manipula cada dado que o observable te retorna,
+     * transformando em algo diferente e te retorna esse dado modificado
+     */
     return this.http.post<Funcionario>(this.baseUrl, func)
+    .pipe(
+      map(async (func) => {
+        // 1° Fazer upload da imagem e recuperar o link gerado
+        const linkFotoFirebase = await this.uploadImagem(foto)
+
+        // 2° Atribuir o link gerado ao funcionário criado
+        func.foto = linkFotoFirebase
+
+        // 3° Atualizar funcionário com a foto
+        return this.atualizarFuncionario(func)
+      })
+    )
   }
 
   atualizarFuncionario(func: Funcionario): Observable<Funcionario> {
@@ -40,7 +70,7 @@ export class FuncionarioService {
   // 1° Pegar a imagem
   // 2° Fazer o upload da imagem
   // 3° Gerar o link de download e retorná-lo
-  async uploadImagem(foto: File): Promise<string> {
+  private async uploadImagem(foto: File): Promise<string> {
     // a palavra async informa que a função vai trabalhar com
     // código assíncrono, ou seja, códigos que demoram para serem executados
 

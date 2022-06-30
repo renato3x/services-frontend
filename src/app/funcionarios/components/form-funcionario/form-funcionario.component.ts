@@ -47,30 +47,29 @@ export class FormFuncionarioComponent implements OnInit {
     const f: Funcionario = this.formFuncionario.value
     f.foto = ''
 
-    this.funcService.salvarFuncionario(f)
-    .subscribe(
-      async (func) => {
-        /**
-         * Após salvar os dados básicos do funcionários
-         * vamos salvar a imagem e gerar o link dela
-         */
-        const link = await this.funcService.uploadImagem(this.foto)
-        /**
-         * salvando a imagem no firebase e recuperando o link de acesso dela
-         */
-        func.foto = link // atribuindo o link da imagem ao funcionário
+    // iniciando salvamento do funcionário
+    this.funcService.salvarFuncionario(f, this.foto)
+    .subscribe((dados) => {
+      // 1° -> Recuperar o observable que me é retornado do primeiro subscribe
 
-        this.funcService.atualizarFuncionario(func).subscribe(
-          (fun) => {
-            /**
-             * Quando a imagem for salva na API, ele mostrará a mensagem do alert
-             * e fechará o dialog
-             */
-            alert('Funcionário salvo com sucesso')
-            this.dialogRef.close() // essa função fecha o dialog pelo typescript
+      /**
+       * a função then() é executada
+       * quando a promise consegue te retornar os dados com sucesso
+       *
+       * nesse caso, o dado que será retorna é um observable com o funcionário
+       * que foi salvo no banco de dados
+       */
+      dados.then((obs$) => {
+        // inscrevendo-se no observable que nos retornará o funcionário salvo no banco de dados
+        obs$.subscribe(
+          (func) => {
+            // quando o funcionário for salvo, aparecerá um alert na tela e o dialog será fechado
+            console.log(func)
+            alert('Funcionário Salvo com sucesso!')
+            this.dialogRef.close()
           }
-        ) // atualizando o funcionário com a URL da imagem que foi enviada
-      }
-    )
+        )
+      })
+    })
   }
 }
