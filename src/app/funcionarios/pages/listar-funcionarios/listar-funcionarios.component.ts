@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -16,7 +18,8 @@ export class ListarFuncionariosComponent implements OnInit {
 
   constructor(
     private funcService: FuncionarioService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -28,21 +31,30 @@ export class ListarFuncionariosComponent implements OnInit {
   }
 
   deletarFuncionario(id: number): void {
-    const deletar = confirm('Você realmente quer excluir esse funcionário?')
+    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent)
 
-    if (deletar) {
-      this.funcService.deleteFuncionario(id)
-      .subscribe(
-        () => {
-          alert('Funcionário deletado!')
-          this.recuperarFuncionarios()
-        },
-        (error) => {
-          alert('Não foi possível deletar esse funcionário')
-          console.log(error)
+    dialogRef.afterClosed()
+    .subscribe(
+      deletar => {
+        if (deletar) {
+          this.funcService.deleteFuncionario(id)
+          .subscribe(
+            () => {
+              this.snackbar.open('Funcionário deletado', 'Ok', {
+                duration: 3000
+              })
+              this.recuperarFuncionarios()
+            },
+            (error) => {
+              this.snackbar.open('Não possível deletar o funcionário', 'Ok', {
+                duration: 3000
+              })
+              console.log(error)
+            }
+          )
         }
-      )
-    }
+      }
+    )
   }
 
   recuperarFuncionarios(): void {

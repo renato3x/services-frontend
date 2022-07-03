@@ -75,7 +75,7 @@ export class FuncionarioComponent implements OnInit {
     this.formFuncionario.valueChanges
     .subscribe(
       ({ nome, email }) => {
-        this.desabiltar = !(nome != this.funcionario.nome || email != this.funcionario.email)
+        this.desabiltar = !(nome != this.funcionario.nome || email != this.funcionario.email) || this.formFuncionario.invalid
       }
     )
   }
