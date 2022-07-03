@@ -16,7 +16,8 @@ export class FuncionarioComponent implements OnInit {
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
-    email: ['', [ Validators.required, Validators.email ]]
+    email: ['', [ Validators.required, Validators.email ]],
+    foto: ['']
   })
 
   imagePreview: string = ''
@@ -41,20 +42,17 @@ export class FuncionarioComponent implements OnInit {
 
   recuperarFuncionario(id: number): void {
     this.funcService.getFuncionarioById(id)
-    .pipe(
-      tap(func => {
-        this.formFuncionario.setValue({
-          nome: func.nome,
-          email: func.email
-        })
-
-        this.imagePreview = func.foto
-        this.valorMudou()
-      })
-    )
     .subscribe(
       func => {
         this.funcionario = func
+        this.formFuncionario.setValue({
+          nome: this.funcionario.nome,
+          email: this.funcionario.email,
+          foto: ''
+        })
+
+        this.imagePreview = this.funcionario.foto
+        this.valorMudou()
       }
     )
   }
@@ -74,8 +72,8 @@ export class FuncionarioComponent implements OnInit {
   valorMudou() {
     this.formFuncionario.valueChanges
     .subscribe(
-      ({ nome, email }) => {
-        this.desabiltar = !(nome != this.funcionario.nome || email != this.funcionario.email) || this.formFuncionario.invalid
+      ({ nome, email, foto }) => {
+        this.desabiltar = !(nome != this.funcionario.nome || email != this.funcionario.email || foto.length > 0) || this.formFuncionario.invalid
       }
     )
   }

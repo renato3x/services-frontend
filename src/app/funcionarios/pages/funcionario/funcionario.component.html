@@ -23,7 +23,7 @@
           <input type="text" matInput placeholder="E-mail" formControlName="email">
         </mat-form-field>
 
-        <input type="file" id="input-foto" #inputFoto (change)="recuperarFoto($event)">
+        <input type="file" id="input-foto" #inputFoto (change)="recuperarFoto($event)" formControlName="foto">
 
         <button type="button" mat-stroked-button color="primary" (click)="inputFoto.click()">
           Atualizar imagem
