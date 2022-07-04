@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { tap } from 'rxjs';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
 
@@ -21,8 +20,8 @@ export class FuncionarioComponent implements OnInit {
   })
 
   imagePreview: string = ''
-  foto!: File
-  desabiltar: boolean = true
+  foto!: File // undefined
+  desabilitar: boolean = true
 
   constructor(
     private route: ActivatedRoute, // acessar os parâmetros da rota ativa
@@ -44,15 +43,26 @@ export class FuncionarioComponent implements OnInit {
     this.funcService.getFuncionarioById(id)
     .subscribe(
       func => {
+        //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
         this.funcionario = func
+
+        // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
+        // no formulário
+
+        /**
+         * setValue() é responsável por pegar os valores que foram passados para ela
+         * e colocar dentro dos formControls
+         */
         this.formFuncionario.setValue({
           nome: this.funcionario.nome,
           email: this.funcionario.email,
           foto: ''
         })
 
+        // 3° carregar o preview da imagem
         this.imagePreview = this.funcionario.foto
-        this.valorMudou()
+
+       this.valorMudou()
       }
     )
   }
@@ -60,9 +70,9 @@ export class FuncionarioComponent implements OnInit {
   recuperarFoto(event: any): void {
     this.foto = event.target.files[0]
 
-    const reader = new FileReader()
+    const reader = new FileReader() // objeto do js que faz leitura de arquivos
 
-    reader.readAsDataURL(this.foto)
+    reader.readAsDataURL(this.foto) // ler o arquivo e gerar um link local para o acesso do conteúdo daquele arquivo
 
     reader.onload = () => {
       this.imagePreview = reader.result as string
@@ -70,10 +80,24 @@ export class FuncionarioComponent implements OnInit {
   }
 
   valorMudou() {
+    /**
+     * valueChanges é uma propriedade dos FormGroups
+     * que é um observable que quando um valor do seu formulário
+     * altera, esse observable te retorna essa modificação
+     */
     this.formFuncionario.valueChanges
     .subscribe(
-      ({ nome, email, foto }) => {
-        this.desabiltar = !(nome != this.funcionario.nome || email != this.funcionario.email || foto.length > 0) || this.formFuncionario.invalid
+      /**
+       * o parâmetro valores é um objeto que é retornado te informando
+       * o valor de cada campo do seu reative forms
+       */
+      (valores) => {
+        /**
+         * o botão será desabilitado se as validações do formulário estiverem inválidas
+         * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
+         * propriedade do objeto funcionário
+         */
+        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
       }
     )
   }
