@@ -24,7 +24,7 @@ export class FormFuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private funcService: FuncionarioService,
     private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar // com esse objeto será criado um snackbar na tela
   ) { }
 
   ngOnInit(): void {

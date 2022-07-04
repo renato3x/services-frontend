@@ -18,7 +18,7 @@ export class ListarFuncionariosComponent implements OnInit {
 
   constructor(
     private funcService: FuncionarioService,
-    private dialog: MatDialog,
+    private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
     private snackbar: MatSnackBar
   ) { }
 
@@ -31,12 +31,32 @@ export class ListarFuncionariosComponent implements OnInit {
   }
 
   deletarFuncionario(id: number): void {
+    /**
+     * A função open() do dialog vai abrir o seu componente
+     * na tela como uma caixa de dialogo, basta informar
+     * a classe do componente que ele precisa abrir pra você
+     *
+     * e ele te retornará uma referência desse componente que está
+     * aberto na sua tela
+     */
     const dialogRef = this.dialog.open(ConfirmarDelecaoComponent)
 
+    /**
+     * A função afterClosed() te retorna um observable
+     * que manda os dados que serão enviados para você
+     * quando esse dialog for fechado
+     */
     dialogRef.afterClosed()
     .subscribe(
-      deletar => {
-        if (deletar) {
+      (deletar) => {
+        /**
+         * o parâmetro deletar vai me retornar um valor booleano
+         * como foi colocado no componente do confirmar-delecao
+         *
+         * se deletar for TRUE, apagaremos o funcionário, se não,
+         * nada acontecerá
+         */
+        if (deletar == true) {
           this.funcService.deleteFuncionario(id)
           .subscribe(
             () => {
@@ -46,7 +66,7 @@ export class ListarFuncionariosComponent implements OnInit {
               this.recuperarFuncionarios()
             },
             (error) => {
-              this.snackbar.open('Não possível deletar o funcionário', 'Ok', {
+              this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
                 duration: 3000
               })
               console.log(error)
