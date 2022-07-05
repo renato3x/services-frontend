@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>Novo Funcionário</h2>
+<div>
+  <h2 mat-dialog-title>Novo Funcionário</h2>
+  <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoFuncionario"></mat-spinner>
+</div>
 <section mat-dialog-content>
   <form action="" [formGroup]="formFuncionario" (ngSubmit)="salvar()">
     <img [src]="fotoPreview || '/assets/no-profile.png'" id="image-preview">

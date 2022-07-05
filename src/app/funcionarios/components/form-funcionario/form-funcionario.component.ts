@@ -21,6 +21,7 @@ export class FormFuncionarioComponent implements OnInit {
 
   foto!: File
   fotoPreview: string = ''
+  salvandoFuncionario: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,7 @@ export class FormFuncionarioComponent implements OnInit {
   }
 
   salvar(): void {
+    this.salvandoFuncionario = true
     const f: Funcionario = this.formFuncionario.value
     f.foto = ''
     let obsSalvar: Observable<any>

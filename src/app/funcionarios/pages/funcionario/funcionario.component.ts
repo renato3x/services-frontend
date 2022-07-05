@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +23,7 @@ export class FuncionarioComponent implements OnInit {
   imagePreview: string = ''
   foto!: File // undefined
   desabilitar: boolean = true
+  naoEncontrado: boolean = false
 
   constructor(
     private route: ActivatedRoute, // acessar os parâmetros da rota ativa
@@ -63,6 +65,9 @@ export class FuncionarioComponent implements OnInit {
         this.imagePreview = this.funcionario.foto
 
        this.valorMudou()
+      },
+      (erro: HttpErrorResponse) => {
+        this.naoEncontrado = erro.status == 404
       }
     )
   }
