@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, mergeMap, Observable } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
 
@@ -21,8 +21,27 @@ export class FuncionarioService {
   }
 
   // http://localhost:3000/funcionarios/
-  deleteFuncionario(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`)
+  deleteFuncionario(func: Funcionario): Observable<any> {
+    // se não tiver foto, apenas será deletado o email e nome
+    if (func.foto.length > 0) {
+      //1° pegar a referência da imagem no fireStorage
+      /**
+       * refFromURL() pega referência do arquivo do storage pelo link de acesso gerado
+       * pelo firebase
+       */
+      return this.storage.refFromURL(func.foto).delete()
+      .pipe(
+        mergeMap(() => {
+          /**
+           * mergeMap tem a função de pegar dois ou mais observables e transformar todos
+           * em um só
+           */
+          return this.http.delete<any>(`${this.baseUrl}/${func.id}`)
+        })
+      )
+    }
+
+    return this.http.delete<any>(`${this.baseUrl}/${func.id}`)
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {

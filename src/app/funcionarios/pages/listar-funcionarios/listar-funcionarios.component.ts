@@ -30,7 +30,7 @@ export class ListarFuncionariosComponent implements OnInit {
     this.recuperarFuncionarios()
   }
 
-  deletarFuncionario(id: number): void {
+  deletarFuncionario(func: Funcionario): void {
     /**
      * A função open() do dialog vai abrir o seu componente
      * na tela como uma caixa de dialogo, basta informar
@@ -57,7 +57,7 @@ export class ListarFuncionariosComponent implements OnInit {
          * nada acontecerá
          */
         if (deletar == true) {
-          this.funcService.deleteFuncionario(id)
+          this.funcService.deleteFuncionario(func)
           .subscribe(
             () => {
               this.snackbar.open('Funcionário deletado', 'Ok', {

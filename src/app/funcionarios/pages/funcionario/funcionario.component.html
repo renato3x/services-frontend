@@ -1,6 +1,6 @@
 <div class="loader" *ngIf="funcionario == undefined; else principal">
-  <p>{{ naoEncontrado ? 'Funcionário não encontrado' : 'Procurando funcionario...' }}</p>
-  <mat-spinner mode="indeterminate" color="primary" *ngIf="!naoEncontrado"></mat-spinner>
+  <p>{{ naoEncontrado == true ? 'Funcionário não encontrado' : 'Procurando funcionario...' }}</p>
+  <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
 </div>
 <ng-template #principal>
   <mat-card>
