@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PodeSairGuard } from './guards/pode-sair.guard';
 import { FuncionarioComponent } from './pages/funcionario/funcionario.component';
 import { ListarFuncionariosComponent } from './pages/listar-funcionarios/listar-funcionarios.component';
 
@@ -10,7 +11,10 @@ const routes: Routes = [
     children: [
       {
         path: ':idFuncionario',
-        component: FuncionarioComponent
+        component: FuncionarioComponent,
+        canDeactivate: [
+          PodeSairGuard
+        ]
       }
     ]
   }
