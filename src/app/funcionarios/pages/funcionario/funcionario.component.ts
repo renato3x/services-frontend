@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -28,7 +29,8 @@ export class FuncionarioComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, // acessar os parâmetros da rota ativa
     private funcService: FuncionarioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -103,6 +105,19 @@ export class FuncionarioComponent implements OnInit {
          * propriedade do objeto funcionário
          */
         this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
+      }
+    )
+  }
+
+  salvarAtualizacoes() {
+    const f: Funcionario = this.formFuncionario.value
+    f.id = this.funcionario.id
+    f.foto = this.funcionario.foto
+
+    this.funcService.atualizarFuncionario(f)
+    .subscribe(
+      () => {
+        this.snackbar.open('Funcionário atualizado com sucesso', 'Ok')
       }
     )
   }
