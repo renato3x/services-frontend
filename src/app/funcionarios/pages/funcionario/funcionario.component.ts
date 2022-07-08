@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
 
@@ -66,7 +67,7 @@ export class FuncionarioComponent implements OnInit {
         // 3° carregar o preview da imagem
         this.imagePreview = this.funcionario.foto
 
-       this.valorMudou()
+        this.valorMudou()
       },
       (erro: HttpErrorResponse) => {
         this.naoEncontrado = erro.status == 404
@@ -110,14 +111,35 @@ export class FuncionarioComponent implements OnInit {
   }
 
   salvarAtualizacoes() {
-    const f: Funcionario = this.formFuncionario.value
+    const f: Funcionario = { ...this.formFuncionario.value }
     f.id = this.funcionario.id
     f.foto = this.funcionario.foto
 
-    this.funcService.atualizarFuncionario(f)
+    const temFoto = this.formFuncionario.value.foto.length > 0
+
+    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
+
+    obsSalvar
     .subscribe(
-      () => {
-        this.snackbar.open('Funcionário atualizado com sucesso', 'Ok')
+      (resultado) => {
+        if (resultado instanceof Observable<Funcionario>) {
+          resultado
+          .subscribe(
+            (func) => {
+              this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+                duration: 3000
+              })
+
+              this.recuperarFuncionario(func.id)
+            }
+          )
+        }
+
+        this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+          duration: 3000
+        })
+
+        this.recuperarFuncionario(resultado.id)
       }
     )
   }

@@ -89,8 +89,33 @@ export class FuncionarioService {
     )
   }
 
-  atualizarFuncionario(func: Funcionario): Observable<Funcionario> {
-    return this.http.put<Funcionario>(`${this.baseUrl}/${func.id}`, func)
+  // fazer com que a função receba a foto ou não
+  atualizarFuncionario(func: Funcionario, foto?: File): any {
+
+    // se a foto não foi passada, atualizar apenas com os dados básicos
+    if (foto == undefined) {
+      return this.http.put<Funcionario>(`${this.baseUrl}/${func.id}`, func)
+    }
+
+    // se já existir uma foto ligada a esse funcionário, iremos deletá-la para pôr a nova
+    if (func.foto.length > 0) {
+      const inscricao = this.storage.refFromURL(func.foto).delete()
+      .subscribe(
+        () => {
+          inscricao.unsubscribe()
+        }
+      )
+    }
+
+    return this.http.put<Funcionario>(`${this.baseUrl}/${func.id}`, func).pipe(
+      mergeMap(async (funcionarioAtualizado) => {
+        const linkFotoFirebase = await this.uploadImagem(foto)
+
+        funcionarioAtualizado.foto = linkFotoFirebase
+
+        return this.atualizarFuncionario(funcionarioAtualizado)
+      })
+    )
   }
 
   // 1° Pegar a imagem
