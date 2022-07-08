@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ConfirmarSaidaComponent } from '../components/confirmar-saida/confirmar-saida.component';
 import { FuncionarioComponent } from '../pages/funcionario/funcionario.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PodeSairGuard implements CanDeactivate<FuncionarioComponent> {
+
+  constructor(
+    private dialog: MatDialog
+  ) {}
+
   canDeactivate(
     component: FuncionarioComponent, // representa o componente que ele está inserido
     currentRoute: ActivatedRouteSnapshot, // a partir dele conseguimos acessar o valor dos parâmetros
@@ -23,7 +30,10 @@ export class PodeSairGuard implements CanDeactivate<FuncionarioComponent> {
     const foto = component.formFuncionario.value.foto
 
     if (nome != component.funcionario.nome || email != component.funcionario.email || foto.length > 0) {
-      const querSair = confirm('Você ainda não salvou as modificações. Quer mesmo sair?')
+      const dialogRef = this.dialog.open(ConfirmarSaidaComponent)
+
+      const querSair = dialogRef.afterClosed()
+
       return querSair
     } else {
       return true
