@@ -97,6 +97,7 @@ export class FuncionarioService {
       return this.http.put<Funcionario>(`${this.baseUrl}/${func.id}`, func)
     }
 
+    
     // se já existir uma foto ligada a esse funcionário, iremos deletá-la para pôr a nova
     if (func.foto.length > 0) {
       const inscricao = this.storage.refFromURL(func.foto).delete()
