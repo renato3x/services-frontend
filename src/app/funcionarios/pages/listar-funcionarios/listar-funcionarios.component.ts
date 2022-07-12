@@ -27,7 +27,14 @@ export class ListarFuncionariosComponent implements OnInit {
     // 2° erro -> ocorre um erro na fonte de dados
     // 3° complete -> a fonte de dados te retorna tudo
 
-    this.recuperarFuncionarios()
+    this.funcService.atualizarFuncionariosSub$
+    .subscribe(
+      (precisaAtualizar) => {
+        if (precisaAtualizar) {
+          this.recuperarFuncionarios()
+        }
+      }
+    )
   }
 
   deletarFuncionario(func: Funcionario): void {
