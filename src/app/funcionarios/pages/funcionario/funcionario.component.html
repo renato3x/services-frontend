@@ -8,9 +8,19 @@
       <img [src]="funcionario.foto || '/assets/no-profile.png'" mat-card-avatar>
       <mat-card-title>{{ funcionario.nome }}</mat-card-title>
       <mat-card-subtitle>{{ funcionario.email }}</mat-card-subtitle>
-      <button mat-icon-button color="primary" routerLink="/funcionarios" id="voltar">
-        <mat-icon>arrow_back</mat-icon>
+      <button mat-icon-button color="primary" id="menu" [mat-menu-trigger-for]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/funcionarios">
+          <mat-icon>arrow_back</mat-icon>
+          Voltar
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          Deletar funcionário
+        </button>
+      </mat-menu>
     </mat-card-header>
     <mat-card-content>
       <form action="" [formGroup]="formFuncionario" (ngSubmit)="salvarAtualizacoes()">
