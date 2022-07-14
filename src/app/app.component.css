@@ -1,8 +1,0 @@
-mat-toolbar-row {
-  display: flex;
-  align-items: center;
-}
-
-.separador {
-  flex-grow: 1;
-}

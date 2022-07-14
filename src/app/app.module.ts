@@ -8,7 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat/'
 import { environment } from 'src/environments/environment';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage'
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [

@@ -9,6 +9,7 @@ import { FormFuncionarioComponent } from './components/form-funcionario/form-fun
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
+import { NavbarComponent } from '../components/navbar/navbar.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-
     FuncionarioComponent,
     FormFuncionarioComponent,
     ConfirmarDelecaoComponent,
-    ConfirmarSaidaComponent
+    ConfirmarSaidaComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
