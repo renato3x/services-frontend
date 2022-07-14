@@ -12,6 +12,10 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'funcionarios'
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   }
 ];
 
