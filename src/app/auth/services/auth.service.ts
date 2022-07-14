@@ -26,4 +26,8 @@ export class AuthService {
   armazenarToken(token: string): void {
     localStorage.setItem('authorization', token)
   }
+
+  recuperarToken(): string | null {
+    return localStorage.getItem('authorization')
+  }
 }
