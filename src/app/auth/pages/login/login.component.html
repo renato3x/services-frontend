@@ -1,7 +1,7 @@
 <section class="grid-container">
   <div class="image-container"></div>
   <main class="form-container">
-    <form>
+    <form [formGroup]="loginForm">
       <h1>Log in</h1>
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
@@ -9,7 +9,11 @@
           type="text"
           matInput
           placeholder="Seu nome de usuário"
+          formControlName="login"
         >
+        <mat-error>
+          <span>Este campo é obrigatório</span>
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Senha</mat-label>
@@ -17,9 +21,13 @@
           type="password"
           matInput
           placeholder="Sua senha"
+          formControlName="password"
         >
+        <mat-error>
+          <span>Este campo é obrigatório</span>
+        </mat-error>
       </mat-form-field>
-      <button type="submit" mat-stroked-button color="primary">
+      <button type="submit" mat-stroked-button color="primary" [disabled]="loginForm.invalid">
         <mat-icon>login</mat-icon>
       </button>
     </form>
