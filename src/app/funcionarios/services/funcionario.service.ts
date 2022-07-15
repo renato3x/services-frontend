@@ -32,6 +32,8 @@ export class FuncionarioService {
 
   // http://localhost:3000/funcionarios/
   deleteFuncionario(func: Funcionario): Observable<any> {
+    const token = this.authService.recuperarToken()
+
     // se não tiver foto, apenas será deletado o email e nome
     if (func.foto.length > 0) {
       //1° pegar a referência da imagem no fireStorage
@@ -46,12 +48,20 @@ export class FuncionarioService {
            * mergeMap tem a função de pegar dois ou mais observables e transformar todos
            * em um só
            */
-          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
+          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
         })
       )
     }
 
-    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
+    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {
