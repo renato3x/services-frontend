@@ -4,11 +4,11 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <h1>Log in</h1>
       <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
+        <mat-label>E-mail</mat-label>
         <input
           type="text"
           matInput
-          placeholder="Seu nome de usuário"
+          placeholder="Seu e-mail"
           formControlName="login"
         >
         <mat-error>

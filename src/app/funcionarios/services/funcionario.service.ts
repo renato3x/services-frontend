@@ -3,22 +3,31 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, mergeMap, Observable, tap } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FuncionarioService {
 
-  private readonly baseUrl: string = 'http://localhost:3000/funcionarios'
+  private readonly baseUrl: string = 'http://localhost:8080/servicos/funcionarios'
   atualizarFuncionariosSub$: BehaviorSubject<boolean> = new BehaviorSubject(true)
 
   constructor(
     private http: HttpClient,
-    private storage: AngularFireStorage // objeto responsável por salvar os arquivos no firebase
+    private storage: AngularFireStorage, // objeto responsável por salvar os arquivos no firebase
+    private authService: AuthService
   ) { }
 
   getFuncionarios(): Observable<Funcionario[]> {
-    return this.http.get<Funcionario[]>(this.baseUrl)
+    const token = this.authService.recuperarToken()
+
+    // Bearer token
+    return this.http.get<Funcionario[]>(this.baseUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   // http://localhost:3000/funcionarios/
