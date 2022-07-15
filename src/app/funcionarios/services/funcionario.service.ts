@@ -46,16 +46,22 @@ export class FuncionarioService {
            * mergeMap tem a função de pegar dois ou mais observables e transformar todos
            * em um só
            */
-          return this.http.delete<any>(`${this.baseUrl}/${func.id}`)
+          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
         })
       )
     }
 
-    return this.http.delete<any>(`${this.baseUrl}/${func.id}`)
+    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {
-    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`)
+    const token = this.authService.recuperarToken()
+
+    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   /**
@@ -104,7 +110,7 @@ export class FuncionarioService {
 
     // se a foto não foi passada, atualizar apenas com os dados básicos
     if (foto == undefined) {
-      return this.http.put<Funcionario>(`${this.baseUrl}/${func.id}`, func)
+      return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func)
       .pipe(
         tap((funcionario) => {
           this.atualizarFuncionariosSub$.next(true)
@@ -123,7 +129,7 @@ export class FuncionarioService {
       )
     }
 
-    return this.http.put<Funcionario>(`${this.baseUrl}/${func.id}`, func).pipe(
+    return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func).pipe(
       mergeMap(async (funcionarioAtualizado) => {
         const linkFotoFirebase = await this.uploadImagem(foto)
 

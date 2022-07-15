@@ -116,7 +116,7 @@ export class FuncionarioComponent implements OnInit {
 
   salvarAtualizacoes() {
     const f: Funcionario = { ...this.formFuncionario.value }
-    f.id = this.funcionario.id
+    f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
 
     const temFoto = this.formFuncionario.value.foto.length > 0
