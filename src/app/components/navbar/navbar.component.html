@@ -9,5 +9,9 @@
         routerLink="/funcionarios"
       >Listar</a>
     </mat-menu>
+
+    <button mat-icon-button (click)="authService.signOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
