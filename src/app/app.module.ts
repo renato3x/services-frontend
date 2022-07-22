@@ -10,7 +10,7 @@ import { AngularFireModule } from '@angular/fire/compat/'
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { TokenInterceptor } from './interceptor/token.interceptor';
-
+import { RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 @NgModule({
   declarations: [
     AppComponent
@@ -29,6 +29,12 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
     }
   ],
   bootstrap: [AppComponent]

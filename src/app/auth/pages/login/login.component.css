@@ -26,3 +26,8 @@
   flex-direction: column;
   width: 100%;
 }
+
+form re-captcha {
+  margin-bottom: 20px;
+  align-self: center;
+}
