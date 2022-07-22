@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -12,32 +13,35 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = this.fb.group({
-    login: ['', [ Validators.required ]],
-    password: ['', [ Validators.required ]]
+    login: ['', [Validators.required]],
+    password: ['', [Validators.required]]
   })
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private titleService: Title,
   ) { }
 
   ngOnInit(): void {
+    //função para alterar titulo
+    this.titleService.setTitle("Service - Login ")
   }
 
   login(): void {
     const credenciais = this.loginForm.value
 
     this.authService.signIn(credenciais)
-    .subscribe(
-      () => {
-        this.snackbar.open('Logado com sucesso', 'Ok', {
-          duration: 3000
-        })
+      .subscribe(
+        () => {
+          this.snackbar.open('Logado com sucesso', 'Ok', {
+            duration: 3000
+          })
 
-        this.router.navigateByUrl('/funcionarios')
-      }
-    )
+          this.router.navigateByUrl('/funcionarios')
+        }
+      )
   }
 }
