@@ -19,8 +19,8 @@ export class FuncionarioComponent implements OnInit {
   funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
-    nome: ['', [ Validators.required ]],
-    email: ['', [ Validators.required, Validators.email ]],
+    nome: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     foto: ['']
   })
 
@@ -50,33 +50,33 @@ export class FuncionarioComponent implements OnInit {
 
   recuperarFuncionario(id: number): void {
     this.funcService.getFuncionarioById(id)
-    .subscribe(
-      func => {
-        //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
-        this.funcionario = func
+      .subscribe(
+        func => {
+          //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
+          this.funcionario = func
 
-        // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
-        // no formulário
+          // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
+          // no formulário
 
-        /**
-         * setValue() é responsável por pegar os valores que foram passados para ela
-         * e colocar dentro dos formControls
-         */
-        this.formFuncionario.setValue({
-          nome: this.funcionario.nome,
-          email: this.funcionario.email,
-          foto: ''
-        })
+          /**
+           * setValue() é responsável por pegar os valores que foram passados para ela
+           * e colocar dentro dos formControls
+           */
+          this.formFuncionario.setValue({
+            nome: this.funcionario.nome,
+            email: this.funcionario.email,
+            foto: ''
+          })
 
-        // 3° carregar o preview da imagem
-        this.imagePreview = this.funcionario.foto
+          // 3° carregar o preview da imagem
+          this.imagePreview = this.funcionario.foto
 
-        this.valorMudou()
-      },
-      (erro: HttpErrorResponse) => {
-        this.naoEncontrado = erro.status == 404
-      }
-    )
+          this.valorMudou()
+        },
+        (erro: HttpErrorResponse) => {
+          this.naoEncontrado = erro.status == 404
+        }
+      )
   }
 
   recuperarFoto(event: any): void {
@@ -98,20 +98,20 @@ export class FuncionarioComponent implements OnInit {
      * altera, esse observable te retorna essa modificação
      */
     this.formFuncionario.valueChanges
-    .subscribe(
-      /**
-       * o parâmetro valores é um objeto que é retornado te informando
-       * o valor de cada campo do seu reative forms
-       */
-      (valores) => {
+      .subscribe(
         /**
-         * o botão será desabilitado se as validações do formulário estiverem inválidas
-         * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
-         * propriedade do objeto funcionário
+         * o parâmetro valores é um objeto que é retornado te informando
+         * o valor de cada campo do seu reative forms
          */
-        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
-      }
-    )
+        (valores) => {
+          /**
+           * o botão será desabilitado se as validações do formulário estiverem inválidas
+           * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
+           * propriedade do objeto funcionário
+           */
+          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
+        }
+      )
   }
 
   salvarAtualizacoes() {
@@ -124,48 +124,35 @@ export class FuncionarioComponent implements OnInit {
     const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
 
     obsSalvar
-    .subscribe(
-      (resultado) => {
-        if (resultado instanceof Observable<Funcionario>) {
-          resultado
-          .subscribe(
-            (func) => {
-              this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-                duration: 3000
-              })
+      .subscribe(
+        (func) => {
 
-              this.recuperarFuncionario(func.id)
-            }
-          )
+          this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+            duration: 3000
+          })
+          this.recuperarFuncionario(func.id)
         }
-
-        this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-          duration: 3000
-        })
-
-        this.recuperarFuncionario(resultado.id)
-      }
-    )
+      )
   }
 
   deletar(): void {
     this.dialog.open(ConfirmarDelecaoComponent)
-    .afterClosed()
-    .subscribe(
-      (deletar) => {
-        if (deletar) {
-          this.funcService.deleteFuncionario(this.funcionario)
-          .subscribe(
-            () => {
-              this.snackbar.open('Funcionário deletado', 'Ok', {
-                duration: 3000
-              })
+      .afterClosed()
+      .subscribe(
+        (deletar) => {
+          if (deletar) {
+            this.funcService.deleteFuncionario(this.funcionario)
+              .subscribe(
+                () => {
+                  this.snackbar.open('Funcionário deletado', 'Ok', {
+                    duration: 3000
+                  })
 
-              this.router.navigateByUrl('/funcionarios')
-            }
-          )
+                  this.router.navigateByUrl('/funcionarios')
+                }
+              )
+          }
         }
-      }
-    )
+      )
   }
 }
