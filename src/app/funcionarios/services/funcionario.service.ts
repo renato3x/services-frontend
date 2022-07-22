@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, mergeMap, Observable, tap } from 'rxjs';
+import { BehaviorSubject, from, map, mergeMap, Observable, tap } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -42,19 +42,19 @@ export class FuncionarioService {
        * pelo firebase
        */
       return this.storage.refFromURL(func.foto).delete()
-      .pipe(
-        mergeMap(() => {
-          /**
-           * mergeMap tem a função de pegar dois ou mais observables e transformar todos
-           * em um só
-           */
-          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        .pipe(
+          mergeMap(() => {
+            /**
+             * mergeMap tem a função de pegar dois ou mais observables e transformar todos
+             * em um só
+             */
+            return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            })
           })
-        })
-      )
+        )
     }
 
     return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
@@ -81,7 +81,7 @@ export class FuncionarioService {
   /**
    * O ? na frente do parâmetro faz com que ele seja opcional na hora de executar a função
    */
-  salvarFuncionario(func: Funcionario, foto?: File) {
+  salvarFuncionario(func: Funcionario, foto?: File): Observable<Funcionario> {
     /**
      * fazendo requisição POST para salvar os dados do funcionário
      * return funcionário que acabou de ser salvo
@@ -100,53 +100,39 @@ export class FuncionarioService {
       return this.http.post<Funcionario>(this.baseUrl, func)
     }
 
-    return this.http.post<Funcionario>(this.baseUrl, func)
-    .pipe(
-      map(async (func) => {
-        // 1° Fazer upload da imagem e recuperar o link gerado
-        const linkFotoFirebase = await this.uploadImagem(foto)
-
-        // 2° Atribuir o link gerado ao funcionário criado
-        func.foto = linkFotoFirebase
-
-        // 3° Atualizar funcionário com a foto
-        return this.atualizarFuncionario(func)
-      })
-    )
+    return this.uploadImagem(foto).pipe(mergeMap((linkFotoFirebase) => {
+      func.foto = linkFotoFirebase
+      return this.http.post<Funcionario>(this.baseUrl, func)
+    }))
   }
 
   // fazer com que a função receba a foto ou não
-  atualizarFuncionario(func: Funcionario, foto?: File): any {
+  atualizarFuncionario(func: Funcionario, foto?: File): Observable<Funcionario> {
 
     // se a foto não foi passada, atualizar apenas com os dados básicos
     if (foto == undefined) {
       return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func)
-      .pipe(
-        tap((funcionario) => {
-          this.atualizarFuncionariosSub$.next(true)
-        })
-      )
+        .pipe(
+          tap((funcionario) => {
+            this.atualizarFuncionariosSub$.next(true)
+          })
+        )
     }
 
 
     // se já existir uma foto ligada a esse funcionário, iremos deletá-la para pôr a nova
     if (func.foto.length > 0) {
       const inscricao = this.storage.refFromURL(func.foto).delete()
-      .subscribe(
-        () => {
-          inscricao.unsubscribe()
-        }
-      )
+        .subscribe(
+          () => {
+            inscricao.unsubscribe()
+          }
+        )
     }
-
-    return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func).pipe(
-      mergeMap(async (funcionarioAtualizado) => {
-        const linkFotoFirebase = await this.uploadImagem(foto)
-
-        funcionarioAtualizado.foto = linkFotoFirebase
-
-        return this.atualizarFuncionario(funcionarioAtualizado)
-      }),
+    return this.uploadImagem(foto).pipe(mergeMap((linkFotoFirebase) => {
+      func.foto = linkFotoFirebase;
+      return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func)
+    }),
       tap((funcionario) => {
         this.atualizarFuncionariosSub$.next(true)
       })
@@ -156,7 +142,7 @@ export class FuncionarioService {
   // 1° Pegar a imagem
   // 2° Fazer o upload da imagem
   // 3° Gerar o link de download e retorná-lo
-  private async uploadImagem(foto: File): Promise<string> {
+  private uploadImagem(foto: File): Observable<string> {
     // a palavra async informa que a função vai trabalhar com
     // código assíncrono, ou seja, códigos que demoram para serem executados
 
@@ -165,12 +151,11 @@ export class FuncionarioService {
     // faz o upload do arquivo para o firebase
     // 1° Parâmetro: nome do arquivo
     // 2° Parâmetro: o arquivo que deve ser enviado
-    const dados = await this.storage.upload(`${nomeDoArquivo}`, foto)
+    const dados = from(this.storage.upload(`${nomeDoArquivo}`, foto))
 
     // a propriedade REF é a referência do arquivo no firebase
 
-    const downloadURL = await dados.ref.getDownloadURL() // retorna um link pro acesso da imagem
-
-    return downloadURL
+    return dados.pipe(mergeMap(
+      (result) => { return result.ref.getDownloadURL() }))
   }
 }
