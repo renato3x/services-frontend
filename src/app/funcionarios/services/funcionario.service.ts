@@ -23,11 +23,7 @@ export class FuncionarioService {
     const token = this.authService.recuperarToken()
 
     // Bearer token
-    return this.http.get<Funcionario[]>(this.baseUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.get<Funcionario[]>(this.baseUrl)
   }
 
   // http://localhost:3000/funcionarios/
@@ -48,30 +44,18 @@ export class FuncionarioService {
              * mergeMap tem a função de pegar dois ou mais observables e transformar todos
              * em um só
              */
-            return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            })
+            return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
           })
         )
     }
 
-    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`,)
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {
     const token = this.authService.recuperarToken()
 
-    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`)
   }
 
   /**
