@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
@@ -19,22 +20,27 @@ export class ListarFuncionariosComponent implements OnInit {
   constructor(
     private funcService: FuncionarioService,
     private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private titleService: Title,
   ) { }
 
+
   ngOnInit(): void {
+    //função para alterar titulo
+    this.titleService.setTitle("Funcionarios Service")
+
     // 1° sucesso -> retorna os dados
     // 2° erro -> ocorre um erro na fonte de dados
     // 3° complete -> a fonte de dados te retorna tudo
 
     this.funcService.atualizarFuncionariosSub$
-    .subscribe(
-      (precisaAtualizar) => {
-        if (precisaAtualizar) {
-          this.recuperarFuncionarios()
+      .subscribe(
+        (precisaAtualizar) => {
+          if (precisaAtualizar) {
+            this.recuperarFuncionarios()
+          }
         }
-      }
-    )
+      )
   }
 
   deletarFuncionario(func: Funcionario): void {
@@ -54,34 +60,34 @@ export class ListarFuncionariosComponent implements OnInit {
      * quando esse dialog for fechado
      */
     dialogRef.afterClosed()
-    .subscribe(
-      (deletar) => {
-        /**
-         * o parâmetro deletar vai me retornar um valor booleano
-         * como foi colocado no componente do confirmar-delecao
-         *
-         * se deletar for TRUE, apagaremos o funcionário, se não,
-         * nada acontecerá
-         */
-        if (deletar == true) {
-          this.funcService.deleteFuncionario(func)
-          .subscribe(
-            () => {
-              this.snackbar.open('Funcionário deletado', 'Ok', {
-                duration: 3000
-              })
-              this.recuperarFuncionarios()
-            },
-            (error) => {
-              this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
-                duration: 3000
-              })
-              console.log(error)
-            }
-          )
+      .subscribe(
+        (deletar) => {
+          /**
+           * o parâmetro deletar vai me retornar um valor booleano
+           * como foi colocado no componente do confirmar-delecao
+           *
+           * se deletar for TRUE, apagaremos o funcionário, se não,
+           * nada acontecerá
+           */
+          if (deletar == true) {
+            this.funcService.deleteFuncionario(func)
+              .subscribe(
+                () => {
+                  this.snackbar.open('Funcionário deletado', 'Ok', {
+                    duration: 3000
+                  })
+                  this.recuperarFuncionarios()
+                },
+                (error) => {
+                  this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
+                    duration: 3000
+                  })
+                  console.log(error)
+                }
+              )
+          }
         }
-      }
-    )
+      )
   }
 
   recuperarFuncionarios(): void {
