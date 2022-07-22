@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { ConfirmarLogoutComponent } from './components/confirmar-logout/confirmar-logout.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
     FormFuncionarioComponent,
     ConfirmarDelecaoComponent,
     ConfirmarSaidaComponent,
-    NavbarComponent
+    NavbarComponent,
+    ConfirmarLogoutComponent
   ],
   imports: [
     CommonModule,

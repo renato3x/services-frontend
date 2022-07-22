@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmarLogoutComponent } from 'src/app/funcionarios/components/confirmar-logout/confirmar-logout.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   signIn(user: User): Observable<{ Authorization: string }> {
@@ -28,8 +31,15 @@ export class AuthService {
   }
 
   signOut(): void {
-    this.removerToken()
-    this.router.navigateByUrl('/auth/login')
+    this.dialog.open(ConfirmarLogoutComponent).afterClosed()
+    .subscribe((deslogar) => {
+      if(deslogar) {
+        this.removerToken()
+        this.router.navigateByUrl('/auth/login')
+      }
+    })
+
+   
   }
 
   armazenarToken(token: string): void {
