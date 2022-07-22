@@ -5,28 +5,19 @@
       <h1>Log in</h1>
       <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Seu e-mail"
-          formControlName="login"
-        >
+        <input type="text" matInput placeholder="Seu e-mail" formControlName="login">
         <mat-error>
           <span>Este campo é obrigatório</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Senha</mat-label>
-        <input
-          type="password"
-          matInput
-          placeholder="Sua senha"
-          formControlName="password"
-        >
+        <input type="password" matInput placeholder="Sua senha" formControlName="password">
         <mat-error>
           <span>Este campo é obrigatório</span>
         </mat-error>
       </mat-form-field>
+      <re-captcha formControlName="reCaptcha"></re-captcha>
       <button type="submit" mat-stroked-button color="primary" [disabled]="loginForm.invalid">
         <mat-icon>login</mat-icon>
       </button>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = this.fb.group({
     login: ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required]],
+    reCaptcha: ['', [Validators.required]]
   })
 
   constructor(
@@ -31,9 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const credenciais = this.loginForm.value
-
-    this.authService.signIn(credenciais)
+    const login = { login: this.loginForm.value.login, password: this.loginForm.value.password }
+    this.authService.signIn(login)
       .subscribe(
         () => {
           this.snackbar.open('Logado com sucesso', 'Ok', {
