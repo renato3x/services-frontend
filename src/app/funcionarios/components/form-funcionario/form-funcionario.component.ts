@@ -14,8 +14,8 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FormFuncionarioComponent implements OnInit {
 
   formFuncionario: FormGroup = this.fb.group({
-    nome: ['', [ Validators.required ]],
-    email: ['', [ Validators.required, Validators.email ]],
+    nome: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     foto: ['']
   })
 
@@ -60,45 +60,11 @@ export class FormFuncionarioComponent implements OnInit {
     }
 
     obsSalvar.subscribe(
-      (resultado) => {
-        // 1° testar se o resultado é uma Promise ou não
-        if (resultado instanceof Promise) {
-          /**
-           * Se cair no if, significa que há uma promise e que tem uma
-           * foto para salvar
-           */
-
-          // 1° -> Recuperar o observable que me é retornado do primeiro subscribe
-
-          /**
-           * a função then() é executada
-           * quando a promise consegue te retornar os dados com sucesso
-           *
-           * nesse caso, o dado que será retorna é um observable com o funcionário
-           * que foi salvo no banco de dados
-           */
-          resultado.then((obs$) => {
-            // inscrevendo-se no observable que nos retornará o funcionário salvo no banco de dados
-            obs$.subscribe(
-              () => {
-                // quando o funcionário for salvo, aparecerá um snackbar na tela e o dialog será fechado
-                this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-                  duration: 3000
-                })
-                this.dialogRef.close()
-              }
-            )
-          })
-        } else {
-          /**
-           * Se cair no else, significa que o funcionário já foi salvo
-           * e não tinha foto para enviar
-           */
-          this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-            duration: 3000
-          })
-          this.dialogRef.close()
-        }
+      () => {
+        this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+          duration: 3000
+        })
+        this.dialogRef.close()
       }
     )
   }
