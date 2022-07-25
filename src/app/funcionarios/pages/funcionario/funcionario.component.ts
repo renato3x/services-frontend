@@ -16,14 +16,14 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
-  funcionario!: Funcionario
-
+  
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
     foto: ['']
   })
-
+  
+  funcionario!: Funcionario
   imagePreview: string = ''
   foto!: File // undefined
   desabilitar: boolean = true

@@ -1,0 +1,141 @@
+<!-- Toolbar -->
+<div class="containerToolbar">
+  <div id="servicesToolbar">
+    <aside>
+      <h1>Services</h1>
+    </aside>
+  </div>
+
+  <div>
+    <mat-form-field color="accent">
+      
+      <input class="search" matInput (keyup)="applyFilter($event)" #input placeholder="Pesquisar"/>
+    </mat-form-field> 
+  </div>
+
+  <div id="buttons">
+    <button mat-button [matMenuTriggerFor]="menuFuncionarios">
+      Funcionários
+    </button>
+    <mat-menu #menuFuncionarios="matMenu">
+      <a mat-menu-item routerLink="/funcionarios">Funcionários</a>
+      <a mat-menu-item routerLink="/cargos">Cargos</a>
+    </mat-menu>
+    <button mat-icon-button (click)="authService.signOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- Formulário Para Cadastro de Cargo -->
+
+<div class="container">
+  <div id="header"></div>
+
+  <div>
+    <form class="mat-elevation-z16" [formGroup]="formOffice">
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Cadastrar Cargo</mat-card-title>
+        </mat-card-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cargo</mat-label>
+          <input type="text" matInput formControlName="nome" name="cargo" />
+          <mat-error>
+            <span> Campo obrigatório! </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descrição</mat-label>
+          <input type="text" matInput formControlName="descricao" name="descricao" />
+          <mat-error>
+            <span> Campo obrigatório! </span>
+          </mat-error>
+        </mat-form-field>
+       
+         <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Salário</mat-label>
+          <input
+            formControlName="salario"
+            matInput
+            type="number"
+            class="example-right-align"
+            placeholder="0"
+          />
+          <span matPrefix>R$&nbsp;</span>
+          <span matSuffix>.00</span>
+          <mat-error>
+            <span> Campo obrigatório! </span>
+          </mat-error>
+        </mat-form-field>
+        <hr />
+
+        <button (click)="registerOffice()" [disabled]="formOffice.invalid" type="submit" mat-raised-button color="primary">Cadastrar Cargo</button>
+      </mat-card>
+    </form>
+  </div>
+
+  <!-- Tabela de Cargos -->
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z16">
+      <ng-container matColumnDef="id">
+        <th class="centralizar" mat-header-cell *matHeaderCellDef>Id</th>
+        <td class="centralizar" mat-cell *matCellDef="let element">{{ element.idCargo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="office">
+        <th class="centralizar" mat-header-cell *matHeaderCellDef>Cargo</th>
+        <td class="centralizar" mat-cell *matCellDef="let element">{{ element.nome }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th class="centralizar" mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td class="centralizar" mat-cell *matCellDef="let element">{{ element.descricao }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="salary">
+        <th class="centralizar" mat-header-cell *matHeaderCellDef>Salario</th>
+        <td class="centralizar" mat-cell *matCellDef="let element">
+          {{ element.salario | currency: "BRL" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th class="centralizar" mat-header-cell *matHeaderCellDef>Editar</th>
+        <td class="centralizar" mat-cell *matCellDef="let element">
+          <button (click)="openDialogEdit(element.idCargo)" mat-icon-button matTooltip="Editar Cargo">
+            <mat-icon>edit</mat-icon>{{ element.edit }}
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th class="centralizar" mat-header-cell *matHeaderCellDef>Excluir</th>
+        <td class="centralizar" mat-cell *matCellDef="let element">
+          <button
+          color="warn"
+            (click)="openDialogDelete(element.idCargo)"
+            mat-icon-button
+            matTooltip="Excluir Cargo"
+          >
+            <mat-icon>delete</mat-icon>{{ element.delete }}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No data matching the filter
+          "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+    
+  </div>
+</div>
