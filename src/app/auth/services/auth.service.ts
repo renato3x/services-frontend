@@ -55,4 +55,10 @@ export class AuthService {
 
     return !this.jwt.isTokenExpired(token) // testando a validade do token
   }
+
+  emailUsuario(){
+    const token= this.recuperarToken()
+    const decode= this.jwt.decodeToken(token!)
+    return decode
+  }
 }

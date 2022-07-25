@@ -9,13 +9,20 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  emailUser!: string;
+
   constructor(
-    private authService: AuthService
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.emailUser= this.emailUsuario()
   }
 
+  emailUsuario():string {
+    const email= this.authService.emailUsuario().sub
+    return email
+  }
   logout() {
     this.authService.signOut()
   }
