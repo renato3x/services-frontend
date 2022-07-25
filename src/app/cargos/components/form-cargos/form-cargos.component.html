@@ -1,0 +1,43 @@
+<div>
+    <h2 mat-dialog-title>Novo Cargo</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoCargo"></mat-spinner>
+</div>
+<section mat-dialog-content>
+    <form action="" [formGroup]="formCargo" (ngSubmit)="salvar()">
+
+        <mat-form-field appearence="fill">
+            <mat-label>Nome</mat-label>
+            <input 
+            type="text"
+            matInput
+            formControlName="nome"
+            >
+        </mat-form-field>
+
+        <mat-form-field appearence="fill">
+            <mat-label>Descrição</mat-label>
+            <input 
+            type="text"
+            matInput
+            formControlName="descricao"
+            >
+        </mat-form-field>
+
+        <mat-form-field appearence="fill">
+            <mat-label>Salário</mat-label>
+            <input id="inputSalario"
+            type="number"
+            matInput
+            formControlName="salario"
+            >
+        </mat-form-field>
+
+        <button 
+        type="submit" 
+        [disabled]="formCargo.invalid"
+        mat-raised-button 
+        color="accent"
+        id="salvar"
+        >Salvar</button>
+    </form>
+</section>

@@ -25,18 +25,23 @@ export class PodeSairGuard implements CanDeactivate<FuncionarioComponent> {
 
     // 1° Pegar os dados do formulário e guardar cada um em variáveis diferentes
 
-    const nome = component.formFuncionario.value.nome
-    const email = component.formFuncionario.value.email
-    const foto = component.formFuncionario.value.foto
+    if (component.funcionario) {
 
-    if (nome != component.funcionario.nome || email != component.funcionario.email || foto.length > 0) {
+      
+      const nome = component.formFuncionario.value.nome
+      const email = component.formFuncionario.value.email
+      const foto = component.formFuncionario.value.foto
+
+      if (nome != component.funcionario.nome || email != component.funcionario.email || foto.length > 0) {
       const dialogRef = this.dialog.open(ConfirmarSaidaComponent)
 
       const querSair = dialogRef.afterClosed()
-
+      
       return querSair
     } else {
       return true
     }
-  }
+    }
+    return true
+}
 }

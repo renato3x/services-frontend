@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Services</h1>
+    <span class="separador"></span>
+    
+    <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
+    <mat-menu #menuFuncionarios="matMenu">
+      <a
+      mat-menu-item
+      routerLink="/funcionarios"
+      >Listar</a>
+    </mat-menu>
+    
+    <button mat-button [matMenuTriggerFor]="menuCargos">Cargos</button>
+    <mat-menu #menuCargos="matMenu">
+      <a
+        mat-menu-item
+        routerLink="/cargos"
+      >Listar</a>
+    </mat-menu>
+
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
