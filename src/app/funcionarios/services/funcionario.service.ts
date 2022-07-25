@@ -82,6 +82,7 @@ export class FuncionarioService {
    * O ? na frente do parâmetro faz com que ele seja opcional na hora de executar a função
    */
   salvarFuncionario(func: Funcionario, foto?: File) {
+    const token = this.authService.recuperarToken()
     /**
      * fazendo requisição POST para salvar os dados do funcionário
      * return funcionário que acabou de ser salvo
@@ -97,10 +98,18 @@ export class FuncionarioService {
      * transformando em algo diferente e te retorna esse dado modificado
      */
     if (foto == undefined) { // se a foto não existe, será retornado um observable que apenas salva os dados básicos
-      return this.http.post<Funcionario>(this.baseUrl, func)
+      return this.http.post<Funcionario>(this.baseUrl, func,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
     }
 
-    return this.http.post<Funcionario>(this.baseUrl, func)
+    return this.http.post<Funcionario>(this.baseUrl, func,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
     .pipe(
       map(async (func) => {
         // 1° Fazer upload da imagem e recuperar o link gerado

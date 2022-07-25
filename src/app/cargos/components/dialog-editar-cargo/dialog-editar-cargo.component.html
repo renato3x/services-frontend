@@ -1,0 +1,65 @@
+<div class="sidebar">
+
+  <form action="" [formGroup]="formOffice">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Cadastro de Serviço</mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cargo</mat-label>
+        <input type="text" matInput formControlName="nome" name="cargo" />
+        <mat-error>
+          <span> Campo obrigatório! </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descrição</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="descricao"
+          name="descricao"
+        />
+        <mat-error>
+          <span> Campo obrigatório! </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Salário</mat-label>
+        <input
+          formControlName="salario"
+          matInput
+          type="number"
+          class="example-right-align"
+          placeholder="0"
+        />
+        <span matPrefix>R$&nbsp;</span>
+        <span matSuffix>.00</span>
+        <mat-error>
+          <span> Campo obrigatório! </span>
+        </mat-error>
+      </mat-form-field>
+      <hr />
+
+      <button 
+      [disabled]="disabledButton" 
+      type="submit" 
+      mat-raised-button 
+      color="warn" 
+      [mat-dialog-close]="true">Atualizar Cargo
+    </button>
+    
+      <button  
+      type="submit" 
+      mat-raised-button 
+      color="primary" 
+      [mat-dialog-close]="false">Cancelar
+    </button>
+
+    </mat-card>
+  </form>
+</div>
