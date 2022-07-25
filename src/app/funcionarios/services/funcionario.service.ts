@@ -4,6 +4,7 @@ import { BehaviorSubject, map, mergeMap, Observable, tap } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,13 @@ export class FuncionarioService {
   constructor(
     private http: HttpClient,
     private storage: AngularFireStorage, // objeto responsável por salvar os arquivos no firebase
-    private authService: AuthService
+    private authService: AuthService,
+    private title: Title
   ) { }
+
+ngOnInit() {
+  this.title.setTitle("Projeto BCW20 Services Frontend Squad 06 - Funcionários");
+}
 
   getFuncionarios(): Observable<Funcionario[]> {
     const token = this.authService.recuperarToken()

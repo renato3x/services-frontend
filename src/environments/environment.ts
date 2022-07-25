@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyAIh0nUciDJUVb6VLj5nd4m-nKo5OeI2Hk",
-    authDomain: "soulcode-app-services.firebaseapp.com",
-    projectId: "soulcode-app-services",
-    storageBucket: "soulcode-app-services.appspot.com",
-    messagingSenderId: "897999773081",
-    appId: "1:897999773081:web:1dad83b8760a5ebd484708",
-    measurementId: "G-TC182RVTS2"
+    apiKey: "AIzaSyBE5UEdCDKRRXuTkrJ7HJNjYF1y4KumiOA",
+    authDomain: "appfuncionariossoulcode.firebaseapp.com",
+    projectId: "appfuncionariossoulcode",
+    storageBucket: "appfuncionariossoulcode.appspot.com",
+    messagingSenderId: "861776417596",
+    appId: "1:861776417596:web:05a43f5be8be65726f0439",
+    measurementId: "G-6VGRV4P68L"
   }
 };
 

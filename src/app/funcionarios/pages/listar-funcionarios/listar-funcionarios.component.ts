@@ -5,6 +5,7 @@ import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/co
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listar-funcionarios',
@@ -19,10 +20,13 @@ export class ListarFuncionariosComponent implements OnInit {
   constructor(
     private funcService: FuncionarioService,
     private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Projeto BCW20 Services Frontend Squad 06 - Funcionários");
+    
     // 1° sucesso -> retorna os dados
     // 2° erro -> ocorre um erro na fonte de dados
     // 3° complete -> a fonte de dados te retorna tudo

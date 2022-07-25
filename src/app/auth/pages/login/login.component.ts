@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,12 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.title.setTitle("Projeto BCW20 Services Frontend Squad 06 - Login");
   }
 
   login(): void {

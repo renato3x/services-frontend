@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-form-funcionario',
@@ -27,10 +28,12 @@ export class FormFuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private funcService: FuncionarioService,
     private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
-    private snackbar: MatSnackBar // com esse objeto será criado um snackbar na tela
+    private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
+    private title: Title
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.title.setTitle("Projeto BCW20 Services Frontend Squad 06 - Funcionários");
   }
 
   recuperarFoto(event: any): void {

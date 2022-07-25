@@ -4,6 +4,7 @@ import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } f
 import { Observable } from 'rxjs';
 import { ConfirmarSaidaComponent } from '../components/confirmar-saida/confirmar-saida.component';
 import { FuncionarioComponent } from '../pages/funcionario/funcionario.component';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,13 @@ import { FuncionarioComponent } from '../pages/funcionario/funcionario.component
 export class PodeSairGuard implements CanDeactivate<FuncionarioComponent> {
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private title: Title
   ) {}
+
+  ngOnInit() {
+    this.title.setTitle("Projeto BCW20 Services Frontend Squad 06");
+  }
 
   canDeactivate(
     component: FuncionarioComponent, // representa o componente que ele está inserido
