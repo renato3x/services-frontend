@@ -42,7 +42,7 @@ export class AuthService {
           
           this.router.navigateByUrl('/auth/login')
 
-          this.snackBar.open('Deslogado com sucesso', 'Ok', {
+          this.snackBar.open('Deslogado com sucesso!', 'Ok', {
             duration: 3000,
             verticalPosition: 'top'
           })
