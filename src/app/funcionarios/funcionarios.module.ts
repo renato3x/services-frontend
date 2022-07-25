@@ -11,6 +11,8 @@ import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confir
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { ConfirmarLogoutComponent } from './components/confirmar-logout/confirmar-logout.component';
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ConfirmarLogoutComponent } from './components/confirmar-logout/confirma
     CommonModule,
     FuncionariosRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule
+  ],
 })
 export class FuncionariosModule { }
