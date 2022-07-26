@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Cargos } from 'src/app/cargos/interface/cargos';
+import { CargosServiceService } from 'src/app/cargos/service/cargos-service.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -20,7 +22,8 @@ export class FuncionarioComponent implements OnInit {
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
-    foto: ['']
+    foto: [''],
+    cargo:['', [Validators.required]]
   })
   
   funcionario!: Funcionario
@@ -28,6 +31,7 @@ export class FuncionarioComponent implements OnInit {
   foto!: File // undefined
   desabilitar: boolean = true
   naoEncontrado: boolean = false
+  cargos!:Cargos[]
 
   constructor(
     private route: ActivatedRoute, // acessar os parâmetros da rota ativa
@@ -35,8 +39,9 @@ export class FuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router // serve para fazer o redirecionamento entre as páginas do app pelo ts
-  ) { }
+    private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
+    private cargosService: CargosServiceService
+    ) { }
 
   ngOnInit(): void {
     // let idFuncionario = this.route.snapshot.paramMap.get('idFuncionario')
@@ -46,6 +51,7 @@ export class FuncionarioComponent implements OnInit {
         this.recuperarFuncionario(idFuncionario)
       }
     )
+    this.getAllOffices()
   }
 
   recuperarFuncionario(id: number): void {
@@ -62,10 +68,14 @@ export class FuncionarioComponent implements OnInit {
          * setValue() é responsável por pegar os valores que foram passados para ela
          * e colocar dentro dos formControls
          */
+        
+        console.log(this.cargos);
+        
         this.formFuncionario.setValue({
           nome: this.funcionario.nome,
           email: this.funcionario.email,
-          foto: ''
+          foto: '',
+          cargo:this.funcionario.cargo.idCargo
         })
 
         // 3° carregar o preview da imagem
@@ -109,7 +119,7 @@ export class FuncionarioComponent implements OnInit {
          * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
          * propriedade do objeto funcionário
          */
-        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
+        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.cargo.idCargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
       }
     )
   }
@@ -118,15 +128,22 @@ export class FuncionarioComponent implements OnInit {
     const f: Funcionario = { ...this.formFuncionario.value }
     f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
+    const cargo = this.cargos.find((cargo)=>{
+      return cargo.idCargo == this.formFuncionario.value.cargo
+    })
+    f.cargo = cargo as Cargos
 
-    const temFoto = this.formFuncionario.value.foto.length > 0
+    const temFoto:boolean = this.formFuncionario.value.foto.length > 0
 
     const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
-
-    obsSalvar
+    console.log(f);
+    
+   obsSalvar
     .subscribe(
       (resultado) => {
         if (resultado instanceof Observable<Funcionario>) {
+          console.log(resultado);
+          
           resultado
           .subscribe(
             (func) => {
@@ -134,18 +151,19 @@ export class FuncionarioComponent implements OnInit {
                 duration: 3000
               })
 
-              this.recuperarFuncionario(func.id)
+              this.recuperarFuncionario(func.idFuncionario)
             }
           )
         }
-
+        else{
         this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
           duration: 3000
         })
 
-        this.recuperarFuncionario(resultado.id)
+        this.recuperarFuncionario(resultado.idFuncionario)
+        }
       }
-    )
+    )  
   }
 
   deletar(): void {
@@ -167,5 +185,11 @@ export class FuncionarioComponent implements OnInit {
         }
       }
     )
+  }
+
+  getAllOffices() {
+    this.cargosService.getAllOffices().subscribe((newValue) => {
+      this.cargos = newValue
+    })
   }
 }

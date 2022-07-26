@@ -68,6 +68,10 @@ export class CargosComponent implements OnInit {
   deleteOfficeById(id: number) {
     this.cargosService.deleteOfficeById(id).subscribe(() => {
       this.cargosService.getAllOffices().subscribe((updatedTable) => {
+        this.snackBar.open("Cargo excluído!","Ok",{
+          verticalPosition:"top",
+          duration:5000
+        })
         this.offices = updatedTable
       });
     });
@@ -107,8 +111,8 @@ export class CargosComponent implements OnInit {
 
   openDialogEdit(id:number) {
     let ref = this.dialog.open(DialogEditarCargoComponent);
-
-    this.cargosService.getOfficeById(id).subscribe((newValues) => {
+    
+     this.cargosService.getOfficeById(id).subscribe((newValues) => {
       ref.componentInstance.formOffice.setValue({
         idCargo:newValues.idCargo,
         nome: newValues.nome,
@@ -117,7 +121,7 @@ export class CargosComponent implements OnInit {
       });
     });
 
-    ref.afterClosed().subscribe((boolean) => {
+     ref.afterClosed().subscribe((boolean) => {
       console.log(boolean);
       if(boolean){
         const updatedOffice = ref.componentInstance.formOffice.value
