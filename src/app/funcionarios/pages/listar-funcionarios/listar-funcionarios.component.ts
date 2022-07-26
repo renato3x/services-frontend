@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Cargos } from 'src/app/cargos/interface/cargos';
+import { CargosServiceService } from 'src/app/cargos/service/cargos-service.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
@@ -14,12 +16,13 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class ListarFuncionariosComponent implements OnInit {
 
   funcionarios: Funcionario[] = []
-  colunas: Array<string> = ['id', 'nome', 'email', 'actions']
-
+  colunas: Array<string> = ['id', 'nome', 'email', 'cargo', 'actions']
+  cargos:Cargos[] = []
   constructor(
     private funcService: FuncionarioService,
     private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private cargoService:CargosServiceService
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +66,7 @@ export class ListarFuncionariosComponent implements OnInit {
          * se deletar for TRUE, apagaremos o funcionário, se não,
          * nada acontecerá
          */
-        if (deletar == true) {
+        if (deletar) {
           this.funcService.deleteFuncionario(func)
           .subscribe(
             () => {
@@ -107,7 +110,7 @@ export class ListarFuncionariosComponent implements OnInit {
     // abrindo o formulário do funcionário
     // e recuperando a referência desse dialog e guardando na variável
     const referenciaDialog = this.dialog.open(FormFuncionarioComponent)
-
+    
     /**
      * a função afterClosed() nos retorna um observable
      * que notifica quando o dialog acabou de ser fechado

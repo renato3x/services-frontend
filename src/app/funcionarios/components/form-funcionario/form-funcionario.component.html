@@ -24,6 +24,16 @@
         formControlName="email"
       >
     </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Cargo</mat-label>
+      <mat-select formControlName="idCargo">
+        <ng-container *ngFor="let cargo of cargos">
+        <mat-option value={{cargo.idCargo}}>{{cargo.nome}}</mat-option> 
+      </ng-container>
+      </mat-select>
+    </mat-form-field>
+    
     <input
       type="file"
       accept="image/*"

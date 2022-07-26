@@ -4,6 +4,7 @@ import { BehaviorSubject, map, mergeMap, Observable, tap } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Cargos } from 'src/app/cargos/interface/cargos';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +21,16 @@ export class FuncionarioService {
   ) { }
 
   getFuncionarios(): Observable<Funcionario[]> {
-    const token = this.authService.recuperarToken()
 
     // Bearer token
-    return this.http.get<Funcionario[]>(this.baseUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.get<Funcionario[]>(this.baseUrl)
   }
 
   // http://localhost:3000/funcionarios/
   deleteFuncionario(func: Funcionario): Observable<any> {
-    const token = this.authService.recuperarToken()
 
     // se não tiver foto, apenas será deletado o email e nome
-    if (func.foto.length > 0) {
+    if (func.foto != undefined) {
       //1° pegar a referência da imagem no fireStorage
       /**
        * refFromURL() pega referência do arquivo do storage pelo link de acesso gerado
@@ -48,30 +43,16 @@ export class FuncionarioService {
            * mergeMap tem a função de pegar dois ou mais observables e transformar todos
            * em um só
            */
-          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
+          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
         })
       )
     }
 
-    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {
-    const token = this.authService.recuperarToken()
-
-    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`)
   }
 
   /**
@@ -81,8 +62,7 @@ export class FuncionarioService {
   /**
    * O ? na frente do parâmetro faz com que ele seja opcional na hora de executar a função
    */
-  salvarFuncionario(func: Funcionario, foto?: File) {
-    const token = this.authService.recuperarToken()
+  salvarFuncionario(func: Funcionario, idCargo:number, foto?: File) {
     /**
      * fazendo requisição POST para salvar os dados do funcionário
      * return funcionário que acabou de ser salvo
@@ -98,18 +78,10 @@ export class FuncionarioService {
      * transformando em algo diferente e te retorna esse dado modificado
      */
     if (foto == undefined) { // se a foto não existe, será retornado um observable que apenas salva os dados básicos
-      return this.http.post<Funcionario>(this.baseUrl, func,{
-        headers:{
-          Authorization:`Bearer ${token}`
-        }
-      })
+      return this.http.post<Funcionario>(`${this.baseUrl}/${idCargo}`, func)
     }
 
-    return this.http.post<Funcionario>(this.baseUrl, func,{
-      headers:{
-        Authorization:`Bearer ${token}`
-      }
-    })
+    return this.http.post<Funcionario>(`${this.baseUrl}/${idCargo}`, func)
     .pipe(
       map(async (func) => {
         // 1° Fazer upload da imagem e recuperar o link gerado
@@ -131,7 +103,7 @@ export class FuncionarioService {
     if (foto == undefined) {
       return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func)
       .pipe(
-        tap((funcionario) => {
+        tap(() => {
           this.atualizarFuncionariosSub$.next(true)
         })
       )
@@ -156,7 +128,7 @@ export class FuncionarioService {
 
         return this.atualizarFuncionario(funcionarioAtualizado)
       }),
-      tap((funcionario) => {
+      tap(() => {
         this.atualizarFuncionariosSub$.next(true)
       })
     )
