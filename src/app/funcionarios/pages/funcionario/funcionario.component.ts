@@ -22,7 +22,8 @@ export class FuncionarioComponent implements OnInit {
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
-    foto: ['']
+    foto: [''],
+    cargo: ['']
   })
 
   imagePreview: string = ''
