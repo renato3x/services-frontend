@@ -32,6 +32,18 @@
       (change)="recuperarFoto($event)"
       formControlName="foto"
     >
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cargo</mat-label>
+      <mat-select formControlName="idCargo">
+        <ng-container *ngFor="let cargo of cargos">
+          <mat-option value="{{ cargo.idCargo }}">
+            {{ cargo.nome }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
     <button
       type="button"
       mat-stroked-button
