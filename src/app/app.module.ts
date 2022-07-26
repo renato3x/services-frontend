@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat/'
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -22,9 +22,7 @@ import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SET
     MaterialModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule,
-    RecaptchaModule,
-    RecaptchaFormsModule
+    AngularFireStorageModule
   ],
   providers: [
     {

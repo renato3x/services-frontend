@@ -29,9 +29,7 @@ import { environment } from 'src/environments/environment';
     CommonModule,
     FuncionariosRoutingModule,
     MaterialModule,
-    ReactiveFormsModule,
-    RecaptchaFormsModule,
-    RecaptchaModule
+    ReactiveFormsModule
   ],
 })
 export class FuncionariosModule { }
