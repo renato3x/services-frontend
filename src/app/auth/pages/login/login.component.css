@@ -26,3 +26,7 @@
   flex-direction: column;
   width: 100%;
 }
+
+re-captcha {
+  margin-bottom: 20px;
+}
