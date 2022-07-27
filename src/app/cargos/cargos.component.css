@@ -28,10 +28,6 @@ aside h1{
   margin-left: 10px;
 }
 
-.search{
-  color: white;
-}
-
 #caixaPesquisa{
   background-color: brown;
   color: white;
@@ -49,6 +45,12 @@ aside h1{
 }
 
 /* Tabela de cargos */
+
+.search{
+  color: white;
+  width: 100px;
+}
+
 mat-toolbar-row {
   display: flex;
   align-items: center;

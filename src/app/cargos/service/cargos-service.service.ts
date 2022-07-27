@@ -11,13 +11,10 @@ export class CargosServiceService {
 
   private readonly url:string = "http://localhost:8080/servicos/cargos"
   public update$:BehaviorSubject<boolean> = new BehaviorSubject(true)
-
-
+  
   constructor(private http:HttpClient) { }
 
-  
-
-  getAllOffices():Observable<Cargos[]> {
+  getAllOffices():Observable<Cargos[]>{
    return this.http.get<Cargos[]>(this.url)
   }
 
