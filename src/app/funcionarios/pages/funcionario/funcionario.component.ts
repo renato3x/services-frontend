@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
@@ -21,7 +22,8 @@ export class FuncionarioComponent implements OnInit {
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
-    foto: ['']
+    foto: [''],
+    cargo: ['']
   })
 
   imagePreview: string = ''
@@ -35,7 +37,8 @@ export class FuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router // serve para fazer o redirecionamento entre as páginas do app pelo ts
+    private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
+    private title: Title
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class FuncionarioComponent implements OnInit {
         this.recuperarFuncionario(idFuncionario)
       }
     )
+    this.title.setTitle('Funcionario Service')
   }
 
   recuperarFuncionario(id: number): void {

@@ -2,6 +2,7 @@
   <mat-toolbar-row>
     <h1>Services</h1>
     <span class="separador"></span>
+    <p>{{authService.emailToken()}}</p>
     <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a
