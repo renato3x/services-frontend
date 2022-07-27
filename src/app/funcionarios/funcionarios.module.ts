@@ -9,7 +9,7 @@ import { FormFuncionarioComponent } from './components/form-funcionario/form-fun
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
-import { NavbarComponent } from '../components/navbar/navbar.component';
+import { CompartilharComponentesModule } from '../compartilhar-componentes/compartilhar-componentes.module';
 
 
 @NgModule({
@@ -19,13 +19,13 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
     FormFuncionarioComponent,
     ConfirmarDelecaoComponent,
     ConfirmarSaidaComponent,
-    NavbarComponent
   ],
   imports: [
     CommonModule,
     FuncionariosRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CompartilharComponentesModule
   ]
 })
 export class FuncionariosModule { }

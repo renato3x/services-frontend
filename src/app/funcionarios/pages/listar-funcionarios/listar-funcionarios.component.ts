@@ -22,7 +22,6 @@ export class ListarFuncionariosComponent implements OnInit {
     private funcService: FuncionarioService,
     private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
     private snackbar: MatSnackBar,
-    private cargoService:CargosServiceService
   ) { }
 
   ngOnInit(): void {
