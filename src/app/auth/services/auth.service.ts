@@ -69,8 +69,15 @@ export class AuthService {
 
     if (token == null) {
       return false
-    }
+    }    
 
     return !this.jwt.isTokenExpired(token) // testando a validade do token
+  }
+  emailToken(): boolean{
+    const token = this.recuperarToken()
+    if (token == null){
+      return false
+    }
+    return this.jwt.decodeToken(token).sub
   }
 }
