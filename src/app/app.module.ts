@@ -17,12 +17,14 @@ import { DialogEditarCargoComponent } from './cargos/components/dialog-editar-ca
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     CargosComponent,
     DialogExcluirCargoComponent,
-    DialogEditarCargoComponent
+    DialogEditarCargoComponent,
+    
   ],
   imports: [
     BrowserModule,
