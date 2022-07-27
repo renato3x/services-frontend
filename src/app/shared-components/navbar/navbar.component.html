@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <h1>Services</h1>
     <span class="separador"></span>
-    
+
     <button matTooltip="Menu Funcionário" mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a
@@ -10,7 +10,7 @@
       routerLink="/funcionarios"
       >Listar</a>
     </mat-menu>
-    
+
     <button matTooltip="Menu Cargos" mat-button [matMenuTriggerFor]="menuCargos">Cargos</button>
     <mat-menu #menuCargos="matMenu">
       <a
@@ -18,6 +18,16 @@
         routerLink="/cargos"
       >Listar</a>
     </mat-menu>
+
+    <button matTooltip="Menu Clientes" mat-button [matMenuTriggerFor]="menuClientes">Clientes</button>
+    <mat-menu #menuClientes="matMenu">
+      <a
+        mat-menu-item
+        routerLink="/clientes"
+      >Listar</a>
+    </mat-menu>
+
+
     <button matTooltip="Menu do usuario" mat-button matTooltip="Menu usuario" [matMenuTriggerFor]="menuUsuario">{{emailUser}}</button>
     <mat-menu #menuUsuario="matMenu">
       <div class="modal" tabindex="-1" role="dialog">
