@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
+import { ConfirmarLogoutComponent } from './confirmar-logout/confirmar-logout.component';
 
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    ConfirmarLogoutComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { ConfirmarLogoutComponent } from '../confirmar-logout/confirmar-logout.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +14,7 @@ export class NavbarComponent implements OnInit {
   emailUser!: string;
 
   constructor(
+    private dialog: MatDialog,
     public authService: AuthService
   ) { }
 
@@ -24,6 +27,16 @@ export class NavbarComponent implements OnInit {
     return email
   }
   logout() {
-    this.authService.signOut()
+    const dialog= this.dialog.open(ConfirmarLogoutComponent)
+    dialog.afterClosed().subscribe((Response) => {
+      if(Response) {
+        this.authService.signOut()
+      }
+    })
+  
   }
-}
+  
+
+  }
+
+
