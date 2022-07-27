@@ -49,6 +49,6 @@
       (click)="fileInput.click()"
     >Selecione uma imagem</button>
 
-    <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+    <button [mat-dialog-close]="true" type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
   </form>
 </section>

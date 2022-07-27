@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cargos } from 'src/app/cargos/interface/cargos';
 import { CargosServiceService } from 'src/app/cargos/service/cargos-service.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
+import { ConfirmarSaidaComponent } from '../../components/confirmar-saida/confirmar-saida.component';
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -108,7 +109,7 @@ export class ListarFuncionariosComponent implements OnInit {
   abrirFormFuncionario(): void {
     // abrindo o formulário do funcionário
     // e recuperando a referência desse dialog e guardando na variável
-    const referenciaDialog = this.dialog.open(FormFuncionarioComponent)
+    const ref = this.dialog.open(FormFuncionarioComponent)
     
     /**
      * a função afterClosed() nos retorna um observable
@@ -117,10 +118,17 @@ export class ListarFuncionariosComponent implements OnInit {
      * quando o dialog for fechado, chamaremos a função que
      * faz a requisição dos funcionários novamente.
      */
-    referenciaDialog.afterClosed().subscribe(
+    
+   
+    ref.afterClosed().subscribe(
       () => {
-        this.recuperarFuncionarios()
+        
+          this.recuperarFuncionarios()
       }
+        
+
+      
     )
-  }
+  
+}
 }

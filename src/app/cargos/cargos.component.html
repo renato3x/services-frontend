@@ -61,6 +61,7 @@
         <input class="search" matInput (keyup)="applyFilter($event)" #input placeholder="Pesquisar"/>
       </mat-form-field> 
     </div>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z16">
       <ng-container matColumnDef="id">
         <th class="centralizar" mat-header-cell *matHeaderCellDef>Id</th>
@@ -112,8 +113,7 @@
 
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
-          No data matching the filter
-          "{{ input.value }}"
+          Dados não encontrados
         </td>
       </tr>
     </table>
