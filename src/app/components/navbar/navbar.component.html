@@ -3,15 +3,22 @@
     <h1>Services</h1>
     <span class="separador"></span>
     <p>{{authService.emailToken()}}</p>
-    <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
+    <button 
+    mat-button 
+    matTooltip="Funcionários"
+    [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a
         mat-menu-item
+        matTooltip="Listar funcionário"
         routerLink="/funcionarios"
       >Listar</a>
     </mat-menu>
 
-    <button mat-icon-button (click)="authService.signOut()">
+    <button 
+    mat-icon-button 
+    matTooltip="Logout"
+    (click)="authService.signOut()">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar-row>
