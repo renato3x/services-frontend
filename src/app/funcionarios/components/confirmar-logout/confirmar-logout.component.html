@@ -3,6 +3,14 @@
   <p><br> Quer mesmo Deslogar?</p>
 </div>
 <div mat-dialog-actions>
-  <button [mat-dialog-close]="true" mat-raised-button color="warn">Continuar</button>
-  <button [mat-dialog-close]="false" mat-raised-button color="primary">Cancelar</button>
+  <button 
+  [mat-dialog-close]="true" 
+  mat-raised-button color="warn"
+  matTooltip="Fazer logout"
+  >Continuar</button>
+  <button 
+  [mat-dialog-close]="false" 
+  mat-raised-button color="primary"
+  matTooltip="Cancelar logout"
+  >Cancelar</button>
 </div>

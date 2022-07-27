@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import {ViewEncapsulation} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
