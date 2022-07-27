@@ -20,7 +20,13 @@ const routes: Routes = [
   {
     path: 'cargos',
     loadChildren: () => import('./cargos/cargos.module').then(m => m.CargosModule)
+  },
+  {
+    path: 'clientes',
+    loadChildren: () => import('./clientes/clientes.module').then(m => m.ClientesModule)
   }
+
+
 ];
 
 @NgModule({
