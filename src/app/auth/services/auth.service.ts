@@ -61,4 +61,6 @@ export class AuthService {
     const decode= this.jwt.decodeToken(token!)
     return decode
   }
+
+  
 }

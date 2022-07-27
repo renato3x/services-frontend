@@ -30,9 +30,18 @@
 
     <button matTooltip="Menu do usuario" mat-button matTooltip="Menu usuario" [matMenuTriggerFor]="menuUsuario">{{emailUser}}</button>
     <mat-menu #menuUsuario="matMenu">
+      <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"></h5>
+            </div>
+          </div>
+        </div>
+      </div>
       <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon> Sair
-      </button>
+        <mat-icon>logout</mat-icon>Sair?
+         </button>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
