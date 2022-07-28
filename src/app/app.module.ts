@@ -15,11 +15,13 @@ import { DialogExcluirCargoComponent } from './cargos/components/dialog-excluir-
 import { DialogEditarCargoComponent } from './cargos/components/dialog-editar-cargo/dialog-editar-cargo.component';
 import { RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     DialogExcluirCargoComponent,
-    DialogEditarCargoComponent
+    DialogEditarCargoComponent,
+    
   ],
   imports: [
     BrowserModule,

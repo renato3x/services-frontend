@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <aside id="lateral">
+    <h2>Clientes</h2>
+  </aside>
+
+  <main>
+
+    <button mat-mini-fab color="accent" (click)="abrirFormCliente()" id="add">
+      <mat-icon>add</mat-icon>
+    </button> 
+
+   <!--  <div>
+      <router-outlet></router-outlet>
+    </div>
+ -->
+ 
+
+ <!-- tabela -->
+    <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let f">{{ f.idCliente }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let f">{{f.nome}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+        <td mat-cell *matCellDef="let f">{{ f.email }}</td>
+      </ng-container>
+      
+     
+
+       <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let f">
+          <button mat-icon-button (click)="AtualizarCliente(f)" >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn"(click)="abrirDialogDeExcluir(f.idCliente)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+
+    </table>
+  </main>
+</div>
