@@ -65,16 +65,8 @@ export class CargosComponent implements OnInit {
     });
   }
 
-  deleteOfficeById(id: number) {
-    this.cargosService.deleteOfficeById(id).subscribe(() => {
-      this.cargosService.getAllOffices().subscribe((updatedTable) => {
-        this.snackBar.open("Cargo excluído!","Ok",{
-          verticalPosition:"top",
-          duration:5000
-        })
-        this.offices = updatedTable
-      });
-    });
+  deleteOfficeById(id:number) {
+    this.cargosService.deleteOfficeById(id).subscribe(() => {});
   }
 
   registerOffice() {

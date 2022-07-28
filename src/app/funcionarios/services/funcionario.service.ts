@@ -21,16 +21,15 @@ export class FuncionarioService {
   ) { }
 
   getFuncionarios(): Observable<Funcionario[]> {
-
-    // Bearer token
     return this.http.get<Funcionario[]>(this.baseUrl)
   }
 
-  // http://localhost:3000/funcionarios/
-  deleteFuncionario(func: Funcionario): Observable<any> {
 
+  deleteFuncionario(func: Funcionario): Observable<any> {
+    console.log(func.foto);
+    
     // se não tiver foto, apenas será deletado o email e nome
-    if (func.foto != undefined) {
+    if (func.foto) {
       //1° pegar a referência da imagem no fireStorage
       /**
        * refFromURL() pega referência do arquivo do storage pelo link de acesso gerado

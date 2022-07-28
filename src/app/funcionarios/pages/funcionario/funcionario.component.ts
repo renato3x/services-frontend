@@ -69,7 +69,7 @@ export class FuncionarioComponent implements OnInit {
          * e colocar dentro dos formControls
          */
         
-        console.log(this.cargos);
+        console.log(this.funcionario);
         
         this.formFuncionario.setValue({
           nome: this.funcionario.nome,
@@ -120,6 +120,8 @@ export class FuncionarioComponent implements OnInit {
          * propriedade do objeto funcionário
          */
         this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.cargo.idCargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
+        console.log(this.desabilitar);
+        
       }
     )
   }
