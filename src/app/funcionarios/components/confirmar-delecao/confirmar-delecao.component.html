@@ -3,15 +3,6 @@
   <p>Tem certeza que quer deletar esse funcionário? Todos os dados desse <br> funcionário serão apagados <strong>permanentemente</strong>!</p>
 </div>
 <div mat-dialog-actions>
-  <button 
-  [mat-dialog-close]="true" 
-  mat-raised-button color="warn"
-  matTooltip="Continuar deleção"
-  >Continuar</button>
-  <button 
-  [mat-dialog-close]="false" 
-  mat-raised-button 
-  color="primary"
-  matTooltip="Cancelar deleção"
-  >Cancelar</button>
+  <button [mat-dialog-close]="true" mat-raised-button color="warn">Continuar</button>
+  <button [mat-dialog-close]="false" mat-raised-button color="primary">Cancelar</button>
 </div>

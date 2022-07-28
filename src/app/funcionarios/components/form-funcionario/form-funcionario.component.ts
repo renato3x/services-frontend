@@ -23,7 +23,7 @@ export class FormFuncionarioComponent implements OnInit {
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
     foto: [''],
-    idCargo: ['']
+    idCargo: ['', [ Validators.required ]]
   })
 
   foto!: File
@@ -62,12 +62,13 @@ export class FormFuncionarioComponent implements OnInit {
   salvar(): void {
     this.salvandoFuncionario = true
     const f: Funcionario = this.formFuncionario.value
+    const c: number = this.formFuncionario.value.idCargo
     let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.foto)
+      obsSalvar = this.funcService.salvarFuncionario(f, c,this.foto)
     } else {
-      obsSalvar = this.funcService.salvarFuncionario(f)
+      obsSalvar = this.funcService.salvarFuncionario(f, c)
     }
 
     obsSalvar.subscribe(

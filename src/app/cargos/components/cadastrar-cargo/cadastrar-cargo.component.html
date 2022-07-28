@@ -1,0 +1,35 @@
+  <section mat-dialog-content>
+    <h3>Cadastrar um Cargo</h3>
+    <form [formGroup]="formCargo" (ngSubmit)="salvar()" >
+      <mat-form-field appearance="fill">
+        <mat-label>Nome do Cargo</mat-label>
+        <input
+          type="text"
+          placeholder="Gerente"
+          matInput
+          formControlName="nome"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descrição do cargo</mat-label>
+        <input
+          type="text"
+          placeholder="Gerenciar o estabelecimento"
+          matInput
+          formControlName="descricao"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Salário</mat-label>
+        <input
+          type="number"
+          placeholder="R$ 1000,00"
+          matInput
+          formControlName="salario"
+        >
+      </mat-form-field>
+      <button type="submit"  mat-raised-button color="accent" id="salvar">Salvar</button>
+    </form>
+  </section>

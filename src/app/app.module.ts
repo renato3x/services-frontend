@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat/'
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,11 @@ import { RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
       useValue: {
         siteKey: environment.recaptcha.siteKey
       } as RecaptchaSettings
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
