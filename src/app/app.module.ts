@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
+import { CompartilharComponentesModule } from './compartilhar-componentes/compartilhar-componentes.module';
 
 
 @NgModule({
