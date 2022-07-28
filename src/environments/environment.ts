@@ -10,8 +10,8 @@ export const environment = {
     projectId: "appservicessoulcode",
     storageBucket: "appservicessoulcode.appspot.com",
     messagingSenderId: "382416819457",
-    appId: "1:382416819457:web:fbde98652c8a0c05cdb700",
-    measurementId: "G-T4J740MR5E"
+    appId: "1:382416819457:web:9445bac6e9588873cdb700",
+    measurementId: "G-EQZGNRP3EK"
   },
   recaptcha: {
     siteKey: '6LdzEBIhAAAAACIxpED99gMErwYRpPebKrExrqhQ',

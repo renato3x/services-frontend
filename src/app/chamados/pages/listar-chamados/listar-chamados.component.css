@@ -1,0 +1,115 @@
+table {
+  width: 95vw;
+  height: fit-content;
+  margin: 0 auto;
+}
+
+td {
+  text-align: center;
+}
+
+
+.cadastrarChamado {
+  position: relative;
+  right: 0px;
+  background-color: rgb(1, 109, 1);
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  width: 163px;
+  align-self: flex-end;
+  margin-right: 5px;
+}
+
+.cadastrarChamado mat-icon {
+  margin-right: 2px;
+}
+
+.cadastrarChamado:hover {
+  background-color: rgb(1, 109, 1);
+
+}
+
+th {
+  text-align: center !important;
+}
+
+ng-container th td {
+  text-align: center !important;
+}
+
+.container {
+  min-height: calc(100vh - 74px);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.status {
+  display: inline-block;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5%;
+  letter-spacing: 1px;
+  width: 86px;
+  text-align: center;
+}
+
+.RECEBIDO {
+  color: white;
+  background-color: #FFC107;
+}
+
+.ATRIBUIDO {
+  color: white;
+  background-color: rgb(34, 100, 161);
+}
+
+.CONCLUIDO {
+  color: white;
+  background-color: rgb(12, 138, 12);
+}
+
+.ARQUIVADO {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.836);
+}
+
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  text-align: initial;
+}
+
+
+.element-detail p span {
+  font-weight: 500;
+  margin-right: 5px;
+}
