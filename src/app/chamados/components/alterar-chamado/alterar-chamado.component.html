@@ -1,0 +1,45 @@
+<div>
+  <h2 mat-dialog-title>Alterar Chamado</h2>
+</div>
+<section mat-dialog-content>
+  <form action="" [formGroup]="formChamados" (ngSubmit)="salvar()">
+    <mat-form-field appearance="fill">
+      <mat-label>Titulo</mat-label>
+      <input type="text" placeholder="Titulo do chamado" matInput formControlName="titulo">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input type="text" matInput formControlName="descricao">
+    </mat-form-field>
+    <div class="field-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Funcionario</mat-label>
+        <mat-select formControlName="idFuncionario" name="funcionario">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.idFuncionario">
+            {{funcionario.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" name="status">
+          <mat-option value="RECEBIDO">
+            Recebido
+          </mat-option>
+          <mat-option value="ATRIBUIDO">
+            Atribuido
+          </mat-option>
+          <mat-option value="CONCLUIDO">
+            Concluido
+          </mat-option>
+          <mat-option value="ARQUIVADO">
+            Arquivado
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button type="submit" [disabled]="formChamados.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+  </form>
+</section>

@@ -1,0 +1,23 @@
+#file-input {
+  display: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: fit-content;
+}
+
+#salvar {
+  margin-top: 8px;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-container mat-form-field {
+  width: 160px;
+}

@@ -5,30 +5,27 @@
 
     <button matTooltip="Menu Funcionário" mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
-      <a
-      mat-menu-item
-      routerLink="/funcionarios"
-      >Listar</a>
+      <a mat-menu-item routerLink="/funcionarios">Listar</a>
     </mat-menu>
 
     <button matTooltip="Menu Cargos" mat-button [matMenuTriggerFor]="menuCargos">Cargos</button>
     <mat-menu #menuCargos="matMenu">
-      <a
-        mat-menu-item
-        routerLink="/cargos"
-      >Listar</a>
+      <a mat-menu-item routerLink="/cargos">Listar</a>
     </mat-menu>
 
     <button matTooltip="Menu Clientes" mat-button [matMenuTriggerFor]="menuClientes">Clientes</button>
     <mat-menu #menuClientes="matMenu">
-      <a
-        mat-menu-item
-        routerLink="/clientes"
-      >Listar</a>
+      <a mat-menu-item routerLink="/clientes">Listar</a>
+    </mat-menu>
+
+    <button matTooltip="Menu Chamados" mat-button [matMenuTriggerFor]="menuChamados">Chamados</button>
+    <mat-menu #menuChamados="matMenu">
+      <a mat-menu-item routerLink="/chamados">Listar</a>
     </mat-menu>
 
 
-    <button matTooltip="Menu do usuario" mat-button matTooltip="Menu usuario" [matMenuTriggerFor]="menuUsuario">{{emailUser}}</button>
+    <button matTooltip="Menu do usuario" mat-button matTooltip="Menu usuario"
+      [matMenuTriggerFor]="menuUsuario">{{emailUser}}</button>
     <mat-menu #menuUsuario="matMenu">
       <div class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
