@@ -2,11 +2,14 @@
   <mat-toolbar-row>
     <h1>Services</h1>
     <span class="separador"></span>
-    <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
+    <button mat-button [matMenuTriggerFor]="menuFuncionarios">Menu de Navegação</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a mat-menu-item routerLink="/funcionarios">Funcionários</a>
       <a mat-menu-item routerLink="/cargos">Cargos</a>
+      <a mat-menu-item routerLink="/clientes">Clientes</a>
     </mat-menu>
+
+   
 
     <button mat-icon-button (click)="openDialogConfirmExit()">
       <mat-icon>logout</mat-icon>

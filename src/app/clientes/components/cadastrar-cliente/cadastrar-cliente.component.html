@@ -1,0 +1,29 @@
+<div>
+    <form (ngSubmit)='cadastrarCliente()'[formGroup]="formClientes" mat-elevation-z16>
+  
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Cadastrar Cliente</mat-card-title>
+        </mat-card-header>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput formControlName="nome" name="nome" />
+          <mat-error>
+            <span> Campo obrigatório! </span>
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput formControlName="email" name="email" />
+          <mat-error>
+            <span> Campo obrigatório! </span>
+          </mat-error>
+        </mat-form-field>
+        
+          <button type="submit" mat-raised-button color="primary" [disabled]="formClientes.invalid">Cadastrar Cliente</button>
+      </mat-card>
+    </form>
+  </div>
+ 

@@ -1,4 +1,4 @@
-<!-- <app-navbar></app-navbar> -->
+<app-navbar></app-navbar>
 <div class="container">
   <aside id="lateral">
     <h2>Clientes</h2>
@@ -6,14 +6,17 @@
 
   <main>
 
-  <!--   <button mat-mini-fab color="accent" (click)="abrirFormCliente()" id="add">
+    <button mat-mini-fab color="accent" (click)="abrirFormCliente()" id="add">
       <mat-icon>add</mat-icon>
-    </button> -->
+    </button> 
 
    <!--  <div>
       <router-outlet></router-outlet>
     </div>
  -->
+ 
+
+ <!-- tabela -->
     <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>#</th>
@@ -22,11 +25,7 @@
 
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let f">
-          <a [routerLink]="'/funcionarios/' + f.idCliente" routerLinkActive="ativo">
-            {{ f.nome }}
-          </a>
-        </td>
+        <td mat-cell *matCellDef="let f">{{f.nome}}</td>
       </ng-container>
 
       <ng-container matColumnDef="email">
@@ -37,9 +36,12 @@
      
 
        <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Excluir</th>
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let f">
-          <button mat-icon-button color="warn" >
+          <button mat-icon-button (click)="AtualizarCliente(f)" >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn"(click)="abrirDialogDeExcluir(f.idCliente)" >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
