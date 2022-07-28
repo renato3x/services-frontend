@@ -1,6 +1,9 @@
 <div>
   <h2 mat-dialog-title>Novo Funcionário</h2>
   <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoFuncionario"></mat-spinner>
+  <button type="button" mat-icon-button (click)="sair()">
+    <mat-icon>logout</mat-icon>
+  </button>
 </div>
 <section mat-dialog-content>
   <form action="" [formGroup]="formFuncionario" (ngSubmit)="salvar()">
@@ -24,7 +27,6 @@
         formControlName="email"
       >
     </mat-form-field>
-
     
     <mat-form-field appearance="fill">
       <mat-label>Cargo</mat-label>
@@ -50,7 +52,8 @@
       color="primary"
       (click)="fileInput.click()"
     >Selecione uma imagem</button>
-
+    
     <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+
   </form>
 </section>

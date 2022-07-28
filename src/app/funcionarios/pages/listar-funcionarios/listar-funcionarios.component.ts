@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { CargoService } from 'src/app/cargos/services/cargo.service';
@@ -111,9 +111,12 @@ export class ListarFuncionariosComponent implements OnInit {
   }
 
   abrirFormFuncionario(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+
     // abrindo o formulário do funcionário
     // e recuperando a referência desse dialog e guardando na variável
-    const referenciaDialog = this.dialog.open(FormFuncionarioComponent)
+    const referenciaDialog = this.dialog.open(FormFuncionarioComponent, dialogConfig)
 
     /**
      * a função afterClosed() nos retorna um observable

@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { ConfirmarSaidaFormComponent } from './components/confirmar-saida-form/confirmar-saida-form.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     FuncionarioComponent,
     FormFuncionarioComponent,
     ConfirmarDelecaoComponent,
-    ConfirmarSaidaComponent
+    ConfirmarSaidaComponent,
+    ConfirmarSaidaFormComponent
   ],
   imports: [
     CommonModule,
