@@ -29,6 +29,11 @@
         <th mat-header-cell *matHeaderCellDef>E-mail</th>
         <td mat-cell *matCellDef="let f">{{ f.email }}</td>
       </ng-container>
+      
+      <ng-container matColumnDef="cargo">
+        <th mat-header-cell *matHeaderCellDef>Cargo</th>
+        <td mat-cell *matCellDef="let f">{{ f.cargo.nome }}</td>
+      </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Excluir</th>
