@@ -24,6 +24,7 @@ td {
   width: 163px;
   align-self: flex-end;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .cadastrarChamado mat-icon {

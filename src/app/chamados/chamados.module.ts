@@ -9,6 +9,8 @@ import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confir
 import { AlterarChamadoComponent } from './components/alterar-chamado/alterar-chamado.component';
 import { FormChamadoComponent } from './components/form-chamado/form-chamado.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddPagamentoComponent } from './components/add-pagamento/add-pagamento.component';
+import { EditPagamentoComponent } from './components/edit-pagamento/edit-pagamento.component';
 
 
 
@@ -17,7 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListarChamadosComponent,
     ConfirmarDelecaoComponent,
     AlterarChamadoComponent,
-    FormChamadoComponent
+    FormChamadoComponent,
+    AddPagamentoComponent,
+    EditPagamentoComponent
   ],
   imports: [
     CommonModule,

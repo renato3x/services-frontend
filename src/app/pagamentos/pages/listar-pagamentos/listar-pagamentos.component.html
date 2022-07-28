@@ -6,15 +6,6 @@
     </aside>
 
     <main>
-
-        <button mat-mini-fab color="accent" (click)="abrirFormPagamento()" matTooltip="Adicionar Pagamento" id="add">
-            <mat-icon>add</mat-icon>
-        </button>
-
-        <div>
-            <router-outlet></router-outlet>
-        </div>
-
         <table mat-table [dataSource]="pagamentos" class="mat-evaluetion-z8">
 
             <ng-container matColumnDef="id">
@@ -36,27 +27,6 @@
                 <th mat-header-cell *matHeaderCellDef>Status do pagamento</th>
                 <td mat-cell *matCellDef="let p"><span class="status" [ngClass]="p.status">{{p.status}}</span></td>
             </ng-container>
-
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Ações</th>
-                <td mat-cell *matCellDef="let p">
-
-                    <button mat-icon-button color="primary"
-                    matTooltip="Editar Pagamento"
-                    [matTooltipPosition]="'left'"
-                    [routerLink]="'/pagamentos/' + p.idPagamento" routerLinkActive="ativo">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-<!-- 
-                    <button mat-icon-button color="warn" (click)="deletarPagamento(p)"
-                    matTooltip="Deletar Pagamento"
-                    [matTooltipPosition]="'right'">
-                        <mat-icon>delete</mat-icon>
-                    </button>
- -->
-                </td>
-            </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="colunas"></tr>
             <tr mat-row *matRowDef="let row, columns: colunas"></tr>
 

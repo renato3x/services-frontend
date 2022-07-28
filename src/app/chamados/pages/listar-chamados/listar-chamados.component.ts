@@ -11,10 +11,10 @@ import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/co
 import { AlterarChamadoComponent } from '../../components/alterar-chamado/alterar-chamado.component';
 import { FuncionarioService } from 'src/app/funcionarios/services/funcionario.service';
 import { ClienteService } from 'src/app/clientes/service/cliente.service';
-import { Funcionario } from 'src/app/funcionarios/models/funcionario';
-import { Cliente } from 'src/app/clientes/models/cliente';
 import { FormChamadoComponent } from '../../components/form-chamado/form-chamado.component';
-
+import { AddPagamentoComponent } from '../../components/add-pagamento/add-pagamento.component';
+import { EditPagamentoComponent } from '../../components/edit-pagamento/edit-pagamento.component';
+import { Pagamento } from 'src/app/pagamentos/models/pagamento';
 
 
 @Component({
@@ -34,8 +34,6 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
   colunas: string[] = ['id', 'titulo', 'data', 'funcionario', 'cliente', 'pagamento', 'status', 'actions'];
   expandedElement!: Chamado[] | null
   columnsToDisplayWithExpand = [...this.colunas, 'expand'];
-  funcionarios!: Funcionario[]
-  clientes!: Cliente[]
 
   constructor(private chamadosService: ChamadosService, private dialog: MatDialog, private snackbar: MatSnackBar, private titleService: Title, private funcionarioService: FuncionarioService, private ClienteService: ClienteService) { }
 
@@ -96,6 +94,19 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
 
   cadastrarChamado() {
     const dialog = this.dialog.open(FormChamadoComponent)
+    dialog.afterClosed().subscribe(() => {
+      this.getChamados();
+    })
+  }
+
+  addPagamento(idChamado: number) {
+    const dialog = this.dialog.open(AddPagamentoComponent, { data: idChamado })
+    dialog.afterClosed().subscribe(() => {
+      this.getChamados();
+    })
+  }
+  edit(pagamento: Pagamento) {
+    const dialog = this.dialog.open(EditPagamentoComponent, { data: pagamento })
     dialog.afterClosed().subscribe(() => {
       this.getChamados();
     })

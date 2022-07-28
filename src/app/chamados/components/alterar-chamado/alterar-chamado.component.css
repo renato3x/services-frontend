@@ -2,10 +2,14 @@
   display: none;
 }
 
+mat-card {
+  width: 350px;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  width: 360px;
+  min-width: 360px;
   height: fit-content;
 }
 
