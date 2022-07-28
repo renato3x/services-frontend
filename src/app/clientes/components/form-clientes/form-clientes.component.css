@@ -1,0 +1,14 @@
+form{
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-margin{
+    margin-bottom: 16px;
+}
