@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <h1>Services</h1>
-    <span class="separador"></span>
+    <span class="separador"></span>  
 
     <button matTooltip="Menu Funcionário" mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
@@ -21,6 +21,11 @@
     <button matTooltip="Menu Chamados" mat-button [matMenuTriggerFor]="menuChamados">Chamados</button>
     <mat-menu #menuChamados="matMenu">
       <a mat-menu-item routerLink="/chamados">Listar</a>
+    </mat-menu>
+
+    <button matTooltip="Menu Pagamentos" mat-button [matMenuTriggerFor]="menuPagamentos">Pagamentos</button>
+    <mat-menu #menuPagamentos="matMenu">
+      <a mat-menu-item routerLink="/pagamentos">Listar</a>
     </mat-menu>
 
 

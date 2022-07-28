@@ -1,0 +1,40 @@
+<div>
+    <h2 mat-dialog-title>Novo Pagamento</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoPagamento"></mat-spinner>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formPagamento" (ngSubmit)="salvar()">      
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Valor</mat-label>
+        <input
+          id="inputValor"
+          type="number"          
+          matInput
+          formControlName="valor"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Forma de pagamento</mat-label>
+        <input
+          type="text"          
+          matInput
+          formControlName="formPagamento"
+        >
+      </mat-form-field>  
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Chamado</mat-label>
+        <mat-select formControlName="idChamado" name="chamado">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let chamado of chamados" [value]="chamado.idChamado">
+            {{chamado.titulo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <button type="submit" [disabled]="formPagamento.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+    </form>
+  </section>
+  
