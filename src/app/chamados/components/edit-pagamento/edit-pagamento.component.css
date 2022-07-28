@@ -1,0 +1,23 @@
+.container-edit {
+  width: 300px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#salvar {
+  margin-top: 8px;
+}
+
+#menu {
+  margin-left: auto;
+}
+
+#inputPagamento::-webkit-outer-spin-button,
+#inputPagamento::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

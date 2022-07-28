@@ -41,9 +41,12 @@
       <td mat-cell *matCellDef="let chamado">
         <div *ngIf="chamado.pagamento!=null;else pagamentoNE">
           {{chamado.pagamento.status}}
+          <button (click)="edit(chamado.pagamento)" mat-icon-button>
+            <mat-icon>edit_note</mat-icon>
+          </button>
         </div>
         <ng-template #pagamentoNE>
-          <button mat-icon-button>
+          <button (click)="addPagamento(chamado.idChamado)" mat-icon-button>
             <mat-icon>add</mat-icon>
           </button>
         </ng-template>

@@ -1,0 +1,26 @@
+<div class="container-edit">
+  <h2>Editar Pagamento #{{this.pagamento.idPagamento}}</h2>
+  <form action="" [formGroup]="formPagamento" (ngSubmit)="atualizar()">
+
+    <mat-form-field appearence="fill">
+      <mat-label>Valor</mat-label>
+      <input id="inputPagamento" type="number" matInput formControlName="valor">
+    </mat-form-field>
+
+    <mat-form-field appearence="fill">
+      <mat-label>Forma de pagamento</mat-label>
+      <input type="text" matInput formControlName="formPagamento">
+    </mat-form-field>
+
+    <mat-form-field appearence="fill">
+      <mat-label>{{ pagamento.status }}</mat-label>
+      <mat-select formControlName="status" name="status">
+        <mat-option value="QUITADO">Quitado</mat-option>
+        <mat-option value="LANCADO">Lançado</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="accent" id="salvar">Salvar
+      alterações</button>
+  </form>
+</div>

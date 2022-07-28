@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import { FormPagamentosComponent } from '../../components/form-pagamentos/form-pagamentos.component';
 import { Pagamento } from '../../models/pagamento';
 import { PagamentoService } from '../../services/pagamento.service';
 
@@ -13,9 +12,9 @@ import { PagamentoService } from '../../services/pagamento.service';
 })
 export class ListarPagamentosComponent implements OnInit {
 
-  pagamentos: Pagamento[] = []  
-  
-  colunas: Array<string> = ['id', 'valor', 'formaDePagamento', 'statusDoPagamento', 'actions']
+  pagamentos: Pagamento[] = []
+
+  colunas: Array<string> = ['id', 'valor', 'formaDePagamento', 'statusDoPagamento']
 
   constructor(
     private pagamentoService: PagamentoService,
@@ -45,14 +44,4 @@ export class ListarPagamentosComponent implements OnInit {
       )
   }
 
-  abrirFormPagamento(): void {
-    const dialogRef = this.dialog.open(FormPagamentosComponent)
-
-    dialogRef.afterClosed()
-      .subscribe(
-        () => {
-          this.recuperarPagamentos()
-        }
-      )
-  }
 }
