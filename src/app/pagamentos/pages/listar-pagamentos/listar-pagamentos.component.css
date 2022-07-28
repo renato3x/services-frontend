@@ -1,0 +1,68 @@
+.container {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 100px 1fr;
+}
+
+#lateral {
+    background: #3f51b5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  #lateral h2 {
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    transform: rotate(-90deg);
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 450px 1fr;
+    padding: 16px;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+
+  table {
+    height: fit-content;
+  }
+  
+  .ativo {
+    color: rgb(238, 234, 32);
+  }
+
+  #add {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .QUITADO{
+    background-color: rgb(12, 138, 12);
+    color: white;
+    
+  }
+  
+  .LANCADO{
+    background-color: #FFC107;    
+    color: white;
+  }
+
+  .status {
+    display: inline-block;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5%;
+    letter-spacing: 1px;
+    width: 86px;
+    text-align: center;
+  }

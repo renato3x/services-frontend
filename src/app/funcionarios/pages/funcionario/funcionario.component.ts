@@ -130,7 +130,7 @@ export class FuncionarioComponent implements OnInit {
           this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
             duration: 3000
           })
-          this.recuperarFuncionario(func.id)
+          this.recuperarFuncionario(func.idFuncionario)
         }
       )
   }

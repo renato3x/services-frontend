@@ -1,0 +1,22 @@
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+  }
+  
+  #salvar {
+    margin-top: 16px;
+  } 
+
+  #inputValor::-webkit-outer-spin-button,
+#inputValor::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+  
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+  

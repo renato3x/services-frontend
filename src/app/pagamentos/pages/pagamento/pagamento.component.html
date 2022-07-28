@@ -1,0 +1,51 @@
+<div class="loader" *ngIf="pagamento == undefined; else principal">
+    <p>{{naoEncontrado? 'Pagamento não encontrado.' : 'Procurando pagamento...'}}</p>
+    <mat-spinner mode="indeterminate" color="primary" *ngIf="!naoEncontrado"></mat-spinner>
+</div>
+
+<ng-template #principal>
+    <mat-card>
+        <mat-card-header>
+
+            <mat-card-title>Pagamento id: {{pagamento.idPagamento}}</mat-card-title>
+            <button mat-icon-button id="menu" color="primary" [matMenuTriggerFor]="menu" matTooltip="Voltar ou deletar">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+
+                <button mat-menu-item color="accent" routerLink="/pagamentos">
+                    <mat-icon>arrow_back</mat-icon>
+                    <span>Voltar</span>
+                </button>
+
+            </mat-menu>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form action="" [formGroup]="formPagamento" (ngSubmit)="atualizar()">
+
+                <mat-form-field appearence="fill">
+                    <mat-label>Valor</mat-label>
+                    <input id="inputPagamento" type="number" matInput formControlName="valor">
+                </mat-form-field>
+
+                <mat-form-field appearence="fill">
+                    <mat-label>Forma de pagamento</mat-label>
+                    <input type="text" matInput formControlName="formPagamento">
+                </mat-form-field>
+
+                <mat-form-field appearence="fill">
+                    <mat-label>{{ pagamento.status }}</mat-label>
+                    <mat-select formControlName="status" name="status">
+                        <mat-option value="QUITADO">Quitado</mat-option>
+                        <mat-option value="LANCADO">Lançado</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar">Salvar
+                    alterações</button>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</ng-template>

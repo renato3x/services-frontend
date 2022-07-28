@@ -83,8 +83,7 @@ export class ListarFuncionariosComponent implements OnInit {
                 (error) => {
                   this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
                     duration: 3000
-                  })
-                  console.log(error)
+                  })                  
                 }
               )
           }
