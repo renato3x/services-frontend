@@ -9,10 +9,11 @@ import { FormFuncionarioComponent } from './components/form-funcionario/form-fun
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
-import { NavbarComponent } from '../components/navbar/navbar.component';
+import { NavbarComponent } from '../compartilhar-componentes/navbar/navbar.component';
 import { ConfirmarLogoutComponent } from './components/confirmar-logout/confirmar-logout.component';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { CompartilharComponentesModule } from '../compartilhar-componentes/compartilhar-componentes.module';
 
 
 @NgModule({
@@ -22,14 +23,14 @@ import { environment } from 'src/environments/environment';
     FormFuncionarioComponent,
     ConfirmarDelecaoComponent,
     ConfirmarSaidaComponent,
-    NavbarComponent,
     ConfirmarLogoutComponent
   ],
   imports: [
     CommonModule,
     FuncionariosRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CompartilharComponentesModule
   ],
 })
 export class FuncionariosModule { }

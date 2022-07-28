@@ -6,7 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CargoServiceService } from 'src/app/cargos/service/cargo-service.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
+import { Cargo } from '../../models/cargo';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
 
@@ -17,13 +19,14 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
+  cargos!: Cargo[]
   funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
     foto: [''],
-    cargo: ['']
+    cargo: ['', [ Validators.required ]]
   })
 
   imagePreview: string = ''
@@ -38,7 +41,8 @@ export class FuncionarioComponent implements OnInit {
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
-    private title: Title
+    private title: Title,
+    private cargoService: CargoServiceService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +54,7 @@ export class FuncionarioComponent implements OnInit {
       }
     )
     this.title.setTitle('Funcionario Service')
+    this.pegarTodosOsCargos()
   }
 
   recuperarFuncionario(id: number): void {
@@ -69,7 +74,8 @@ export class FuncionarioComponent implements OnInit {
         this.formFuncionario.setValue({
           nome: this.funcionario.nome,
           email: this.funcionario.email,
-          foto: ''
+          foto: '',
+          cargo: this.funcionario.cargo.idCargo
         })
 
         // 3° carregar o preview da imagem
@@ -113,7 +119,7 @@ export class FuncionarioComponent implements OnInit {
          * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
          * propriedade do objeto funcionário
          */
-        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
+        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.cargo.idCargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
       }
     )
   }
@@ -169,6 +175,14 @@ export class FuncionarioComponent implements OnInit {
             }
           )
         }
+      }
+    )
+  }
+
+  pegarTodosOsCargos() {
+    this.cargoService.pegarCargos().subscribe(
+      (cargo) => {
+        this.cargos = cargo
       }
     )
   }

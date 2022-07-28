@@ -1,0 +1,68 @@
+.container {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 100px 1fr;
+  }
+  
+  #lateral {
+    background: #3f51b5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  #lateral h2 {
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    transform: rotate(-90deg);
+  }
+  
+  main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 450px 1fr;
+    padding: 16px;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+  
+  table {
+    height: fit-content;
+  }
+
+  a {
+    color: #87cefa;
+    text-decoration: none;
+  }
+
+  .ativo {
+    color: red;
+  }
+
+  #add {
+    position: fixed;
+    right: 16px;
+    bottom: 15px;
+  }
+
+  mat-toolbar-row {
+    display: flex;
+    align-items: center;
+}
+
+.separador {
+    flex-grow: 1;
+}
+
+.filterDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#filterForm {
+  background-color: lavender;
+  border-radius: 20px;
+}

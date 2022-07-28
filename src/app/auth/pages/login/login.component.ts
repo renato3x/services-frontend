@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase/app';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import {ViewEncapsulation} from '@angular/core';
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -18,7 +19,6 @@ export class LoginComponent implements OnInit {
     password: ['', [ Validators.required ]],
     recaptcha: ['', [ Validators.required ]]
   })
-  private _doc: any;
 
   constructor(
     private fb: FormBuilder,

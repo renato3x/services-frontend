@@ -15,7 +15,7 @@ export class AuthService {
 
   private readonly baseUrl: string = 'http://localhost:8080'
   private jwt = new JwtHelperService() // esse objeto permitirá saber se o token está válido ou não
-
+  
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -69,15 +69,9 @@ export class AuthService {
 
     if (token == null) {
       return false
-    }    
-
+    }
     return !this.jwt.isTokenExpired(token) // testando a validade do token
   }
-  emailToken(): boolean{
-    const token = this.recuperarToken()
-    if (token == null){
-      return false
-    }
-    return this.jwt.decodeToken(token).sub
-  }
+
+  
 }
