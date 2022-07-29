@@ -23,6 +23,7 @@
     <mat-form-field appearance="fill">
       <mat-label>UF</mat-label>
       <input type="text" matInput formControlName="uf">
+      <mat-error>Apenas 2 caracteres</mat-error>
     </mat-form-field>
 
     <button type="submit" [disabled]="formEndereco.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>

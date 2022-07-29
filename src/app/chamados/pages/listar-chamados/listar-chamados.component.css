@@ -1,13 +1,20 @@
 table {
-  width: 95vw;
   height: fit-content;
   margin: 0 auto;
+  width: 80%;
+  max-width: 1050px;
+}
+
+#add {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 td {
   text-align: center;
 }
-
 
 .cadastrarChamado {
   position: relative;
@@ -27,14 +34,7 @@ td {
   cursor: pointer;
 }
 
-.cadastrarChamado mat-icon {
-  margin-right: 2px;
-}
 
-.cadastrarChamado:hover {
-  background-color: rgb(1, 109, 1);
-
-}
 
 th {
   text-align: center !important;
@@ -44,15 +44,6 @@ ng-container th td {
   text-align: center !important;
 }
 
-.container {
-  min-height: calc(100vh - 74px);
-  padding-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: fit-content;
-  margin: 0 auto;
-}
 
 .status {
   display: inline-block;
@@ -60,7 +51,7 @@ ng-container th td {
   padding: 5px 10px;
   border-radius: 5%;
   letter-spacing: 1px;
-  width: 86px;
+  width: 102px;
   text-align: center;
 }
 
@@ -107,6 +98,10 @@ tr.example-element-row:not(.example-expanded-row):active {
   flex-direction: column;
   padding: 0 15px;
   text-align: initial;
+}
+
+.element-detail div {
+  margin: 5px 0;
 }
 
 

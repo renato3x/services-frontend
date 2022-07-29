@@ -1,35 +1,71 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
-    <button *ngIf="mobileQuery.matches" mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="example-app-name">Soul<span>Services</span></h1>
-  </mat-toolbar>
-
-  <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #snav class="sidenav" fixedInViewport="true" [attr.role]="mobileQuery.matches?'dialog':'navigation'"
-      [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" fixedTopGap="64">
-      <mat-nav-list>
-        <a mat-list-item routerLink="funcionarios">
-          <mat-icon>add</mat-icon>
-          <span>Funcionarios</span>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #snav class="sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
+    fixedTopGap="64">
+    <div class="top">
+      <div class="logo">
+        <h2>Soul<span class="">Services</span></h2>
+      </div>
+      <div *ngIf="mobileQuery.matches" (click)="snav.toggle()">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+    <nav>
+      <a routerLink="../funcionarios" routerLinkActive="active">
+        <mat-icon>badge</mat-icon>
+        <h3>Funcionarios</h3>
+      </a>
+      <a routerLink="../clientes" routerLinkActive="active">
+        <mat-icon>person_filled</mat-icon>
+        <h3>Clientes</h3>
+      </a>
+      <a routerLink="../chamados" routerLinkActive="active">
+        <mat-icon>home_repair_service</mat-icon>
+        <h3>Chamados</h3>
+      </a>
+      <a routerLink="../pagamentos" routerLinkActive="active">
+        <mat-icon>payments</mat-icon>
+        <h3>Pagamentos</h3>
+      </a>
+      <a routerLink="../cargos" routerLinkActive="active">
+        <mat-icon>home_repair_service</mat-icon>
+        <h3>Cargos</h3>
+      </a>
+      <div>
+        <p>Sua sessão expira:</p>
+        <p>{{data|date:'dd/MM'}} as {{data|date:'shortTime'}}</p>
+        <p></p>
+        <a (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <h3>Sair</h3>
         </a>
-        <a mat-list-item routerLink="clientes">
-          <mat-icon>add</mat-icon>
-          <span>Clientes</span>
-        </a>
-        <a mat-list-item routerLink="chamados">
-          <mat-icon>add</mat-icon>
-          <span>Chamados</span>
-        </a>
-        <a mat-list-item routerLink="chamados">
-          <mat-icon>add</mat-icon>
-          <span>Chamados</span>
-        </a>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <ng-content></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+      </div>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content class="mat-sidenav-content">
+    <div class="toolbar">
+      <button mat-icon-button *ngIf="mobileQuery.matches" (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <img class="profile-img-toolbar" width="30" height="30" src="assets/no-profile.png" alt="Foto de perfil">
+        {{emailUser}}
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Sair
+        </button>
+        <button mat-menu-item routerLink="/perfil">
+          <mat-icon>person</mat-icon>
+          Perfil
+        </button>
+      </mat-menu>
+    </div>
+    <div class="title">
+      <h1>{{titulo}}</h1>
+    </div>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

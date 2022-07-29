@@ -26,7 +26,7 @@ export class ListarFuncionariosComponent implements OnInit {
     private cargo: CargoService
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.titleService.setTitle("Funcionarios Service")
 
     this.funcService.atualizarFuncionariosSub$
@@ -38,14 +38,13 @@ export class ListarFuncionariosComponent implements OnInit {
         }
       )
   }
-
   deletarFuncionario(func: Funcionario): void {
-    
+
     const dialogRef = this.dialog.open(ConfirmarDelecaoComponent)
-    
+
     dialogRef.afterClosed()
       .subscribe(
-        (deletar) => {          
+        (deletar) => {
           if (deletar == true) {
             this.funcService.deleteFuncionario(func)
               .subscribe(
@@ -58,7 +57,7 @@ export class ListarFuncionariosComponent implements OnInit {
                 (error) => {
                   this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
                     duration: 3000
-                  })                  
+                  })
                 }
               )
           }
@@ -68,10 +67,10 @@ export class ListarFuncionariosComponent implements OnInit {
 
   recuperarFuncionarios(): void {
     this.funcService.getFuncionarios().subscribe(
-      (funcs) => { 
-        this.funcionarios = funcs.reverse()       
+      (funcs) => {
+        this.funcionarios = funcs.reverse()
       },
-      (erro) => { 
+      (erro) => {
         console.log(erro)
       }
     )
@@ -82,7 +81,7 @@ export class ListarFuncionariosComponent implements OnInit {
     dialogConfig.disableClose = true;
 
     const referenciaDialog = this.dialog.open(FormFuncionarioComponent, dialogConfig)
-    
+
     referenciaDialog.afterClosed().subscribe(
       () => {
         this.recuperarFuncionarios()

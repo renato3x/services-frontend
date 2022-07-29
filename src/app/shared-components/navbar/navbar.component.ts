@@ -1,8 +1,6 @@
-import { BreakpointObserver, Breakpoints, BreakpointState, MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Output, } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ConfirmarLogoutComponent } from '../confirmar-logout/confirmar-logout.component';
 
@@ -11,53 +9,42 @@ import { ConfirmarLogoutComponent } from '../confirmar-logout/confirmar-logout.c
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnDestroy {
+export class NavbarComponent implements OnDestroy, OnInit {
   mobileQuery: MediaQueryList;
-  /* isHandset:Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.isHandset) */
-  private _mobileQueryListener: () => void;
+  emailUser!: string;
+  data = this.tempoToken();
+  @Input()
+  titulo!: string;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthService) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthService, private dialog: MatDialog,) {
+    this.mobileQuery = media.matchMedia('(max-width: 1200px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-
+  ngOnInit(): void {
+    this.emailUser = this.emailUsuario()
+  }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
+  private _mobileQueryListener: () => void;
 
   tempoToken() {
     return this.authService.tempoApp()
   }
 
+  emailUsuario(): string {
+    const email = this.authService.emailUsuario().sub
+    return email
 
-  /* 
-    emailUser!: string;
-  
-    constructor(
-      private dialog: MatDialog,
-      public authService: AuthService
-    ) { }
-  
-    ngOnInit(): void {
-      this.emailUser= this.emailUsuario()
-    }
-  
-    emailUsuario():string {
-      const email= this.authService.emailUsuario().sub
-      return email
-    }
-    logout() {
-      const dialog= this.dialog.open(ConfirmarLogoutComponent)
-      dialog.afterClosed().subscribe((Response) => {
-        if(Response) {
-          this.authService.signOut()
-        }
-      })
-    
-    } */
-
-
+  }
+  logout() {
+    const dialog = this.dialog.open(ConfirmarLogoutComponent)
+    dialog.afterClosed().subscribe((Response) => {
+      if (Response) {
+        this.authService.signOut()
+      }
+    })
+  }
 }
-
-

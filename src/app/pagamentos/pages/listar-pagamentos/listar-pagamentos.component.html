@@ -1,12 +1,6 @@
-<app-navbar></app-navbar>
-
-<div class="container">
-    <aside id="lateral">
-        <h2>Pagamentos</h2>
-    </aside>
-
+<app-navbar [titulo]="'Pagamentos'">
     <main>
-        <table mat-table [dataSource]="pagamentos" class="mat-evaluetion-z8">
+        <table mat-table [dataSource]="pagamentos" class="mat-elevation-z8">
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -29,7 +23,6 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="colunas"></tr>
             <tr mat-row *matRowDef="let row, columns: colunas"></tr>
-
         </table>
     </main>
-</div>
+</app-navbar>

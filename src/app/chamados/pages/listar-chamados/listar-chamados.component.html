@@ -1,8 +1,7 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <button class="cadastrarChamado" type="button" (click)="cadastrarChamado()" matTooltip="Cadastrar Chamado"
-    [matTooltipPosition]="'right'">
-    <mat-icon>add</mat-icon><span>Cadastrar Chamado</span>
+<app-navbar [titulo]="'Chamados'">
+  <button type="button" mat-mini-fab (click)="cadastrarChamado()" matTooltip="Cadastrar Chamado"
+    [matTooltipPosition]="'left'" id="add">
+    <mat-icon>add</mat-icon>
   </button>
   <table mat-table [dataSource]="chamados" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="id">
@@ -100,4 +99,4 @@
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
-</div>
+</app-navbar>

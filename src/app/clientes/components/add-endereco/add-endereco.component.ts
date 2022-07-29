@@ -18,13 +18,13 @@ export class AddEnderecoComponent implements OnInit {
     rua: ['', [Validators.required]],
     bairro: ['', [Validators.required]],
     cidade: ['', [Validators.required]],
-    uf: ['', [Validators.required]]
+    uf: ['', [Validators.required, Validators.maxLength(2)]]
   })
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddEnderecoComponent>,
-    @Inject (MAT_DIALOG_DATA)
+    @Inject(MAT_DIALOG_DATA)
     public data: any,
     private enderecoService: EnderecoService,
     private snackbar: MatSnackBar
