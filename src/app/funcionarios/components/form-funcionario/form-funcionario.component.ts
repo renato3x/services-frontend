@@ -32,9 +32,9 @@ export class FormFuncionarioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private funcService: FuncionarioService,
-    private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
+    private dialogRef: MatDialogRef<FormFuncionarioComponent>,
     private dialog: MatDialog,
-    private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
+    private snackbar: MatSnackBar,
     private cargo: CargoService
   ) { }
 
@@ -103,5 +103,4 @@ export class FormFuncionarioComponent implements OnInit {
       this.dialogRef.close()
     }    
   }
-
 }

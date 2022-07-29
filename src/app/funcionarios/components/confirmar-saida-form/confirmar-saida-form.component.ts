@@ -11,5 +11,4 @@ export class ConfirmarSaidaFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
