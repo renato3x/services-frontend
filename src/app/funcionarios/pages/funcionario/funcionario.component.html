@@ -8,15 +8,15 @@
       <img [src]="funcionario.foto || '/assets/no-profile.png'" mat-card-avatar>
       <mat-card-title>{{ funcionario.nome }}</mat-card-title>
       <mat-card-subtitle>{{ funcionario.email }}</mat-card-subtitle>
-      <button mat-icon-button color="primary" id="menu" [mat-menu-trigger-for]="menu">
+      <button mat-icon-button color="primary" id="menu" [mat-menu-trigger-for]="menu" matTooltip="Menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/funcionarios">
+        <button mat-menu-item routerLink="/funcionarios" matTooltip="Voltar">
           <mat-icon>arrow_back</mat-icon>
           Voltar
         </button>
-        <button mat-menu-item (click)="deletar()">
+        <button mat-menu-item (click)="deletar()" matTooltip="Deletar Funcionário">
           <mat-icon>delete</mat-icon>
           Deletar funcionário
         </button>
@@ -34,6 +34,17 @@
         <mat-form-field appearance="fill">
           <mat-label>E-mail</mat-label>
           <input type="text" matInput placeholder="E-mail" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Cargo</mat-label>
+          <mat-select formControlName="cargo">
+            <ng-container *ngFor="let cargo of cargos">
+              <mat-option [value]="cargo.idCargo">
+                {{ cargo.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
         </mat-form-field>
 
         <input type="file" id="input-foto" #inputFoto (change)="recuperarFoto($event)" formControlName="foto">

@@ -1,5 +1,5 @@
 mat-card, .loader {
-  height: calc(100vh - (150px));
+  height: calc(100vh - (20px));
   position: sticky;
   top: 16px;
   left: 0;

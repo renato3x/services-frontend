@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TooltipPosition } from '@angular/material/tooltip';
+import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
+import { CargoServiceService } from 'src/app/cargos/service/cargo-service.service';
+import { Cargo } from '../../models/cargo';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
 
@@ -13,10 +17,13 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FormFuncionarioComponent implements OnInit {
 
+  cargos: Cargo[] = []
+
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
-    foto: ['']
+    foto: [''],
+    idCargo: ['', [ Validators.required ]]
   })
 
   foto!: File
@@ -27,10 +34,14 @@ export class FormFuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private funcService: FuncionarioService,
     private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
-    private snackbar: MatSnackBar // com esse objeto será criado um snackbar na tela
+    private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
+    private title: Title,
+    private cargoService: CargoServiceService
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Cadastrar Funcionário')
+    this.recuperarCargos()
   }
 
   recuperarFoto(event: any): void {
@@ -51,12 +62,13 @@ export class FormFuncionarioComponent implements OnInit {
   salvar(): void {
     this.salvandoFuncionario = true
     const f: Funcionario = this.formFuncionario.value
+    const c: number = this.formFuncionario.value.idCargo
     let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.foto)
+      obsSalvar = this.funcService.salvarFuncionario(f, c,this.foto)
     } else {
-      obsSalvar = this.funcService.salvarFuncionario(f)
+      obsSalvar = this.funcService.salvarFuncionario(f, c)
     }
 
     obsSalvar.subscribe(
@@ -99,6 +111,14 @@ export class FormFuncionarioComponent implements OnInit {
           })
           this.dialogRef.close()
         }
+      }
+    )
+  }
+
+  recuperarCargos() {
+    this.cargoService.pegarCargos().subscribe(
+      (cargos) => {
+        this.cargos = cargos
       }
     )
   }
