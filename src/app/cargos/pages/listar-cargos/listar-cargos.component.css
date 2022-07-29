@@ -1,12 +1,6 @@
-.container {
-  min-height: calc(100vh - 64px);
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 100px 1fr;
-}
-
 table {
   height: fit-content;
+
 }
 
 #lateral {
@@ -24,6 +18,7 @@ table {
 }
 
 main {
+  min-height: calc(100vh - 64px);
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 450px 1fr;
@@ -36,4 +31,6 @@ main {
   position: fixed;
   right: 16px;
   bottom: 16px;
+  background-color: rgba(0, 0, 0, 0.9);
+
 }

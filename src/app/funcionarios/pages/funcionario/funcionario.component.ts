@@ -19,7 +19,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FuncionarioComponent implements OnInit {
 
   funcionario!: Funcionario
-  cargos: Cargo[] = []  
+  cargos: Cargo[] = []
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
@@ -29,17 +29,17 @@ export class FuncionarioComponent implements OnInit {
   })
 
   imagePreview: string = ''
-  foto!: File 
+  foto!: File
   desabilitar: boolean = true
   naoEncontrado: boolean = false
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private funcService: FuncionarioService,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router, 
+    private router: Router,
     private cargoService: CargoService
   ) { }
 
@@ -48,10 +48,10 @@ export class FuncionarioComponent implements OnInit {
       (params) => {
         let idFuncionario = parseInt(params.get('idFuncionario') ?? '0')
         this.recuperarFuncionario(idFuncionario)
-        this.mostrarCargos()        
+        this.mostrarCargos()
       }
     )
-  }  
+  }
 
   mostrarCargos() {
     this.cargoService.getCargos().subscribe(
@@ -61,18 +61,18 @@ export class FuncionarioComponent implements OnInit {
     )
   }
 
-  recuperarFuncionario(id: number): void {    
+  recuperarFuncionario(id: number): void {
     this.funcService.getFuncionarioById(id)
       .subscribe(
-        func => {       
+        func => {
           this.funcionario = func
-          
+
           this.formFuncionario.setValue({
             nome: this.funcionario.nome,
             email: this.funcionario.email,
             idCargo: this.funcionario.cargo.idCargo,
             foto: ''
-          })         
+          })
           this.imagePreview = this.funcionario.foto
           this.valorMudou()
         },
@@ -85,19 +85,19 @@ export class FuncionarioComponent implements OnInit {
   recuperarFoto(event: any): void {
     this.foto = event.target.files[0]
 
-    const reader = new FileReader() 
+    const reader = new FileReader()
 
-    reader.readAsDataURL(this.foto) 
+    reader.readAsDataURL(this.foto)
 
     reader.onload = () => {
       this.imagePreview = reader.result as string
     }
   }
 
-  valorMudou() {   
+  valorMudou() {
     this.formFuncionario.valueChanges
-      .subscribe(        
-        (valores) => {         
+      .subscribe(
+        (valores) => {
           this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.idCargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
         }
       )
@@ -106,26 +106,26 @@ export class FuncionarioComponent implements OnInit {
   salvarAtualizacoes() {
     const f: Funcionario = { ...this.formFuncionario.value }
     f.idFuncionario = this.funcionario.idFuncionario
-    f.foto = this.funcionario.foto   
+    f.foto = this.funcionario.foto
     const idCargo: number = this.formFuncionario.value.idCargo
     this.cargoService.getCargoById(idCargo).subscribe(
       (cargo) => {
         f.cargo = cargo
         const temFoto = this.formFuncionario.value.foto.length > 0
 
-    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
+        const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
 
-    obsSalvar
-      .subscribe(
-        (func) => {
-          this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-            duration: 3000
-          })
-          this.recuperarFuncionario(func.idFuncionario)
-        }
-      )
+        obsSalvar
+          .subscribe(
+            (func) => {
+              this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+                duration: 3000
+              })
+              this.recuperarFuncionario(func.idFuncionario)
+            }
+          )
       }
-    ) 
+    )
   }
 
   deletar(): void {

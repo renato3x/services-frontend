@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   private readonly baseUrl: string = 'http://localhost:8080'
-  private jwt = new JwtHelperService() 
+  private jwt = new JwtHelperService()
 
   constructor(
     private http: HttpClient,
@@ -20,11 +20,11 @@ export class AuthService {
 
   signIn(user: User): Observable<{ Authorization: string }> {
     return this.http.post<{ Authorization: string }>(`${this.baseUrl}/login`, user)
-    .pipe(
-      tap((response) => {
-        this.armazenarToken(response.Authorization)
-      })
-    )
+      .pipe(
+        tap((response) => {
+          this.armazenarToken(response.Authorization)
+        })
+      )
   }
 
   signOut(): void {
@@ -44,19 +44,25 @@ export class AuthService {
     return localStorage.getItem('authorization')
   }
 
-  logado(): boolean {    
+  logado(): boolean {
     const token = this.recuperarToken()
 
     if (token == null) {
       return false
     }
 
-    return !this.jwt.isTokenExpired(token) 
+    return !this.jwt.isTokenExpired(token)
   }
 
-  emailUsuario(){
-    const token= this.recuperarToken()
-    const decode= this.jwt.decodeToken(token!)
+  emailUsuario() {
+    const token = this.recuperarToken()
+    const decode = this.jwt.decodeToken(token!)
     return decode
-  }  
+  }
+
+  tempoApp() {
+    const token = this.recuperarToken()?.toString()
+    console.log(this.jwt.decodeToken(token).sub)
+    return this.jwt.getTokenExpirationDate(token)
+  }
 }

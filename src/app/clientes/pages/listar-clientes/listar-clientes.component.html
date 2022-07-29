@@ -1,21 +1,12 @@
-<app-navbar></app-navbar>
-
-<div class="container">
-    <aside id="lateral">
-        <h2>Clientes</h2>
-    </aside>
-
+<app-navbar [titulo]="'Clientes'">
     <main>
-
-        <button mat-mini-fab color="accent" (click)="abrirFormClientes()" id="add">
-            <mat-icon>add</mat-icon>
+        <button mat-mini-fab (click)="abrirFormClientes()" id="add">
+            <mat-icon>person_add</mat-icon>
         </button>
-
         <div>
             <router-outlet></router-outlet>
         </div>
-
-        <table mat-table [dataSource]="clientes" class="mat-evaluetion-z8">
+        <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>#</th>
                 <td mat-cell *matCellDef="let c">{{c.idCliente}}</td>
@@ -38,7 +29,8 @@
             <ng-container matColumnDef="endereco">
                 <th mat-header-cell *matHeaderCellDef>Endereco</th>
                 <td mat-cell *matCellDef="let c">
-                    <div *ngIf="c.enderecoCliente != undefined, else btnEndereco"> {{c.enderecoCliente.rua}}, {{c.enderecoCliente.bairro}}, {{c.enderecoCliente.cidade}} - {{c.enderecoCliente.uf}}
+                    <div *ngIf="c.enderecoCliente != undefined, else btnEndereco"> {{c.enderecoCliente.rua}},
+                        {{c.enderecoCliente.bairro}}, {{c.enderecoCliente.cidade}} - {{c.enderecoCliente.uf}}
                         <button mat-icon-button (click)="editEndereco(c.enderecoCliente)">
                             <mat-icon>edit_note</mat-icon>
                         </button>
@@ -56,7 +48,7 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Excluir</th>
                 <td mat-cell *matCellDef="let c">
-                    <button mat-icon-button color="warn" (click)="deletarCliente(c)" >
+                    <button mat-icon-button color="warn" (click)="deletarCliente(c)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
@@ -67,4 +59,4 @@
 
         </table>
     </main>
-</div>
+</app-navbar>

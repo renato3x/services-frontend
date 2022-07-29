@@ -1,49 +1,71 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <h1>Services</h1>
-    <span class="separador"></span>  
-
-    <button matTooltip="Menu Funcionário" mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
-    <mat-menu #menuFuncionarios="matMenu">
-      <a mat-menu-item routerLink="/funcionarios">Listar</a>
-    </mat-menu>
-
-    <button matTooltip="Menu Cargos" mat-button [matMenuTriggerFor]="menuCargos">Cargos</button>
-    <mat-menu #menuCargos="matMenu">
-      <a mat-menu-item routerLink="/cargos">Listar</a>
-    </mat-menu>
-
-    <button matTooltip="Menu Clientes" mat-button [matMenuTriggerFor]="menuClientes">Clientes</button>
-    <mat-menu #menuClientes="matMenu">
-      <a mat-menu-item routerLink="/clientes">Listar</a>
-    </mat-menu>
-
-    <button matTooltip="Menu Chamados" mat-button [matMenuTriggerFor]="menuChamados">Chamados</button>
-    <mat-menu #menuChamados="matMenu">
-      <a mat-menu-item routerLink="/chamados">Listar</a>
-    </mat-menu>
-
-    <button matTooltip="Menu Pagamentos" mat-button [matMenuTriggerFor]="menuPagamentos">Pagamentos</button>
-    <mat-menu #menuPagamentos="matMenu">
-      <a mat-menu-item routerLink="/pagamentos">Listar</a>
-    </mat-menu>
-
-
-    <button matTooltip="Menu do usuario" mat-button matTooltip="Menu usuario"
-      [matMenuTriggerFor]="menuUsuario">{{emailUser}}</button>
-    <mat-menu #menuUsuario="matMenu">
-      <div class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title"></h5>
-            </div>
-          </div>
-        </div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #snav class="sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
+    fixedTopGap="64">
+    <div class="top">
+      <div class="logo">
+        <h2>Soul<span class="">Services</span></h2>
       </div>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon>Sair?
-         </button>
-    </mat-menu>
-  </mat-toolbar-row>
-</mat-toolbar>
+      <div *ngIf="mobileQuery.matches" (click)="snav.toggle()">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+    <nav>
+      <a routerLink="../funcionarios" routerLinkActive="active">
+        <mat-icon>badge</mat-icon>
+        <h3>Funcionarios</h3>
+      </a>
+      <a routerLink="../clientes" routerLinkActive="active">
+        <mat-icon>person_filled</mat-icon>
+        <h3>Clientes</h3>
+      </a>
+      <a routerLink="../chamados" routerLinkActive="active">
+        <mat-icon>home_repair_service</mat-icon>
+        <h3>Chamados</h3>
+      </a>
+      <a routerLink="../pagamentos" routerLinkActive="active">
+        <mat-icon>payments</mat-icon>
+        <h3>Pagamentos</h3>
+      </a>
+      <a routerLink="../cargos" routerLinkActive="active">
+        <mat-icon>home_repair_service</mat-icon>
+        <h3>Cargos</h3>
+      </a>
+      <div>
+        <p>Sua sessão expira:</p>
+        <p>{{data|date:'dd/MM'}} as {{data|date:'shortTime'}}</p>
+        <p></p>
+        <a (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <h3>Sair</h3>
+        </a>
+      </div>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content class="mat-sidenav-content">
+    <div class="toolbar">
+      <button mat-icon-button *ngIf="mobileQuery.matches" (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <img class="profile-img-toolbar" width="30" height="30" src="assets/no-profile.png" alt="Foto de perfil">
+        {{emailUser}}
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Sair
+        </button>
+        <button mat-menu-item routerLink="/perfil">
+          <mat-icon>person</mat-icon>
+          Perfil
+        </button>
+      </mat-menu>
+    </div>
+    <div class="title">
+      <h1>{{titulo}}</h1>
+    </div>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
