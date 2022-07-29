@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Cargos } from 'src/app/cargos/interface/cargos';
 import { CargosServiceService } from 'src/app/cargos/service/cargos-service.service';
@@ -18,11 +19,12 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class ListarFuncionariosComponent implements OnInit {
   funcionarios: Funcionario[] = [];
   colunas: Array<string> = ['id', 'nome', 'email', 'cargo', 'actions'];
-  cargos: Cargos[] = [];
+  cargos!: Cargos
   constructor(
     private funcService: FuncionarioService,
     private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private title:Title
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,8 @@ export class ListarFuncionariosComponent implements OnInit {
       if (precisaAtualizar) {
         this.recuperarFuncionarios();
       }
-    });
+    })
+    this.title.setTitle("Funcionários")
   }
 
   deletarFuncionario(func: Funcionario): void {
@@ -46,8 +49,10 @@ export class ListarFuncionariosComponent implements OnInit {
      * e ele te retornará uma referência desse componente que está
      * aberto na sua tela
      */
-    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent);
+    
 
+    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent);
+    
     /**
      * A função afterClosed() te retorna um observable
      * que manda os dados que serão enviados para você
@@ -63,8 +68,7 @@ export class ListarFuncionariosComponent implements OnInit {
        */
       if (deletar) {
         this.funcService.deleteFuncionario(func).subscribe(
-          (a) => {
-            console.log(a);
+          () => {
             
             this.snackbar.open('Funcionário deletado', 'Ok', {
               duration: 3000,

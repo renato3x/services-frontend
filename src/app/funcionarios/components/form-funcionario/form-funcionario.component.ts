@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { filter, Observable } from 'rxjs';
 import { Cargos } from 'src/app/cargos/interface/cargos';
 import { CargosServiceService } from 'src/app/cargos/service/cargos-service.service';
@@ -32,11 +33,13 @@ export class FormFuncionarioComponent implements OnInit {
     private funcService: FuncionarioService,
     private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
     private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
-    private cargosService: CargosServiceService
+    private cargosService: CargosServiceService,
+    private title:Title
   ) {}
 
   ngOnInit(): void {
-    this.getAllOffices();
+    this.getAllOffices()
+    this.title.setTitle("Cadastrar Funcionário")
   }
 
   recuperarFoto(event: any): void {

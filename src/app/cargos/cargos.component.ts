@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
 import { AuthService } from '../auth/services/auth.service';
 import { DialogEditarCargoComponent } from './components/dialog-editar-cargo/dialog-editar-cargo.component';
 import { DialogExcluirCargoComponent } from './components/dialog-excluir-cargo/dialog-excluir-cargo.component';
@@ -25,7 +26,6 @@ export class CargosComponent implements OnInit {
     'description',
     'salary',
     'edit',
-    'delete',
   ];
   office!: Cargos;
   formOffice: FormGroup = this.fb.group({
@@ -40,13 +40,15 @@ export class CargosComponent implements OnInit {
     private fb: FormBuilder,
     private cargosService: CargosServiceService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
     this.cargosService.update$.subscribe(()=> {
       this.getAllOffices()
     })
+    this.title.setTitle("Cargos")
   }
 
   /* Filtro da tabela */

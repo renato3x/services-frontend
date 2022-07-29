@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 import { AtualizarClienteComponent } from '../../components/atualizar-cliente/atualizar-cliente.component';
 import { CadastrarClienteComponent } from '../../components/cadastrar-cliente/cadastrar-cliente.component';
 import { DeletarClientesComponent } from '../../components/deletar-clientes/deletar-clientes.component';
@@ -18,13 +19,15 @@ clientes!:Cliente[]
 colunas: Array<string> = ['id','nome','email','actions']
   constructor(
     private clienteService:ClientesService,
-    private dialog : MatDialog
+    private dialog : MatDialog,
+    private title:Title
     ) { }
 
 
 
   ngOnInit(): void {
     this.recuperarClientes()
+    this.title.setTitle("Clientes")
   }
   recuperarClientes(){
     this.clienteService.getClientes().subscribe((clientesX)=>{

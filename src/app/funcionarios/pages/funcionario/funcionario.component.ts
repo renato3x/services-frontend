@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cargos } from 'src/app/cargos/interface/cargos';
@@ -27,6 +28,7 @@ export class FuncionarioComponent implements OnInit {
   })
   
   funcionario!: Funcionario
+  funcionarios!: Funcionario[]
   imagePreview: string = ''
   foto!: File // undefined
   desabilitar: boolean = true
@@ -40,7 +42,8 @@ export class FuncionarioComponent implements OnInit {
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
-    private cargosService: CargosServiceService
+    private cargosService: CargosServiceService,
+    private title:Title
     ) { }
 
   ngOnInit(): void {
@@ -49,6 +52,10 @@ export class FuncionarioComponent implements OnInit {
       (params) => {
         let idFuncionario = parseInt(params.get('idFuncionario') ?? '0')
         this.recuperarFuncionario(idFuncionario)
+
+        this.funcService.getFuncionarioById(idFuncionario).subscribe(() => {
+          this.title.setTitle("Funcionário " + this.formFuncionario.value.nome)
+        })
       }
     )
     this.getAllOffices()
@@ -69,14 +76,15 @@ export class FuncionarioComponent implements OnInit {
          * e colocar dentro dos formControls
          */
         
-        console.log(this.funcionario);
-        
+        console.log(this.funcionario.cargo.idCargo);
+        if(this.funcionario.cargo.idCargo != undefined){
         this.formFuncionario.setValue({
           nome: this.funcionario.nome,
           email: this.funcionario.email,
-          foto: '',
+          foto:'',
           cargo:this.funcionario.cargo.idCargo
         })
+      }
 
         // 3° carregar o preview da imagem
         this.imagePreview = this.funcionario.foto
@@ -114,13 +122,13 @@ export class FuncionarioComponent implements OnInit {
        * o valor de cada campo do seu reative forms
        */
       (valores) => {
+        
         /**
          * o botão será desabilitado se as validações do formulário estiverem inválidas
          * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
          * propriedade do objeto funcionário
          */
-        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.cargo.idCargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
-        console.log(this.desabilitar);
+        this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.cargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
         
       }
     )
@@ -169,9 +177,9 @@ export class FuncionarioComponent implements OnInit {
   }
 
   deletar(): void {
-    this.dialog.open(ConfirmarDelecaoComponent)
-    .afterClosed()
-    .subscribe(
+    const ref = this.dialog.open(ConfirmarDelecaoComponent)
+
+    ref.afterClosed().subscribe(
       (deletar) => {
         if (deletar) {
           this.funcService.deleteFuncionario(this.funcionario)
@@ -180,7 +188,6 @@ export class FuncionarioComponent implements OnInit {
               this.snackbar.open('Funcionário deletado', 'Ok', {
                 duration: 3000
               })
-
               this.router.navigateByUrl('/funcionarios')
             }
           )

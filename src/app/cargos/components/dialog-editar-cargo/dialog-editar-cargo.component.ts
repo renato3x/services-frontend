@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Cargos } from '../../interface/cargos';
 import { CargosServiceService } from '../../service/cargos-service.service';
 
@@ -21,11 +22,13 @@ export class DialogEditarCargoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private cargosService: CargosServiceService
+    private cargosService: CargosServiceService,
+    private title:Title
   ) {}
 
   ngOnInit(): void {
-    this.disabledButtonFunction();
+    this.disabledButtonFunction()
+    this.title.setTitle("Editar Cargo")
   }
 
   disabledButtonFunction() {
