@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <h1> Services </h1>
     <span class="separador"></span>
-    <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
+    <button mat-button matTooltip="Funcionários" [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a
         mat-menu-item
@@ -13,7 +13,7 @@
       >Cargos</a>
     </mat-menu>
 
-    <button mat-icon-button (click)="authService.signOut()">
+    <button mat-icon-button matTooltip="Logout" (click)="authService.signOut()">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar-row>
