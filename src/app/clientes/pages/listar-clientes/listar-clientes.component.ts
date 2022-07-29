@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { Endereco } from 'src/app/enderecos/models/endereco';
+import { EnderecoService } from 'src/app/enderecos/services/endereco.service';
+import { AddEnderecoComponent } from '../../components/add-endereco/add-endereco.component';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
+import { EditEnderecoComponent } from '../../components/edit-endereco/edit-endereco.component';
 import { FormClientesComponent } from '../../components/form-cliente/form-cliente.component';
 import { Cliente } from '../../models/cliente';
 import { ClienteService } from '../../service/cliente.service';
@@ -17,7 +21,7 @@ export class ListarClientesComponent implements OnInit {
 
   clientes: Cliente[] = []
 
-  colunas: Array<string> = ['id', 'nome', 'descricao', 'actions']
+  colunas: Array<string> = ['id', 'nome', 'descricao','endereco', 'actions']
 
   constructor(
     private clienteService: ClienteService,
@@ -92,5 +96,21 @@ export class ListarClientesComponent implements OnInit {
     )
   }
 
+  addEndereco(idCliente: number) {
+    const dialog = this.dialog.open(AddEnderecoComponent, {data: idCliente})
+    dialog.afterClosed().subscribe(
+      () => {
+        this.recuperarClientes()
+      }
+    )
+  }
 
+  editEndereco(endereco: Endereco) {
+    const dialog = this.dialog.open(EditEnderecoComponent, {data: endereco})
+    dialog.afterClosed().subscribe(
+      () => {
+        this.recuperarClientes()
+      }
+    )
+  }
 }

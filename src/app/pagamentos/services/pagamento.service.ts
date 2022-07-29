@@ -19,14 +19,10 @@ export class PagamentoService {
   ) { }
 
   getPagamentos(): Observable<Pagamento[]> {
-    const token = this.authService.recuperarToken()
-
     return this.http.get<Pagamento[]>(this.baseUrl)
   }
   
   getPagamentoById(id: number): Observable<Pagamento>{
-    const token = this.authService.recuperarToken()
-
     return this.http.get<Pagamento>(`${this.baseUrl}/${id}`)
   }
 

@@ -1,0 +1,30 @@
+<div>
+  <h2 mat-dialog-title>Editar Endereço #{{this.endereco.idEndereco}}</h2>
+  <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoEndereco"></mat-spinner>
+</div>
+
+<form action="" [formGroup]="formEndereco" (ngSubmit)="atualizar()">
+
+  <mat-form-field appearence="fill">
+    <mat-label>Rua</mat-label>
+    <input type="text" matInput formControlName="rua">
+  </mat-form-field>
+
+  <mat-form-field appearence="fill">
+    <mat-label>Bairro</mat-label>
+    <input type="text" matInput formControlName="bairro">
+  </mat-form-field>
+
+  <mat-form-field appearence="fill">
+    <mat-label>Cidade</mat-label>
+    <input type="text" matInput formControlName="cidade">
+  </mat-form-field>
+
+  <mat-form-field appearence="fill">
+    <mat-label>UF</mat-label>
+    <input type="text" matInput formControlName="uf">
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button color="accent" id="salvar">Salvar
+    alterações</button>
+</form>
