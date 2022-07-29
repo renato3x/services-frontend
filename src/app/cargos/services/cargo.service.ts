@@ -22,7 +22,6 @@ export class CargoService {
   getCargos(): Observable<Cargo[]> {
 
     return this.http.get<Cargo[]>(this.baseUrl)
-
   }
   
   getCargoById(id: number): Observable<Cargo> {
@@ -43,7 +42,6 @@ export class CargoService {
   salvarCargo(cargo: Cargo): Observable<Cargo> {
 
     return this.http.post<Cargo>(this.baseUrl, cargo)
-
   }
 
   atualizarCargo(cargo: Cargo): Observable<Cargo> {
@@ -54,9 +52,7 @@ export class CargoService {
         this.atualizarCargosSub$.next(true)
       })
     )
-
   }
-
 }
 
 

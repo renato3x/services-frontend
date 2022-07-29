@@ -54,7 +54,6 @@ export class CargoComponent implements OnInit {
         descricao: this.cargo.descricao,
         salario: this.cargo.salario
       })
-
       this.valorMudou()
       },
       (erro: HttpErrorResponse) => {
@@ -71,7 +70,6 @@ export class CargoComponent implements OnInit {
         this.desabilitar = this.formCargo.invalid || !(valores.nome != this.cargo.nome || valores.descricao != this.cargo.descricao || valores.salario != this.cargo.salario )         
     })    
   }
-
 
   atualizar(): void {
     const c: Cargo = {...this.formCargo.value}
@@ -111,11 +109,6 @@ export class CargoComponent implements OnInit {
         )
         }
       }
-    )
-    
+    )    
   }
-
-
-
-
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
 
-//material
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatButtonModule } from '@angular/material/button'
@@ -77,5 +76,4 @@ import { MatTooltipModule } from '@angular/material/tooltip'
   ]
 })
 export class MaterialModule {
-
 }

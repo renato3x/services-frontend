@@ -29,6 +29,7 @@ import { Pagamento } from 'src/app/pagamentos/models/pagamento';
     ]),
   ],
 })
+
 export class ListarChamadosComponent implements OnInit, AfterViewInit {
   chamados!: Chamado[]
   colunas: string[] = ['id', 'titulo', 'data', 'funcionario', 'cliente', 'pagamento', 'status', 'actions'];
@@ -39,8 +40,6 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
   }
-
-
 
   ngOnInit(): void {
     this.getChamados()
@@ -54,13 +53,13 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
       }
     )
   }
+
   deletarChamado(idChamado: number) {
     const dialogRef = this.dialog.open(ConfirmarDelecaoComponent)
 
     dialogRef.afterClosed()
       .subscribe(
         (deletar) => {
-
           if (deletar == true) {
             this.chamadosService.deleteChamado(idChamado)
               .subscribe(
@@ -73,14 +72,14 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
                 (error) => {
                   this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
                     duration: 3000
-                  })
-                  console.log(error)
+                  })                  
                 }
               )
           }
         }
       )
   }
+
   alterarChamado(chamado: Chamado) {
     const dialogRef = this.dialog.open(AlterarChamadoComponent, {
       data: {
@@ -105,6 +104,7 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
       this.getChamados();
     })
   }
+
   edit(pagamento: Pagamento) {
     const dialog = this.dialog.open(EditPagamentoComponent, { data: pagamento })
     dialog.afterClosed().subscribe(() => {
