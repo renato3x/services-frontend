@@ -1,0 +1,15 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: fit-content;
+}
+
+#salvar {
+    margin-top: 16px;
+}
+
+div {
+    display: flex;
+    justify-content: space-between;
+}

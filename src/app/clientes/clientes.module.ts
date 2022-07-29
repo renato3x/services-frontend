@@ -10,6 +10,8 @@ import { ClienteComponent } from './pages/cliente/cliente.component';
 import { ListarClientesComponent } from './pages/listar-clientes/listar-clientes.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddEnderecoComponent } from './components/add-endereco/add-endereco.component';
+import { EditEnderecoComponent } from './components/edit-endereco/edit-endereco.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConfirmarSaidaComponent,
     ClienteComponent,
     ListarClientesComponent,
-    FormClientesComponent
+    FormClientesComponent,
+    AddEnderecoComponent,
+    EditEnderecoComponent
   ],
 
 

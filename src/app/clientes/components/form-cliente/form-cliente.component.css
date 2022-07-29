@@ -5,3 +5,8 @@ form {
   width: 400px;
 
 }
+
+div {
+  display: flex;
+  justify-content: space-between;
+}
