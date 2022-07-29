@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   private readonly baseUrl: string = 'http://localhost:8080'
-  private jwt = new JwtHelperService() 
+  private jwt = new JwtHelperService() // esse objeto permitirá saber se o token está válido ou não
 
   constructor(
     private http: HttpClient,
@@ -44,19 +44,23 @@ export class AuthService {
     return localStorage.getItem('authorization')
   }
 
-  logado(): boolean {    
+  logado(): boolean {
+    // o usuário estará logado se o token estiver armazenado
+    // e o token ainda for válido
     const token = this.recuperarToken()
 
     if (token == null) {
       return false
     }
 
-    return !this.jwt.isTokenExpired(token) 
+    return !this.jwt.isTokenExpired(token) // testando a validade do token
   }
 
   emailUsuario(){
     const token= this.recuperarToken()
     const decode= this.jwt.decodeToken(token!)
     return decode
-  }  
+  }
+
+  
 }

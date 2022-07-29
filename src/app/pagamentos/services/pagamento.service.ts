@@ -23,7 +23,13 @@ export class PagamentoService {
 
     return this.http.get<Pagamento[]>(this.baseUrl)
   }
-  
+
+  /* deletePagamentos(pag: Pagamento): Observable<any> {
+    const token = this.authService.recuperarToken()
+
+      return this.http.delete<any>(`${this.baseUrl}/${pag.idPagamento}`)
+  } */
+
   getPagamentoById(id: number): Observable<Pagamento>{
     const token = this.authService.recuperarToken()
 

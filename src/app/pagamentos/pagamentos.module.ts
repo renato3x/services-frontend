@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
+
 @NgModule({
   declarations: [
     ListarPagamentosComponent

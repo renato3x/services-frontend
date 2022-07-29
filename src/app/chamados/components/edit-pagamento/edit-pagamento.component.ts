@@ -43,6 +43,7 @@ export class EditPagamentoComponent implements OnInit {
         duration: 3000
       })
       this.dialogref.close()
+
     })
   }
 }

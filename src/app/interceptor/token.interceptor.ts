@@ -17,11 +17,15 @@ export class TokenInterceptor implements HttpInterceptor {
 
     const token = this.authService.recuperarToken();
     if (token) {
+
       const clone = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${token}`)
       })
       return next.handle(clone);
     }
+
+
     return next.handle(request);
   }
 }
+

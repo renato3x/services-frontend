@@ -11,4 +11,5 @@ export class ConfirmarDelecaoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 }

@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddPagamentoComponent } from './components/add-pagamento/add-pagamento.component';
 import { EditPagamentoComponent } from './components/edit-pagamento/edit-pagamento.component';
 
+
+
 @NgModule({
   declarations: [
     ListarChamadosComponent,
@@ -33,5 +35,4 @@ import { EditPagamentoComponent } from './components/edit-pagamento/edit-pagamen
     useValue: 'BRL'
   },]
 })
-
 export class ChamadosModule { }

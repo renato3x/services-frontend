@@ -43,4 +43,5 @@ export class ListarPagamentosComponent implements OnInit {
         }
       )
   }
+
 }

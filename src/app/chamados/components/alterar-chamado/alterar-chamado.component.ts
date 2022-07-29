@@ -54,5 +54,6 @@ export class AlterarChamadoComponent implements OnInit {
     this.chamadosService.putChamado(c, idFuncionario).subscribe(() => {
       this.dialogRef.close()
     })
+
   }
 }

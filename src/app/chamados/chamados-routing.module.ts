@@ -21,5 +21,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-
 export class ChamadosRoutingModule { }

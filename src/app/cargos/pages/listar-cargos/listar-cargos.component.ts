@@ -28,6 +28,7 @@ export class ListarCargosComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle("Cargos Service")
 
+
     this.cargoService.atualizarCargosSub$.subscribe(
       (precisaAtualizar) => {
         if (precisaAtualizar) {
@@ -44,6 +45,9 @@ export class ListarCargosComponent implements OnInit {
       },
       (erro) => {
         console.log(erro)
+      },
+      () => {
+        console.log('Dados enviados com sucesso')
       }
     )
   }
@@ -57,6 +61,7 @@ export class ListarCargosComponent implements OnInit {
         this.recuperarCargos()
       }
     )
+
   }
 
   deletarCargo(cargo: Cargo): void {
@@ -85,4 +90,6 @@ export class ListarCargosComponent implements OnInit {
       }
     )
   } 
+
+
 }

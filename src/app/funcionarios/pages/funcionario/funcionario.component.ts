@@ -5,8 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Cargo } from 'src/app/cargos/models/cargo';
-import { CargoService } from 'src/app/cargos/services/cargo.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -19,61 +17,60 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FuncionarioComponent implements OnInit {
 
   funcionario!: Funcionario
-  cargos: Cargo[] = []  
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    idCargo: ['', [Validators.required]],
     foto: ['']
   })
 
   imagePreview: string = ''
-  foto!: File 
+  foto!: File // undefined
   desabilitar: boolean = true
   naoEncontrado: boolean = false
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute, // acessar os parâmetros da rota ativa
     private funcService: FuncionarioService,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router, 
-    private cargoService: CargoService
+    private router: Router // serve para fazer o redirecionamento entre as páginas do app pelo ts
   ) { }
 
   ngOnInit(): void {
+    // let idFuncionario = this.route.snapshot.paramMap.get('idFuncionario')
     this.route.paramMap.subscribe(
       (params) => {
         let idFuncionario = parseInt(params.get('idFuncionario') ?? '0')
         this.recuperarFuncionario(idFuncionario)
-        this.mostrarCargos()        
-      }
-    )
-  }  
-
-  mostrarCargos() {
-    this.cargoService.getCargos().subscribe(
-      (carg) => {
-        this.cargos = carg
       }
     )
   }
 
-  recuperarFuncionario(id: number): void {    
+  recuperarFuncionario(id: number): void {
     this.funcService.getFuncionarioById(id)
       .subscribe(
-        func => {       
+        func => {
+          //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
           this.funcionario = func
-          
+
+          // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
+          // no formulário
+
+          /**
+           * setValue() é responsável por pegar os valores que foram passados para ela
+           * e colocar dentro dos formControls
+           */
           this.formFuncionario.setValue({
             nome: this.funcionario.nome,
             email: this.funcionario.email,
-            idCargo: this.funcionario.cargo.idCargo,
             foto: ''
-          })         
+          })
+
+          // 3° carregar o preview da imagem
           this.imagePreview = this.funcionario.foto
+
           this.valorMudou()
         },
         (erro: HttpErrorResponse) => {
@@ -85,20 +82,34 @@ export class FuncionarioComponent implements OnInit {
   recuperarFoto(event: any): void {
     this.foto = event.target.files[0]
 
-    const reader = new FileReader() 
+    const reader = new FileReader() // objeto do js que faz leitura de arquivos
 
-    reader.readAsDataURL(this.foto) 
+    reader.readAsDataURL(this.foto) // ler o arquivo e gerar um link local para o acesso do conteúdo daquele arquivo
 
     reader.onload = () => {
       this.imagePreview = reader.result as string
     }
   }
 
-  valorMudou() {   
+  valorMudou() {
+    /**
+     * valueChanges é uma propriedade dos FormGroups
+     * que é um observable que quando um valor do seu formulário
+     * altera, esse observable te retorna essa modificação
+     */
     this.formFuncionario.valueChanges
-      .subscribe(        
-        (valores) => {         
-          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.idCargo != this.funcionario.cargo.idCargo || valores.foto.length > 0)
+      .subscribe(
+        /**
+         * o parâmetro valores é um objeto que é retornado te informando
+         * o valor de cada campo do seu reative forms
+         */
+        (valores) => {
+          /**
+           * o botão será desabilitado se as validações do formulário estiverem inválidas
+           * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
+           * propriedade do objeto funcionário
+           */
+          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
         }
       )
   }
@@ -106,26 +117,22 @@ export class FuncionarioComponent implements OnInit {
   salvarAtualizacoes() {
     const f: Funcionario = { ...this.formFuncionario.value }
     f.idFuncionario = this.funcionario.idFuncionario
-    f.foto = this.funcionario.foto   
-    const idCargo: number = this.formFuncionario.value.idCargo
-    this.cargoService.getCargoById(idCargo).subscribe(
-      (cargo) => {
-        f.cargo = cargo
-        const temFoto = this.formFuncionario.value.foto.length > 0
+    f.foto = this.funcionario.foto
+
+    const temFoto = this.formFuncionario.value.foto.length > 0
 
     const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
 
     obsSalvar
       .subscribe(
         (func) => {
+
           this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
             duration: 3000
           })
           this.recuperarFuncionario(func.idFuncionario)
         }
       )
-      }
-    ) 
   }
 
   deletar(): void {
@@ -140,6 +147,7 @@ export class FuncionarioComponent implements OnInit {
                   this.snackbar.open('Funcionário deletado', 'Ok', {
                     duration: 3000
                   })
+
                   this.router.navigateByUrl('/funcionarios')
                 }
               )

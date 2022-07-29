@@ -15,10 +15,10 @@ export class ChamadosService {
   getChamados(): Observable<Chamado[]> {
     return this.http.get<Chamado[]>(`${this.baseUrl}`)
   }
-  
   getChamadoById(idChamado: number): Observable<Chamado> {
     return this.http.get<Chamado>(`${this.baseUrl}/${idChamado}`)
   }
+
 
   putChamado(chamado: Chamado, idFuncionario?: number): Observable<Chamado> {
     if (idFuncionario) {
@@ -38,3 +38,4 @@ export class ChamadosService {
     return this.http.post<Chamado>(`${this.baseUrl}/${idCliente}`, chamado)
   }
 }
+

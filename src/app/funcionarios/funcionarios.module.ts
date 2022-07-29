@@ -12,6 +12,7 @@ import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { ConfirmarSaidaFormComponent } from './components/confirmar-saida-form/confirmar-saida-form.component';
 
+
 @NgModule({
   declarations: [
     ListarFuncionariosComponent,
