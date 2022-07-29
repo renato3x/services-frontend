@@ -1,0 +1,34 @@
+<section mat-dialog-content>
+    <h3>Cadastrar um Cliente</h3>
+    <form [formGroup]="formCliente" (ngSubmit)="salvarAtualizacoes()" >
+      <mat-form-field appearance="fill">
+        <mat-label>Nome do Cliente</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: Marlon Ferreira"
+          matInput
+          formControlName="nome"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email do Cliente</mat-label>
+        <input
+          type="text"
+          placeholder="marlon@gmail.com"
+          matInput
+          formControlName="email"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Endereço</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="idEndereco"
+        >
+      </mat-form-field>
+      <button type="submit"  mat-raised-button color="accent" id="salvar">Salvar Atualizações</button>
+    </form>
+  </section>

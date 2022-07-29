@@ -12,6 +12,10 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 import { CompartilharComponentesModule } from './compartilhar-componentes/compartilhar-componentes.module';
+import { ClienteComponent } from './clientes/pages/cliente/cliente.component';
+import { FormClienteComponent } from './clientes/componentes/form-cliente/form-cliente.component';
+import { DeletarClienteComponent } from './clientes/componentes/deletar-cliente/deletar-cliente.component';
+import { EditarClienteComponent } from './clientes/componentes/editar-cliente/editar-cliente.component';
 
 
 @NgModule({

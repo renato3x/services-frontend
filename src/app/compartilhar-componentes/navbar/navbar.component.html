@@ -4,13 +4,16 @@
     <span class="separador"></span>
     <button mat-button matTooltip="Funcionários" [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
-      <a
+      <button
         mat-menu-item
         routerLink="/funcionarios"
-      >Listar</a>
-      <a mat-menu-item
+      >Listar</button>
+      <button mat-menu-item
          routerLink="/cargos"
-      >Cargos</a>
+      >Cargos</button>
+      <button mat-menu-item routerLink="/clientes">
+        Clientes
+      </button>
     </mat-menu>
 
     <button mat-icon-button matTooltip="Logout" (click)="authService.signOut()">

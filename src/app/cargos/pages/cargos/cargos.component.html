@@ -31,11 +31,11 @@
           <td mat-cell *matCellDef="let c"> {{ c.salario | currency: "BRL" }} </td>
         </ng-container>
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>actions</th>
+          <th mat-header-cell *matHeaderCellDef>Ações</th>
           <td mat-cell *matCellDef="let c">
             <button mat-icon-button (click)="dialogEdit(c)">
               <mat-icon>edit</mat-icon>
-            </button>
+            </button><br>
             <button color="warn" mat-icon-button (click)="deletarCargo(c.idCargo)"> <!-- click delete aqui -->
               <mat-icon>delete</mat-icon>
             </button>
