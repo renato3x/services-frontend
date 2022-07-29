@@ -25,7 +25,6 @@ export class PodeSairGuard implements CanDeactivate<CargoComponent> {
       const descricao = component.formCargo.value.descricao
       const salario = component.formCargo.value.salario
 
-
       if (nome != component.cargo.nome || descricao != component.cargo.descricao || salario != component.cargo.salario) {
         const dialogRef = this.dialog.open(ConfirmarSaidaComponent)
         
@@ -37,6 +36,5 @@ export class PodeSairGuard implements CanDeactivate<CargoComponent> {
     }
   } 
   return true
-  }
-  
+  }  
 }

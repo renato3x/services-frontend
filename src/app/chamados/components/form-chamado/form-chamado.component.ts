@@ -32,6 +32,7 @@ export class FormChamadoComponent implements OnInit {
     this.recuperarFuncionarios()
     this.recuperarClientes()
   }
+  
   cadastrarChamado() {
     const idCliente = this.formChamados.value.idCliente
     const chamado: Chamado = {
@@ -46,9 +47,11 @@ export class FormChamadoComponent implements OnInit {
       })
     })
   }
+
   recuperarFuncionarios() {
     this.funcionarioService.getFuncionarios().subscribe(funcionarios => this.funcionarios = funcionarios)
   }
+
   recuperarClientes() {
     this.clienteService.getClientes().subscribe(clientes => this.clientes = clientes)
   }

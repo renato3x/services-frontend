@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit {
     private titleService: Title,
   ) { }
 
-  ngOnInit(): void {
-    //função para alterar titulo
+  ngOnInit(): void {   
     this.titleService.setTitle("Service - Login ")
   }
 
@@ -40,7 +39,6 @@ export class LoginComponent implements OnInit {
           this.snackbar.open('Logado com sucesso', 'Ok', {
             duration: 3000
           })
-
           this.router.navigateByUrl('/funcionarios')
         }
       )
