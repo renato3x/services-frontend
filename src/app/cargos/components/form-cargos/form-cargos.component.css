@@ -1,22 +1,23 @@
 form {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: 350px;
-    justify-content: center;
+    width: 300px;
+    height: fit-content;
 }
 
 #salvar {
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 div {
     display: flex;
-    justify-content: space-between; 
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 #inputSalario::-webkit-outer-spin-button,
 #inputSalario::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }

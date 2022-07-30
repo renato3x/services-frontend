@@ -11,6 +11,7 @@ import { FormChamadoComponent } from './components/form-chamado/form-chamado.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddPagamentoComponent } from './components/add-pagamento/add-pagamento.component';
 import { EditPagamentoComponent } from './components/edit-pagamento/edit-pagamento.component';
+import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EditPagamentoComponent } from './components/edit-pagamento/edit-pagamen
     AlterarChamadoComponent,
     FormChamadoComponent,
     AddPagamentoComponent,
-    EditPagamentoComponent
+    EditPagamentoComponent,
+    ConfirmarSaidaComponent
   ],
   imports: [
     CommonModule,

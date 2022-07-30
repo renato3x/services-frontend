@@ -1,6 +1,11 @@
-<div class="container-edit">
+<div>
   <h2>Editar Pagamento #{{this.pagamento.idPagamento}}</h2>
-  <form action="" [formGroup]="formPagamento" (ngSubmit)="atualizar()">
+  <button type="button" mat-icon-button (click)="sair()">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>
+<section mat-dialog-content>
+  <form [formGroup]="formPagamento" (ngSubmit)="atualizar()">
 
     <mat-form-field appearence="fill">
       <mat-label>Valor</mat-label>
@@ -20,7 +25,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="accent" id="salvar">Salvar
+    <button [disabled]="desabilitar" type="submit" mat-raised-button color="accent" id="salvar">Salvar
       alterações</button>
   </form>
-</div>
+</section>

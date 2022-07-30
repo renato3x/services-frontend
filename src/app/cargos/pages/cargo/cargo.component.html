@@ -1,68 +1,31 @@
-<div class="loader" *ngIf="cargo == undefined; else principal">
-    <p>{{naoEncontrado? 'Cargo não encontrado.' : 'Procurando cargo...'}}</p>
-    <mat-spinner mode="indeterminate" color="primary" *ngIf="!naoEncontrado"></mat-spinner>
+<div>
+    <h2>{{cargo.nome}}</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoCargo"></mat-spinner>
+    <button type="button" mat-icon-button (click)="sair()">
+        <mat-icon>arrow_forward</mat-icon>
+    </button>
 </div>
+<section mat-dialog-content>
+    <form action="" [formGroup]="formCargo" (ngSubmit)="atualizar()">
 
-<ng-template #principal>    
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>{{ cargo.nome }}</mat-card-title>
+        <mat-form-field appearence="fill">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput formControlName="nome">
+        </mat-form-field>
 
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" id="menu">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item color="primary" routerLink="/cargos">
-                    <mat-icon>arrow_back</mat-icon>
-                    <span>Voltar</span>
-                </button>             
-                <button mat-menu-item color="primary" (click)="deletar(cargo)" >
-                    <mat-icon>delete</mat-icon>
-                    <span>Deletar Cargo</span>
-                </button>
-            </mat-menu>
-        </mat-card-header>
+        <mat-form-field appearence="fill">
+            <mat-label>Descrição</mat-label>
+            <input type="text" matInput formControlName="descricao">
+        </mat-form-field>
 
-        <mat-card-content>
-            <form action="" [formGroup]="formCargo"(ngSubmit)="atualizar()">
-                
-                <mat-form-field appearence="fill">
-                    <mat-label>Nome</mat-label>
-                    <input
-                    type="text"
-                    matInput
-                    formControlName="nome"
-                    >
-                </mat-form-field>
-                
-                <mat-form-field appearence="fill">
-                    <mat-label>Descrição</mat-label>
-                    <input 
-                    type="text"
-                    matInput
-                    formControlName="descricao"
-                    >
-                </mat-form-field>
-                
-                <mat-form-field appearence="fill">
-                    <mat-label>Salário</mat-label>
-                    <input id="inputSalario"
-                    type="number"
-                    matInput
-                    formControlName="salario"
-                    >
-                </mat-form-field>
-                
-                <button 
-                type="submit" 
-                mat-raised-button 
-                color="accent"
-                id="salvar"
-                [disabled]="desabilitar"
-                >Salvar alterações</button>
-            </form>
+        <mat-form-field appearence="fill">
+            <mat-label>Salário</mat-label>
+            <input id="inputSalario" type="number" matInput formControlName="salario">
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar">Salvar
+            alterações</button>
+    </form>
 
 
-        </mat-card-content>
-    </mat-card>
-</ng-template>
+</section>

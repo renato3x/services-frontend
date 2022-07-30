@@ -72,7 +72,7 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
                 (error) => {
                   this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
                     duration: 3000
-                  })                  
+                  })
                 }
               )
           }
@@ -82,6 +82,7 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
 
   alterarChamado(chamado: Chamado) {
     const dialogRef = this.dialog.open(AlterarChamadoComponent, {
+      disableClose: true,
       data: {
         chamado
       }
@@ -92,7 +93,7 @@ export class ListarChamadosComponent implements OnInit, AfterViewInit {
   }
 
   cadastrarChamado() {
-    const dialog = this.dialog.open(FormChamadoComponent)
+    const dialog = this.dialog.open(FormChamadoComponent, { disableClose: true })
     dialog.afterClosed().subscribe(() => {
       this.getChamados();
     })

@@ -1,12 +1,17 @@
-.container-edit {
-  width: 300px;
+div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  min-width: 360px;
+  height: fit-content;
 }
+
 
 #salvar {
   margin-top: 8px;

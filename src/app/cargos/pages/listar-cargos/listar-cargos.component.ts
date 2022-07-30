@@ -6,6 +6,7 @@ import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/co
 import { FormCargosComponent } from '../../components/form-cargos/form-cargos.component';
 import { Cargo } from '../../models/cargo';
 import { CargoService } from '../../services/cargo.service';
+import { CargoComponent } from '../cargo/cargo.component';
 
 @Component({
   selector: 'app-listar-cargos',
@@ -50,7 +51,21 @@ export class ListarCargosComponent implements OnInit {
 
   abrirFormCargo(): void {
 
-    const referenciaDialog = this.dialog.open(FormCargosComponent)
+    const referenciaDialog = this.dialog.open(FormCargosComponent, {
+      disableClose: true,
+    })
+
+    referenciaDialog.afterClosed().subscribe(
+      () => {
+        this.recuperarCargos()
+      }
+    )
+  }
+  editarCargo(cargo: Cargo) {
+    const referenciaDialog = this.dialog.open(CargoComponent, {
+      disableClose: true,
+      data: cargo
+    })
 
     referenciaDialog.afterClosed().subscribe(
       () => {
@@ -64,25 +79,25 @@ export class ListarCargosComponent implements OnInit {
     const referenciaDialog = this.dialog.open(ConfirmarDelecaoComponent)
 
     referenciaDialog.afterClosed()
-    .subscribe(
-      deletar => {
-        if (deletar) {
-        this.cargoService.deleteCargo(cargo).subscribe(
-          () => {
-            this.snackbar.open('Cargo deletado', 'Ok', {
-              duration: 3000
-            })
-            this.recuperarCargos()
-          },
-          (error) => {
-            this.snackbar.open('Não foi possível deletar o cargo', 'Ok', {
-              duration: 3000
-            })
-            console.log(error)
+      .subscribe(
+        deletar => {
+          if (deletar) {
+            this.cargoService.deleteCargo(cargo).subscribe(
+              () => {
+                this.snackbar.open('Cargo deletado', 'Ok', {
+                  duration: 3000
+                })
+                this.recuperarCargos()
+              },
+              (error) => {
+                this.snackbar.open('Não foi possivel excluir o cargo. Algum funcionario possui este cargo', 'Ok', {
+                  duration: 3000
+                })
+                console.log(error)
+              }
+            )
           }
-        )
         }
-      }
-    )
-  } 
+      )
+  }
 }

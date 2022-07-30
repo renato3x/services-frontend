@@ -1,5 +1,8 @@
 <div>
-  <h2 mat-dialog-title>Alterar Chamado</h2>
+  <h2>Alterar Chamado</h2>
+  <button (click)="close()" type="button" mat-icon-button>
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
 </div>
 <section mat-dialog-content>
   <form action="" [formGroup]="formChamados" (ngSubmit)="salvar()">
@@ -40,6 +43,6 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button type="submit" [disabled]="formChamados.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+    <button [disabled]="desabilitar" type="submit" mat-raised-button color="accent" id="salvar">Salvar</button>
   </form>
 </section>

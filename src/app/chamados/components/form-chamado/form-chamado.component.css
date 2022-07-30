@@ -13,14 +13,14 @@ form {
   margin-top: 10px;
 }
 
-.container {
-  flex-direction: column;
-}
 
 div {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
+
 
 #cliente {
   width: 140px

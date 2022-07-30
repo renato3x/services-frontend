@@ -1,28 +1,30 @@
-<div class="container">
-  <h2 mat-dialog-title>Cadastrar Chamado</h2>
-  <section mat-dialog-content>
-    <form action="" [formGroup]="formChamados" (ngSubmit)="cadastrarChamado()">
-      <mat-form-field appearance="fill">
-        <mat-label>Titulo</mat-label>
-        <input type="text" placeholder="Titulo do chamado" matInput formControlName="titulo">
-      </mat-form-field>
-      <mat-form-field appearance="fill" id="descricao">
-        <mat-label>Descrição</mat-label>
-        <textarea id="descricao" placeholder="Descrição do chamado" matInput formControlName="descricao"></textarea>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" id="cliente">
-        <mat-label>Cliente</mat-label>
-        <mat-select formControlName="idCliente" name="cliente">
-          <mat-option></mat-option>
-          <mat-option *ngFor="let cliente of clientes" [value]="cliente.idCliente">
-            {{cliente.nome}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <button type="submit" [disabled]="formChamados.invalid" mat-raised-button color="accent"
-        id="salvar">Salvar</button>
-    </form>
-  </section>
+<div>
+  <h2>Novo Chamado</h2>
+  <button type="button" mat-icon-button (click)="sair()">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
 </div>
+<section mat-dialog-content>
+  <form action="" [formGroup]="formChamados" (ngSubmit)="cadastrarChamado()">
+    <mat-form-field appearance="fill">
+      <mat-label>Titulo</mat-label>
+      <input type="text" placeholder="Titulo do chamado" matInput formControlName="titulo">
+    </mat-form-field>
+    <mat-form-field appearance="fill" id="descricao">
+      <mat-label>Descrição</mat-label>
+      <textarea id="descricao" placeholder="Descrição do chamado" matInput formControlName="descricao"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" id="cliente">
+      <mat-label>Cliente</mat-label>
+      <mat-select formControlName="idCliente" name="cliente">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.idCliente">
+          {{cliente.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" [disabled]="formChamados.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+  </form>
+</section>

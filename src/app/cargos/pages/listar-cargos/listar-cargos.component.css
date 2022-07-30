@@ -1,36 +1,18 @@
+main {
+  margin-bottom: 20px;
+}
+
 table {
   height: fit-content;
-
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1050px;
 }
 
-#lateral {
-  background: #3f51b5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#lateral h2 {
-  color: white;
-  text-align: center;
-  font-weight: 500;
-  transform: rotate(-90deg);
-}
-
-main {
-  min-height: calc(100vh - 64px);
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 450px 1fr;
-  padding: 16px;
-  gap: 16px;
-  box-sizing: border-box;
-}
 
 #add {
   position: fixed;
   right: 16px;
   bottom: 16px;
   background-color: rgba(0, 0, 0, 0.9);
-
 }

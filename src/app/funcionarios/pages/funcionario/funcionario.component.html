@@ -1,8 +1,8 @@
 <div>
-  <h2 mat-dialog-title>{{funcionario.nome}}</h2>
+  <h2>{{funcionario.nome}}</h2>
   <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoFuncionario"></mat-spinner>
-  <button type="button" mat-icon-button>
-    <mat-icon>logout</mat-icon>
+  <button (click)="close()" type="button" mat-icon-button>
+    <mat-icon>arrow_forward</mat-icon>
   </button>
 </div>
 <section mat-dialog-content>
@@ -32,8 +32,7 @@
       formControlName="foto">
     <button type="button" mat-stroked-button color="primary" (click)="fileInput.click()">Selecione uma imagem</button>
 
-    <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent"
-      id="salvar">Salvar</button>
+    <button type="submit" [disabled]="desabilitar" mat-raised-button color="accent" id="salvar">Salvar</button>
 
   </form>
 </section>

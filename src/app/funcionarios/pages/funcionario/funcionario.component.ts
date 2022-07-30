@@ -11,6 +11,7 @@ import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/co
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfirmarSaidaComponent } from '../../components/confirmar-saida/confirmar-saida.component';
 
 @Component({
   selector: 'app-funcionario',
@@ -39,7 +40,6 @@ export class FuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router,
     private cargoService: CargoService,
     private dialogref: MatDialogRef<FuncionarioComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
@@ -117,23 +117,19 @@ export class FuncionarioComponent implements OnInit {
     )
   }
 
-  deletar(): void {
-    this.dialog.open(ConfirmarDelecaoComponent)
-      .afterClosed()
-      .subscribe(
-        (deletar) => {
-          if (deletar) {
-            this.funcService.deleteFuncionario(this.funcionario)
-              .subscribe(
-                () => {
-                  this.snackbar.open('Funcionário deletado', 'Ok', {
-                    duration: 3000
-                  })
-                  this.router.navigateByUrl('/funcionarios')
-                }
-              )
-          }
+
+  close() {
+    if (!this.desabilitar) {
+      const dialog = this.dialog.open(ConfirmarSaidaComponent)
+      dialog.afterClosed().subscribe((response) => {
+        if (response == false) {
+          return
+        } else {
+          this.dialogref.close()
         }
-      )
+      })
+    } else {
+      this.dialogref.close()
+    }
   }
 }

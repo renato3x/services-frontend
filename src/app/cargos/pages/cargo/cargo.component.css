@@ -1,24 +1,17 @@
-mat-card, .loader {
-    height: calc(100vh - 150px);
-    position: sticky;
-    top: 16px;
-    left: 0;
-}
- .loader {
+form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
- }
+    width: 300px;
+    height: fit-content;
+}
 
- form {
+div {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 400px;
-    height: 400px;
-    
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
+
 
 #salvar {
     margin-top: 16px;
@@ -30,6 +23,6 @@ mat-card, .loader {
 
 #inputSalario::-webkit-outer-spin-button,
 #inputSalario::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }

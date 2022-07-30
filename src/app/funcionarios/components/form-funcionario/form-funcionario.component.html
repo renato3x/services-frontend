@@ -1,8 +1,8 @@
 <div>
-  <h2 mat-dialog-title>Novo Funcionário</h2>
+  <h2>Novo Funcionário</h2>
   <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoFuncionario"></mat-spinner>
   <button type="button" mat-icon-button (click)="sair()">
-    <mat-icon>logout</mat-icon>
+    <mat-icon>arrow_forward</mat-icon>
   </button>
 </div>
 <section mat-dialog-content>
@@ -11,23 +11,13 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Nome</mat-label>
-      <input
-        type="text"
-        placeholder="Ex: João Pedro"
-        matInput
-        formControlName="nome"
-      >
+      <input type="text" placeholder="Ex: João Pedro" matInput formControlName="nome">
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>E-mail</mat-label>
-      <input
-        type="email"
-        placeholder="Ex: seuemail@mail.com"
-        matInput
-        formControlName="email"
-      >
+      <input type="email" placeholder="Ex: seuemail@mail.com" matInput formControlName="email">
     </mat-form-field>
-    
+
     <mat-form-field appearance="fill">
       <mat-label>Cargo</mat-label>
       <mat-select formControlName="idCargo" name="cargo">
@@ -38,22 +28,12 @@
       </mat-select>
     </mat-form-field>
 
-    <input
-      type="file"
-      accept="image/*"
-      id="file-input"
-      #fileInput
-      (change)="recuperarFoto($event)"
-      formControlName="foto"
-    >
-    <button
-      type="button"
-      mat-stroked-button
-      color="primary"
-      (click)="fileInput.click()"
-    >Selecione uma imagem</button>
-    
-    <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
+    <input type="file" accept="image/*" id="file-input" #fileInput (change)="recuperarFoto($event)"
+      formControlName="foto">
+    <button type="button" mat-stroked-button color="primary" (click)="fileInput.click()">Selecione uma imagem</button>
+
+    <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent"
+      id="salvar">Salvar</button>
 
   </form>
 </section>

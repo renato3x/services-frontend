@@ -1,15 +1,19 @@
-.container {
-  width: 400px;
-  height: 800px;
+div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  min-width: 250px;
+  height: fit-content;
 }
 
 #salvar {
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 #inputValor::-webkit-outer-spin-button,

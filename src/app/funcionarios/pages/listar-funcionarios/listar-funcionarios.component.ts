@@ -90,7 +90,10 @@ export class ListarFuncionariosComponent implements OnInit {
     )
   }
   editar(f: Funcionario) {
-    const dialog = this.dialog.open(FuncionarioComponent, { data: f })
+    const dialog = this.dialog.open(FuncionarioComponent, {
+      data: f,
+      disableClose: true,
+    })
     dialog.afterClosed().subscribe(() => {
       this.recuperarFuncionarios();
     })

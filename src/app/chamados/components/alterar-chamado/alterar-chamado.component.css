@@ -2,10 +2,6 @@
   display: none;
 }
 
-mat-card {
-  width: 350px;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -19,7 +15,9 @@ form {
 
 div {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .field-container mat-form-field {
