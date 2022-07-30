@@ -1,8 +1,11 @@
+.container {
+  width: 400px;
+  height: 800px;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: fit-content;
 }
 
 #salvar {

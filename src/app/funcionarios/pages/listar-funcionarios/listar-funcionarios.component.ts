@@ -7,6 +7,7 @@ import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/co
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
+import { FuncionarioComponent } from '../funcionario/funcionario.component';
 
 @Component({
   selector: 'app-listar-funcionarios',
@@ -68,7 +69,7 @@ export class ListarFuncionariosComponent implements OnInit {
   recuperarFuncionarios(): void {
     this.funcService.getFuncionarios().subscribe(
       (funcs) => {
-        this.funcionarios = funcs.reverse()
+        this.funcionarios = funcs
       },
       (erro) => {
         console.log(erro)
@@ -77,15 +78,21 @@ export class ListarFuncionariosComponent implements OnInit {
   }
 
   abrirFormFuncionario(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    const referenciaDialog = this.dialog.open(FormFuncionarioComponent, {
+      disableClose: true,
 
-    const referenciaDialog = this.dialog.open(FormFuncionarioComponent, dialogConfig)
+    })
 
     referenciaDialog.afterClosed().subscribe(
       () => {
         this.recuperarFuncionarios()
       }
     )
+  }
+  editar(f: Funcionario) {
+    const dialog = this.dialog.open(FuncionarioComponent, { data: f })
+    dialog.afterClosed().subscribe(() => {
+      this.recuperarFuncionarios();
+    })
   }
 }
