@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,6 +10,7 @@ import { CargoService } from 'src/app/cargos/services/cargo.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { Funcionario } from '../../models/funcionario';
 import { FuncionarioService } from '../../services/funcionario.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-funcionario',
@@ -31,26 +32,22 @@ export class FuncionarioComponent implements OnInit {
   imagePreview: string = ''
   foto!: File
   desabilitar: boolean = true
-  naoEncontrado: boolean = false
+  salvandoFuncionario = false
 
   constructor(
-    private route: ActivatedRoute,
     private funcService: FuncionarioService,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router,
-    private cargoService: CargoService
+    private cargoService: CargoService,
+    private dialogref: MatDialogRef<FuncionarioComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: any
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      (params) => {
-        let idFuncionario = parseInt(params.get('idFuncionario') ?? '0')
-        this.recuperarFuncionario(idFuncionario)
-        this.mostrarCargos()
-      }
-    )
+    this.recuperarFuncionario()
+    this.mostrarCargos()
   }
 
   mostrarCargos() {
@@ -61,25 +58,16 @@ export class FuncionarioComponent implements OnInit {
     )
   }
 
-  recuperarFuncionario(id: number): void {
-    this.funcService.getFuncionarioById(id)
-      .subscribe(
-        func => {
-          this.funcionario = func
-
-          this.formFuncionario.setValue({
-            nome: this.funcionario.nome,
-            email: this.funcionario.email,
-            idCargo: this.funcionario.cargo.idCargo,
-            foto: ''
-          })
-          this.imagePreview = this.funcionario.foto
-          this.valorMudou()
-        },
-        (erro: HttpErrorResponse) => {
-          this.naoEncontrado = erro.status == 404
-        }
-      )
+  recuperarFuncionario(): void {
+    this.funcionario = this.data;
+    this.formFuncionario.setValue({
+      nome: this.funcionario.nome,
+      email: this.funcionario.email,
+      idCargo: this.funcionario.cargo.idCargo,
+      foto: ''
+    })
+    this.imagePreview = this.funcionario.foto
+    this.valorMudou()
   }
 
   recuperarFoto(event: any): void {
@@ -104,6 +92,7 @@ export class FuncionarioComponent implements OnInit {
   }
 
   salvarAtualizacoes() {
+    this.salvandoFuncionario = true
     const f: Funcionario = { ...this.formFuncionario.value }
     f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
@@ -121,7 +110,7 @@ export class FuncionarioComponent implements OnInit {
               this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
                 duration: 3000
               })
-              this.recuperarFuncionario(func.idFuncionario)
+              this.dialogref.close()
             }
           )
       }

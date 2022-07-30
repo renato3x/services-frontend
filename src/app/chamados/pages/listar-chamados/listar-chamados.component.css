@@ -1,3 +1,7 @@
+main {
+  margin-bottom: 30px;
+}
+
 table {
   height: fit-content;
   margin: 0 auto;
@@ -15,26 +19,6 @@ table {
 td {
   text-align: center;
 }
-
-.cadastrarChamado {
-  position: relative;
-  right: 0px;
-  background-color: rgb(1, 109, 1);
-  color: white;
-  font-weight: 500;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  border-radius: 10px;
-  border: none;
-  width: 163px;
-  align-self: flex-end;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-
 
 th {
   text-align: center !important;

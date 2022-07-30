@@ -1,71 +1,39 @@
-<div class="loader" *ngIf="funcionario == undefined; else principal">
-  <p>{{ naoEncontrado == true ? 'Funcionário não encontrado' : 'Procurando funcionario...' }}</p>
-  <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
+<div>
+  <h2 mat-dialog-title>{{funcionario.nome}}</h2>
+  <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoFuncionario"></mat-spinner>
+  <button type="button" mat-icon-button>
+    <mat-icon>logout</mat-icon>
+  </button>
 </div>
+<section mat-dialog-content>
+  <form action="" [formGroup]="formFuncionario" (ngSubmit)="salvarAtualizacoes()">
+    <img [src]="imagePreview || '/assets/no-profile.png'" id="image-preview">
 
-<ng-template #principal>
-  <mat-card>
-    <mat-card-header>
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input type="text" placeholder="Ex: João Pedro" matInput formControlName="nome">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input type="email" placeholder="Ex: seuemail@mail.com" matInput formControlName="email">
+    </mat-form-field>
 
-      <img [src]="funcionario.foto || '/assets/no-profile.png'" mat-card-avatar>
+    <mat-form-field appearance="fill">
+      <mat-label>Cargo</mat-label>
+      <mat-select formControlName="idCargo" name="cargo">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let cargo of cargos" [value]="cargo.idCargo">
+          {{cargo.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <mat-card-title>{{ funcionario.nome }}</mat-card-title>
-      <mat-card-subtitle>{{ funcionario.email }}</mat-card-subtitle>
+    <input type="file" accept="image/*" id="file-input" #fileInput (change)="recuperarFoto($event)"
+      formControlName="foto">
+    <button type="button" mat-stroked-button color="primary" (click)="fileInput.click()">Selecione uma imagem</button>
 
-      <button mat-icon-button color="primary" id="menu" [mat-menu-trigger-for]="menu" matTooltip="Voltar ou deletar">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/funcionarios">
-          <mat-icon>arrow_back</mat-icon>
-          Voltar
-        </button>
-        <button mat-menu-item (click)="deletar()">
-          <mat-icon>delete</mat-icon>
-          Deletar funcionário
-        </button>
-      </mat-menu>
-    </mat-card-header>
+    <button type="submit" [disabled]="formFuncionario.invalid" mat-raised-button color="accent"
+      id="salvar">Salvar</button>
 
-    <mat-card-content>
-      <form action="" [formGroup]="formFuncionario" (ngSubmit)="salvarAtualizacoes()">
-        <img [src]="imagePreview || '/assets/no-profile.png'" id="image-preview">
-
-        <mat-form-field appearance="fill">
-          <mat-label>Nome</mat-label>
-          <input type="text" matInput placeholder="Novo nome" formControlName="nome">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>E-mail</mat-label>
-          <input type="text" matInput placeholder="E-mail" formControlName="email">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>Cargo</mat-label>
-          <mat-select formControlName="idCargo" name="cargo">
-            <mat-option></mat-option>
-            <mat-option *ngFor="let cargo of cargos" [value]="cargo.idCargo">
-              {{ cargo.nome }}
-            </mat-option>
-          </mat-select>          
-        </mat-form-field>
-
-        <input type="file" id="input-foto" #inputFoto (change)="recuperarFoto($event)" formControlName="foto">
-        <button type="button" mat-stroked-button color="primary" (click)="inputFoto.click()">
-          Atualizar imagem
-        </button>
-
-        <button
-          type="submit"
-          mat-raised-button
-          color="accent"
-          id="salvar"
-          [disabled]="desabilitar"
-        >Salvar atualizações
-      </button>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
-</ng-template>
+  </form>
+</section>
