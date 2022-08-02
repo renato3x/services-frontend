@@ -1,0 +1,14 @@
+mat-toolbar-row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .separador {
+    flex-grow: 1;
+  }
+
+  #sair{
+    align-items: end;
+    text-align: end;
+    width: auto;
+  }

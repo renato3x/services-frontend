@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Novo Cliente</h2>
+<section mat-dialog-content>
+
+    <form action="" (ngSubmit)="cadastrarCliente()" [formGroup]="formCliente">
+            <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input type="text" placeholder="Ex: John Doe" matInput formControlName="nome">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" placeholder="Ex: johndoe@email.com" matInput formControlName="email">
+        </mat-form-field>
+
+        <mat-checkbox class="example-margin" (change)="checked = !checked">Cadastrar Endereco</mat-checkbox>
+        
+        <div *ngIf="checked">
+            <form action="" [formGroup]="formEndereco">
+                <mat-form-field appearance="fill">
+                    <mat-label>CEP</mat-label>
+                    <input type="number" placeholder="12345678" matInput  #cep (change)="getEnderecoPeloCep(cep.value)">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Rua</mat-label>
+                    <input type="text" placeholder="Ex: Rua Principal" matInput formControlName="rua" formControlName="rua">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Bairro</mat-label>
+                    <input type="text" placeholder="Ex: Centro" matInput formControlName="bairro" formControlName="bairro">
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Cidade</mat-label>
+                    <input type="text" placeholder="Ex: São Paulo" matInput formControlName="cidade" formControlName="cidade">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>UF</mat-label>
+                    <input type="text" placeholder="Ex: SP" matInput formControlName="uf" formControlName="uf">
+            </mat-form-field>
+            </form>
+        </div>
+        
+        <button mat-raised-button color="accent" id="salvar">Salvar</button>
+
+    </form>
+
+</section>

@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { VerificacaoTokenGuard } from './verificacao-token.guard';
 
 describe('VerificacaoTokenGuard', () => {

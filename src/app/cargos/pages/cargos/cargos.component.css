@@ -1,0 +1,39 @@
+mat-card, .loader {
+    position: sticky;
+    top: 16px;
+    left: 0;
+}
+ .loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 150px);
+ }
+
+ form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    height: 250px;
+    
+}
+
+#salvar {
+    margin-top: 16px;
+}
+
+#menu {
+    margin-left: auto;
+}
+
+#inputSalario::-webkit-outer-spin-button,
+#inputSalario::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+mat-card-content{
+    height: calc(100vh - 350px);
+}

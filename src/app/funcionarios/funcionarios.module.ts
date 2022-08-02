@@ -1,6 +1,6 @@
+import { SharedComponentsModule } from './../shared-components/shared-components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FuncionariosRoutingModule } from './funcionarios-routing.module';
 import { ListarFuncionariosComponent } from './pages/listar-funcionarios/listar-funcionarios.component';
 import { MaterialModule } from '../material/material.module';
@@ -9,7 +9,6 @@ import { FormFuncionarioComponent } from './components/form-funcionario/form-fun
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
-import { NavbarComponent } from '../components/navbar/navbar.component';
 
 
 @NgModule({
@@ -18,14 +17,14 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
     FuncionarioComponent,
     FormFuncionarioComponent,
     ConfirmarDelecaoComponent,
-    ConfirmarSaidaComponent,
-    NavbarComponent
+    ConfirmarSaidaComponent
   ],
   imports: [
     CommonModule,
     FuncionariosRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedComponentsModule
   ]
 })
 export class FuncionariosModule { }

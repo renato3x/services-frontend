@@ -12,31 +12,33 @@ export class PodeSairGuard implements CanDeactivate<FuncionarioComponent> {
 
   constructor(
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   canDeactivate(
-    component: FuncionarioComponent, // representa o componente que ele está inserido
-    currentRoute: ActivatedRouteSnapshot, // a partir dele conseguimos acessar o valor dos parâmetros
+    component: FuncionarioComponent,
+    currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
+    
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // se o guard retornar o valor TRUE, significa que a pessoa PODE sair da página
-    // se o guard retornar o valor FALSE, significa que a pessoa NÃO PODE sair da página
 
-    // 1° Pegar os dados do formulário e guardar cada um em variáveis diferentes
+    if (component.funcionario) {
 
-    const nome = component.formFuncionario.value.nome
-    const email = component.formFuncionario.value.email
-    const foto = component.formFuncionario.value.foto
 
-    if (nome != component.funcionario.nome || email != component.funcionario.email || foto.length > 0) {
-      const dialogRef = this.dialog.open(ConfirmarSaidaComponent)
+      const nome = component.formFuncionario.value.nome
+      const email = component.formFuncionario.value.email
+      const foto = component.formFuncionario.value.foto
 
-      const querSair = dialogRef.afterClosed()
+      if (nome != component.funcionario.nome || email != component.funcionario.email || foto.length > 0) {
+        const dialogRef = this.dialog.open(ConfirmarSaidaComponent)
 
-      return querSair
-    } else {
-      return true
+        const querSair = dialogRef.afterClosed()
+
+        return querSair
+      } else {
+        return true
+      }
     }
+    return true
   }
 }
