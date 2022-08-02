@@ -1,18 +1,22 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
+  <mat-toolbar-row class="mat-elevation-z2">
     <h1>Services</h1>
+  
     <span class="separador"></span>
-    <button mat-button [matMenuTriggerFor]="menu">Listar</button>
+    <button mat-button [matMenuTriggerFor]="menu" matTooltip="Listar"><mat-icon>menu</mat-icon></button>
     <mat-menu #menu="matMenu">
       <a mat-menu-item routerLink="/funcionarios">Funcionarios</a>
       <a mat-menu-item routerLink="/cargos">Cargos</a>
       <a mat-menu-item routerLink="/clientes">Clientes</a>
+      <a mat-menu-item routerLink="/chamados">Chamados</a>
+      <a mat-menu-item routerLink="/pagamentos">Pagamentos</a>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="menuConfiguracoes">{{emailUsuario}}</button>
-    <mat-menu #menuConfiguracoes="matMenu">
+    <mat-menu #menuConfiguracoes="matMenu" id="sair">
       <button mat-menu-item (click)="logout()" matTooltip="Deslogar">
-        <mat-icon>logout</mat-icon>
+        <mat-icon>logout</mat-icon>Logout
       </button>
+      
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

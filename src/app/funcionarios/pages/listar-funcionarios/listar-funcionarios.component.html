@@ -1,15 +1,20 @@
 <app-navbar></app-navbar>
+
 <div class="container">
   <aside id="lateral">
     <h2>Funcionários</h2>
   </aside>
+
   <main>
-    <button mat-mini-fab color="accent" (click)="abrirFormFuncionario()" id="add" matTooltip="Adicionar Novo Funcionario">
+    <button mat-mini-fab color="accent" (click)="abrirFormFuncionario()" id="add"
+      matTooltip="Adicionar Novo Funcionario">
       <mat-icon>add</mat-icon>
     </button>
+    
     <div>
       <router-outlet></router-outlet>
     </div>
+
     <table mat-table [dataSource]="funcionarios" class="mat-elevation-z8">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>#</th>
@@ -29,7 +34,7 @@
         <th mat-header-cell *matHeaderCellDef>E-mail</th>
         <td mat-cell *matCellDef="let f">{{ f.email }}</td>
       </ng-container>
-      
+
       <ng-container matColumnDef="cargo">
         <th mat-header-cell *matHeaderCellDef>Cargo</th>
         <td mat-cell *matCellDef="let f">{{ f.cargo?.nome }}</td>
@@ -38,8 +43,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Excluir</th>
         <td mat-cell *matCellDef="let f">
-          <button mat-icon-button color="warn" (click)="deletarFuncionario(f)"
-          matTooltip="Deletar Funcionario">
+          <button mat-icon-button color="warn" (click)="deletarFuncionario(f)" matTooltip="Deletar Funcionario">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

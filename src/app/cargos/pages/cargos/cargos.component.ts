@@ -77,7 +77,7 @@ export class CargosComponent implements OnInit {
   }
 
 
-  atualizar(): void {
+  inserirPagamento(): void {
     const c: Cargo = { ...this.formCargo.value }
     c.idCargo = this.cargo.idCargo
 

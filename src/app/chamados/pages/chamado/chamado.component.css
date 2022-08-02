@@ -1,0 +1,31 @@
+mat-card, .loader {
+  height: calc(125vh - (140px));
+  position: sticky;
+  top: 16px;
+  left: 0;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+#salvar {
+  margin-top: 16px;
+}
+
+
+#input-foto {
+  display: none;
+}
+
+#menu {
+  margin-left: auto;
+}

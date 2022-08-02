@@ -12,10 +12,10 @@ import { CargoService } from '../../services/cargo.service';
   templateUrl: './listar-cargos.component.html',
   styleUrls: ['./listar-cargos.component.css']
 })
+
 export class ListarCargosComponent implements OnInit {
 
   cargos: Cargo[] = []
-
   colunas: Array<string> = ['id', 'nome', 'descricao', 'salario', 'actions']
 
   constructor(
@@ -67,7 +67,8 @@ export class ListarCargosComponent implements OnInit {
       .subscribe(
         deletar => {
           if (deletar) {
-            this.cargoService.deleteCargo(cargo).subscribe(
+            this.cargoService.deleteCargo(cargo)
+            .subscribe(
               () => {
                 this.snackbar.open('Cargo deletado', 'Ok', {
                   duration: 3000

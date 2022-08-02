@@ -41,6 +41,11 @@ export class LoginComponent implements OnInit {
           })
 
           this.router.navigateByUrl('/funcionarios')
+        },
+        (error) => {
+          this.snackbar.open('Usuario ou senha incorretos', 'Ok', {
+            duration: 3000
+          })                  
         }
       )
   }

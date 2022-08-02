@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <aside id="lateral">
+    <h2>Chamados</h2>
+  </aside>
+
+  <main>
+    <button mat-mini-fab color="accent" (click)="abrirFormChamado()" id="add" matTooltip="Adicionar Chamado">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+
+    <table mat-table [dataSource]="chamados" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let chamado">
+          {{chamado.idChamado}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef>Titulo</th>
+
+        <td mat-cell *matCellDef="let chamado">
+          
+          <a [routerLink]="'/chamados/' + chamado.idChamado" routerLinkActive="ativo">
+            {{ chamado.titulo }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Data</th>
+        <td mat-cell *matCellDef="let chamado">{{chamado.dataEntrada | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let chamado">
+          <p class="status" [ngClass]="chamado.status">{{chamado.status}} </p>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pagamento">
+        <th mat-header-cell *matHeaderCellDef>Pagamento</th>
+        <td mat-cell *matCellDef="let chamado">
+          <p class="status" [ngClass]="chamado.status">{{chamado.pagamento?.status}} </p>
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="pagamento">
+        <th mat-header-cell *matHeaderCellDef>Pagamento</th>
+
+        <td mat-cell *matCellDef="let chamado">
+
+          <div *ngIf="chamado.pagamento!=null;else pagamentoNE">
+            {{chamado.pagamento?.status}}
+            <button (click)="editarPagamento(chamado.pagamento)" mat-icon-button matTooltip="Alterar Pagamento">
+
+              <mat-icon>credit_card</mat-icon>
+            </button>
+          </div>
+
+          <ng-template #pagamentoNE>
+            <button (click)="abrirFormPagamento(chamado.idChamado)" mat-icon-button matTooltip="Inserir Pagamento">
+
+              <mat-icon>library_add</mat-icon>
+
+            </button>
+          </ng-template>
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descricao</th>
+        <td mat-cell *matCellDef="let chamado"> {{chamado.descricao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="funcionario">
+        <th mat-header-cell *matHeaderCellDef>Funcionario</th>
+        <td mat-cell *matCellDef="let chamado"> {{chamado.funcionario?.nome??'S/F'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let chamado"> {{chamado.cliente?.nome??'S/C'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Excluir</th>
+        <td mat-cell *matCellDef="let chamado">
+
+          <button mat-icon-button color="warn" type="button" (click)="deletarChamado(chamado.idChamado)"
+            matTooltip="Deletar Chamado">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+      <tr mat-row *matRowDef="let row, columns: colunas"></tr>
+    </table>
+
+  </main>
+</div>

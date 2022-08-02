@@ -16,14 +16,17 @@
     </div>
 
     <table mat-table [dataSource]="cargos" class="mat-evaluetion-z8">
+      
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>#</th>
+
         <td mat-cell *matCellDef="let c">{{c.idCargo}}</td>
       </ng-container>
 
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let c">
+          
           <a [routerLink]="'/cargos/' + c.idCargo" routerLinkActive="ativo">
             {{ c.nome }}
           </a>

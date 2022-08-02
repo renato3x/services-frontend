@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap} from 'rxjs';
 import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -9,13 +9,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class AuthService {
-
+  
   private readonly baseUrl: string = 'http://localhost:8080'
   private jwt = new JwtHelperService()
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    
   ) { }
 
   signIn(user: User): Observable<{ Authorization: string }> {
@@ -52,10 +53,13 @@ export class AuthService {
     return !this.jwt.isTokenExpired(token)
   }
 
-  emailLogado(){
+  email(){
     const token= this.recuperarToken()
     const decode= this.jwt.decodeToken(token!)
     return decode
   }
+
+
+
 
 }

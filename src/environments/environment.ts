@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyDCJLNVvRxvcqhMAxJ3QetRGqMgyd9xl8Q",
-    authDomain: "soulcodefuncionarios.firebaseapp.com",
-    projectId: "soulcodefuncionarios",
-    storageBucket: "soulcodefuncionarios.appspot.com",
-    messagingSenderId: "80888093326",
-    appId: "1:80888093326:web:0fb7affe1973c5060187df"
+    apiKey: "AIzaSyCMAGqaNbpmY9KjQtLetkH6SNmhEetgCys",
+    authDomain: "soulcode-funcionarios.firebaseapp.com",
+    projectId: "soulcode-funcionarios",
+    storageBucket: "soulcode-funcionarios.appspot.com",
+    messagingSenderId: "28436876943",
+    appId: "1:28436876943:web:d18c37cbd94da34cf6eafa",
+    measurementId: "G-SGPPZTZKSP"
   },
   recaptcha: {
     siteKey: '6LeSHRUhAAAAAHphLukaju56oMpv3IRpc6HHl6RC',
@@ -25,3 +26,12 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+
+
+/* apiKey: "AIzaSyDCJLNVvRxvcqhMAxJ3QetRGqMgyd9xl8Q",
+    authDomain: "soulcodefuncionarios.firebaseapp.com",
+    projectId: "soulcodefuncionarios",
+    storageBucket: "soulcodefuncionarios.appspot.com",
+    messagingSenderId: "80888093326",
+    appId: "1:80888093326:web:0fb7affe1973c5060187df" */

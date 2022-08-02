@@ -6,3 +6,9 @@ mat-toolbar-row {
   .separador {
     flex-grow: 1;
   }
+
+  #sair{
+    align-items: end;
+    text-align: end;
+    width: auto;
+  }

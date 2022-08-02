@@ -20,13 +20,10 @@ export class CargoService {
   ) { }
   
   getCargos(): Observable<Cargo[]> {
-
     return this.http.get<Cargo[]>(this.baseUrl)
-
   }
   
   getCargoById(id: number): Observable<Cargo> {
-  
     return this.http.get<Cargo>(`${this.baseUrl}/${id}`)
   }
 
@@ -47,7 +44,6 @@ export class CargoService {
   }
 
   atualizarCargo(cargo: Cargo): Observable<Cargo> {
-    
     return this.http.put<Cargo>(`${this.baseUrl}/${cargo.idCargo}`, cargo)
     .pipe(
       tap((carg) => {

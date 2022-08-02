@@ -1,0 +1,107 @@
+<div class="container">
+  <h2 mat-dialog-title>Novo Chamado</h2>
+  <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoChamado">
+  </mat-spinner>
+  <button id="menu" mat-icon-button (click)="sair()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<section mat-dialog-content>
+
+  <form action="" [formGroup]="formChamados" (ngSubmit)="salvar()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Id Chamado</mat-label>
+      <input id="inputID" type="number" placeholder="IdChamado" matInput formControlName="idChamado">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Titulo</mat-label>
+      <input type="text" placeholder="Titulo do chamado" matInput formControlName="titulo">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" id="descricao">
+      <mat-label>Descrição</mat-label>
+      <textarea id="descricao" placeholder="Descrição do chamado" matInput formControlName="descricao"></textarea>
+    </mat-form-field>
+
+    <div class="field-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Funcionario</mat-label>
+        <mat-select formControlName="idFuncionario" name="funcionario">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.idFuncionario">
+            {{funcionario.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="field-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="idCliente" name="cliente">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let cliente of clientes" [value]="cliente.idCliente">
+            {{cliente.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="field-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" name="status">
+          <mat-option value="RECEBIDO">
+            Recebido
+          </mat-option>
+          <mat-option value="ATRIBUIDO">
+            Atribuido
+          </mat-option>
+          <mat-option value="CONCLUIDO">
+            Concluido
+          </mat-option>
+          <mat-option value="ARQUIVADO">
+            Arquivado
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <mat-checkbox class="example-margin" (change)="checked = !checked">Cadastrar Pagamento</mat-checkbox>
+    <div *ngIf="checked">
+
+      <form action="" [formGroup]="formChamados" (ngSubmit)="salvar()">
+        <mat-form-field appearence="fill">
+          <mat-label>Valor</mat-label>
+          <input type="number" matInput formControlName="valor">
+        </mat-form-field>
+    
+         <mat-form-field appearence="fill">
+          <mat-label>Forma de pagamento</mat-label>
+          <input type="text" matInput formControlName="formPagamento">
+        </mat-form-field>
+
+    <div class="field-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="statusP" name="status">
+          <mat-option value="QUITADO">
+            Quitado
+          </mat-option>
+          <mat-option value="LANCADO">
+            Lançado
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+    <button type="submit" mat-raised-button color="accent" id="salvar">Salvar</button>
+  </form>
+
+</section>

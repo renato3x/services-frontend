@@ -33,7 +33,11 @@
   }
   
   .ativo {
-    color: red;
+    color: rgb(96, 175, 163);
+  }
+  
+  a{
+    color:rgb(158, 195, 189)
   }
   
   #add {

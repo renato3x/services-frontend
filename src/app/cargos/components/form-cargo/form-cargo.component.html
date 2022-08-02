@@ -1,8 +1,10 @@
 <div>
   <h2 mat-dialog-title>Novo Cargo</h2>
-  <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoCargo"></mat-spinner>
+  <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoCargo">
+  </mat-spinner>
 </div>
 <section mat-dialog-content>
+
   <form action="" [formGroup]="formCargo" (ngSubmit)="salvar()">
 
     <mat-form-field appearence="fill">
@@ -22,4 +24,5 @@
 
     <button type="submit" [disabled]="formCargo.invalid" mat-raised-button color="accent" id="salvar">Salvar</button>
   </form>
+  
 </section>

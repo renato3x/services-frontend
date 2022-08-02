@@ -7,23 +7,24 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
   emailUsuario!: string;
-
   constructor(
     public authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.emailUsuario = this.emailLogado()
+    this.emailUsuario = this.email()
   }
 
-  emailLogado():string {
-    const email = this.authService.emailLogado().sub
+  email():string {
+    const email = this.authService.email().sub
     return email
   }
   
   logout() {
     this.authService.signOut()
   }
+
+  
+  
 }

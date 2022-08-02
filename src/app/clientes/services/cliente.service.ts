@@ -42,7 +42,8 @@ export class ClienteService {
         mergeMap(
           (endereco) => {
             cliente.enderecoCliente = endereco;
-            return this.http.put<Cliente>(`${this.baseUrl}/${idCliente}`, cliente).pipe(
+            return this.http.put<Cliente>(`${this.baseUrl}/${idCliente}`, cliente)
+            .pipe(
               tap(() => this.atualizarClientes$.next(true)))
           }
         )

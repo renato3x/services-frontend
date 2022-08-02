@@ -27,7 +27,7 @@ export class FuncionarioService {
   deleteFuncionario(func: Funcionario): Observable<any> {
     const token = this.authService.recuperarToken()
 
-    if (func.foto.length > 0) {
+    if (func.foto && func.foto.length > 0) {
       return this.storage.refFromURL(func.foto).delete()
         .pipe(
           mergeMap(() => {
@@ -69,7 +69,7 @@ export class FuncionarioService {
         )
     }
 
-    if (func.foto.length > 0) {
+    if (func.foto && func.foto.length > 0) {
       const inscricao = this.storage.refFromURL(func.foto).delete()
         .subscribe(
           () => {

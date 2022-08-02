@@ -5,7 +5,7 @@
   </aside>
   <main>
 
-    <button mat-mini-fab color="accent" id="add" (click)="abrirFormCliente()">
+    <button mat-mini-fab color="accent" id="add" (click)="abrirFormCliente()" matTooltip="Adicionar Novo Cliente">
       <mat-icon>add</mat-icon>
     </button>
     <div>
@@ -40,7 +40,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Excluir</th>
         <td mat-cell *matCellDef="let c">
-          <button mat-icon-button color="warn" (click)="deletarCliente(c.idCliente)">
+          <button mat-icon-button color="warn" (click)="deletarCliente(c.idCliente)" matTooltip="Deletar Cliente">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

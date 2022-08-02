@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { mergeMap, Observable, tap } from 'rxjs';
 import { Cliente } from '../../models/cliente';
-import { Endereco } from '../../models/endereco';
 import { ClienteService } from '../../services/cliente.service';
 import { EnderecosService } from '../../services/enderecos.service';
 
@@ -18,7 +16,6 @@ import { EnderecosService } from '../../services/enderecos.service';
 export class FormClientesComponent implements OnInit {
 
   checked: boolean = false
-
 
   constructor(
     private http: HttpClient,
@@ -66,8 +63,8 @@ export class FormClientesComponent implements OnInit {
     const endereco = this.formEndereco.value
     const novoCliente: Cliente = this.formCliente.value;
 
-
     if(endereco.rua.length > 0){
+
       this.clienteService.cadastrarClientes(novoCliente).subscribe(
         cliente => {
           this.enderecoService.cadastrarEndereco(endereco, cliente.idCliente!).subscribe(
